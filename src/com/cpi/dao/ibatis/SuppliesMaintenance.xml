@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sqlmap-2.dtd">
+<sqlMap namespace="SuppliesMaintenance">
+	<typeAlias alias="SuppliesMaintenanceClass" type="com.cpi.entity.SuppliesMaintenance" />
+
+	<resultMap id="allSuppliesMap" class="SuppliesMaintenanceClass">
+		<result column="supply_id" property="supplyId" />
+		<result column="supply_type" property="supplyType" />
+		<result column="item_name" property="itemName" />
+		<result column="item_unit" property="itemUnit" />
+		<result column="obsolete_tag" property="obsoleteTag" />
+		<result column="location" property="location" />
+		<result column="reorder_level" property="reorderLevel" />
+		<result column="actual_count" property="actualCount" />
+		<result column="remarks" property="remarks" />
+		<result column="date_added" property="dateAdded" />
+		<result column="last_user" property="lastUser" />
+		<result column="last_update" property="lastUpdate" />
+	</resultMap>
+
+	<select id="getAllSupplies" resultMap="allSuppliesMap">
+		SELECT * FROM supplies_2
+	</select>
+
+	<select id="addSupplies" resultClass="java.lang.String">
+		BEGIN
+		INSERT INTO
+		supplies_2(supply_id,supply_type,item_name,item_unit,obselete_tag,location,reorder_level,actual_count,remarks,date_added,last_user,last_update)
+		VALUES
+		(seq_supply_id_2.NEXTVAL,#supplyType#,#itemName#,#itemUnit#,#obsoleteTag#,#location#,#reorderLevel#,#actualCount#,#remarks#,#dateAdded#,#lastUser#,#lastUpdate#)
+		END;
+	</select>
+
+	<select id="updateSupplies" resultClass="java.lang.String">
+		BEGIN
+			UPDATE supplies_2
+			SET supply_type = #supplyType#,
+				item_name = #itemName#,
+				item_unit = #itemUnit#,
+				obsolete_tag = #obsoleteTag#,
+				location = #location#,
+				reorder_level = #reorderLevel#,
+				actual_count = #actualCount#,
+				remarks = #remarks#
+		WHERE supply_id = #supplyId#
+		END;
+	</select>
+
+</sqlMap>
+
+

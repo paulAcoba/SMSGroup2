@@ -29,7 +29,7 @@ public class IssuesSupplyServlet extends HttpServlet{
 		
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("/com/cpi/resource/applicationContext.xml");
-		IssuedSupplyService issuedSupply = (IssuedSupplyService) context.getBean("issueSupplyService");
+		IssuedSupplyService issuedSupply = (IssuedSupplyService) context.getBean("issuedSupply");
 
 		request.setAttribute("lastUser", session.getAttribute("username"));
 		request.setAttribute("lastUpdate", new Date());

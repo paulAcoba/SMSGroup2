@@ -14,4 +14,14 @@
   	<servlet-name>issuedSupply</servlet-name>
   	<url-pattern>/issuedSupply</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+  	<servlet-name>supplymaintenance</servlet-name>
+  	<servlet-class>com.cpi.servlet.SuppliesMaintenanceServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>supplymaintenance</servlet-name>
+  	<url-pattern>/supplymaintenance</url-pattern>
+  </servlet-mapping>
 </web-app>

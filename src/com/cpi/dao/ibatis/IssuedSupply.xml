@@ -2,7 +2,7 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sqlmap-2.dtd">
 <sqlMap namespace="IssuedSupply">
 	<typeAlias alias="IssuedSupplyClass" type="com.cpi.entity.IssuedSupply" /><!-- this will initiates the xml from the entity -->
-	<typeAlias alias="SupplyClass" type="com.cpi.entity.Item" />
+	<typeAlias alias="SupplyClass" type="com.cpi.entity.SuppliesMaintenance" />
 	
 	<resultMap id="allIsssuedSupplyMap" class="IssuedSupplyClass">
 		<result column="issue_id" property="issueId" />
@@ -28,7 +28,7 @@
 	<select id="getAllItems" resultMap="allItemsMap">
 		BEGIN
 			SELECT supply_id, item_name, actual_count FROM supply_2
-			WHERE obsolete_tag := 'Y'
+			WHERE obsolete_tag = 'Y'
 		END;
 	</select>
 	
@@ -38,20 +38,20 @@
 			VALUES (seq_issued_id_2.NEXTVAL,#supplyId#,#issueDate#,#requestor#,#quantity#,#deptId#,#lastUser#,#lastUpdate#);
 			
 			UPDATE supply_2
-			SET actual_count := actual_count - #quantity#
-			WHERE supply_id := #supplyId#;
+			SET actual_count = actual_count - #quantity#
+			WHERE supply_id = #supplyId#;
 		END;
 	</select>
 	
 	<select id="updateIssuedSupplies" resultClass="java.lang.String">
 		BEGIN
 			UPDATE issued_supplies_2
-			SET issue_date := #issueDate#,
-				requestor := #quantity#,
-				dept_id := #deptId#,
-				last_user := #lastUser#,
-				last_update := #lastUpdate#
-			WHERE issue_id := #issueId#
+			SET issue_date = #issueDate#,
+				requestor = #quantity#,
+				dept_id = #deptId#,
+				last_user = #lastUser#,
+				last_update = #lastUpdate#
+			WHERE issue_id = #issueId#
 		END;
 	</select>
 </sqlMap>

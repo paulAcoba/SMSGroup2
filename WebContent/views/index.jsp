@@ -125,7 +125,7 @@ try{
 	
 	$('btnCancel').observe("click", refresh);
 }catch(e){
-	alert("home.jsp "+e);
+	alert("issuedsupply.jsp "+e);
 }
 	
 	

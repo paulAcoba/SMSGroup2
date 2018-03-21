@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.cpi.dao.IssuedSupplyDAO;
 import com.cpi.entity.IssuedSupply;
+import com.cpi.entity.SuppliesMaintenance;
 import com.cpi.service.IssuedSupplyService;
 
 public class IssuedSupplyServiceImpl implements IssuedSupplyService{
@@ -25,12 +26,12 @@ public class IssuedSupplyServiceImpl implements IssuedSupplyService{
 		
 
 		public void getAllItem(HttpServletRequest request) throws SQLException{
-			List<IssuedSupply> list = this.getIssuedSupplyDao().getAllItems();
+			List<SuppliesMaintenance> list = this.getIssuedSupplyDao().getAllItems();
 			System.out.println(list);
 			String addOption = "";
 			for (int i = 0; i < list.size(); i++) {
 				addOption += "<option id='"+list.get(i).getSupplyId()+"' value='"+list.get(i).getSupplyId()+"'>";
-				//addOption += list.get(i).getItemName();
+				addOption += list.get(i).getItemName();
 				addOption += "</option>";
 			}
 			request.setAttribute("allItems", addOption);

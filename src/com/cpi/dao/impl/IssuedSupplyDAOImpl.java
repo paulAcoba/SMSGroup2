@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.cpi.dao.IssuedSupplyDAO;
 import com.cpi.entity.IssuedSupply;
+import com.cpi.entity.SuppliesMaintenance;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 public class IssuedSupplyDAOImpl implements IssuedSupplyDAO{
@@ -21,8 +22,8 @@ public class IssuedSupplyDAOImpl implements IssuedSupplyDAO{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<IssuedSupply> getAllItems() throws SQLException{
-		return (List<IssuedSupply>) this.getSqlMapClient().queryForList("getAllItems");
+	public List<SuppliesMaintenance> getAllItems() throws SQLException{
+		return (List<SuppliesMaintenance>) this.getSqlMapClient().queryForList("getAllItems");
 	}
 	
 	public String addIssuedSupplies(Map<String, Object> items) throws SQLException{

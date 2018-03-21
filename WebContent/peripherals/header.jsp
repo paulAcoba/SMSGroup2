@@ -5,3 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script type="text/javascript" src="js/prototype.js"></script>
+<script>
+	try{
+		var contextPath = "${pageContext.request.contextPath}";	
+	}catch(e){
+		alert("header.jsp ", e);
+	}
+</script>	

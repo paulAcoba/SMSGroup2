@@ -14,6 +14,10 @@
 		<result column="last_update" property="lastUpdate" />
 	</resultMap>
 	
+	<resultMap id="allItemsMap" class="">
+	
+	</resultMap>
+	
 	<select id="getAllIssuedSupplies" resultMap="allIsssuedSupplyMap">
 		SELECT * FROM issued_supply_2
 	</select>

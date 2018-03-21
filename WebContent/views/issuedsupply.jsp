@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../peripherals/header.jsp"></jsp:include>
 <title>Issue Supplies</title>
 </head>
@@ -52,9 +53,81 @@
 						<th>Last Updated By</th>
 						<th>Last Update</th>
 					</tr>
+					<c:out value="${allIssuedSupply}"></c:out>
 				</table>
 			</div>
 		</fieldset>
 	</div>
 </body>
 </html>
+<script>
+try{
+	function refresh(){
+		new Ajax.Request(contextPath + "/issuedSupply",{
+			method: "POST",
+			parameter:{
+				action: "refresh"
+			},
+			onComplete : function(response){
+				$('dataTable').update({bottom:response.responseText});
+			}
+		});
+	}
+	
+	$('btnAdd').observe("click",function(){
+		new Ajax.Request(contextPath + "/issuedSupply",{
+			method: "POST",
+			parameter:{
+				action: "addData",
+				supplyId: $F('selItems'),
+				issueDate: $F('txtIssueDate'),
+				requestor: $F('txtRequestedBy'),
+				quantity: $F('txtQuantity'),
+				deptId: $F('selDept')
+			},
+			onComplete : function(response){
+				//$('dataTable').update(response.responseText);
+				alert("Data Added");
+				refresh();
+			}
+		});
+	});
+	
+	function updateIssue(){
+		new Ajax.Request(contextPath + "/issuedSupply",{
+			method: "POST",
+			parameter:{
+				action: "updateData",
+				supplyId: $F('selItems'),
+				issueDate: $F('txtIssueDate'),
+				requestor: $F('txtRequestedBy'),
+				quantity: $F('txtQuantity'),
+				deptId: $F('selDept')
+			},
+			onComplete : function(response){
+				//$('dataTable').update(response.responseText);
+				alert("Data Added");
+				refresh();
+				//clear();
+			}
+		});
+	}
+	
+	$('btnSave').observe("click", updateIssue);
+	
+	function clear(){
+		$('selItems').value = '1';
+		$('txtIssueDate').value = '';
+		$('txtRequestedBy').value = '';
+		$('txtQuantity').value = '';
+		$('selDept').value = '1';
+	}
+	
+	$('btnCancel').observe("click", refresh);
+}catch(e){
+	alert("home.jsp "+e);
+}
+	
+	
+	
+</script>

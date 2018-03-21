@@ -1,6 +1,7 @@
 package com.cpi.service.impl;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,11 +31,30 @@ public class IssuedSupplyServiceImpl implements IssuedSupplyService{
 		}
 		
 		public void addIssuedSupply(HttpServletRequest request) throws SQLException{
-			/*Map<String, Object> params = new*/
+			Map<String, Object> params = new HashMap<>();
+			params.put("supplyId", request.getParameter("supplyId"));
+			params.put("issueDate", request.getParameter("issueDate"));
+			params.put("requestor", request.getParameter("requestor"));
+			params.put("quantity", request.getParameter("quantity"));
+			params.put("deptId", request.getParameter("deptId"));
+			params.put("lastUser", request.getAttribute("lastUser"));
+			params.put("lastUpdate", request.getAttribute("lastUpdate"));
+			
+			this.getIssuedSupplyDao().addIssuedSupplies(params);
 		}
 		
 		public void updateIssuedSupply(HttpServletRequest request) throws SQLException{
+			Map<String, Object> params = new HashMap<>();
+			params.put("issueId", request.getParameter("issueId"));
+			params.put("supplyId", request.getParameter("supplyId"));
+			params.put("issueDate", request.getParameter("issueDate"));
+			params.put("requestor", request.getParameter("requestor"));
+			params.put("quantity", request.getParameter("quantity"));
+			params.put("deptId", request.getParameter("deptId"));
+			params.put("lastUser", request.getAttribute("lastUser"));
+			params.put("lastUpdate", request.getAttribute("lastUpdate"));
 			
+			this.getIssuedSupplyDao().updateIssuedSupplies(params);
 		}
 		
 		public void getAllIssuedSupplyById(HttpServletRequest request) throws SQLException{
@@ -42,7 +62,23 @@ public class IssuedSupplyServiceImpl implements IssuedSupplyService{
 		}
 		
 		public void getAllIssuedSupply(HttpServletRequest request) throws SQLException{
+			List<IssuedSupply> list = this.getIssuedSupplyDao().getAllIssuedSupplies();
+			System.out.println(list);
+			String addTr = "";
 			
+			for (int i = 0; i < list.size(); i++) {
+				addTr += "<tr id='"+list.get(i).getIssueId()+"'>";
+				addTr += "<td><a href='#'>"+list.get(i).getIssueId()+"</a></td>";
+				addTr += "<td>"+list.get(i).getIssueId()+"</td>";
+				addTr += "<td>"+list.get(i).getQuantity()+"</td>";
+				addTr += "<td>"+list.get(i).getRequestor()+"</td>";
+				addTr += "<td>"+list.get(i).getIssueId()+"</td>";
+				addTr += "<td>"+list.get(i).getIssueDate()+"</td>";
+				addTr += "<td>"+list.get(i).getLastUser()+"</td>";
+				addTr += "<td>"+list.get(i).getLastUpdate()+"</td>";
+				addTr += "</tr>";
+			}
+			request.setAttribute("allIssuedSupply", addTr);
 		}
 		
 }

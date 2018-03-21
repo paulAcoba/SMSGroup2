@@ -22,7 +22,7 @@ public class IssuedSupplyDAOImpl implements IssuedSupplyDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<IssuedSupply> getAllItems() throws SQLException{
-		return (List<IssuedSupply>) this.getSqlMapClient().queryForList("getAllIssuedSupplies");
+		return (List<IssuedSupply>) this.getSqlMapClient().queryForList("getAllItems");
 	}
 	
 	public String addIssuedSupplies(Map<String, Object> items) throws SQLException{

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sqlmap-2.dtd">
+<sqlMap namespace="IssuedSupply">
+	<typeAlias alias="IssuedSupplyClass" type="com.cpi.entity.IssuedSupply" /><!-- this will initiates the xml from the entity -->
+	
+	<resultMap id="allIsssuedSupplyMap" class="IssuedSupplyClass">
+		<result column="issue_id" property="issueId" />
+		<result column="supply_id" property="supplyId" />
+		<result column="issue_date" property="issueDate" />
+		<result column="requestor" property="requestor" />
+		<result column="quantity" property="quantity" />
+		<result column="dept_id" property="deptId" />
+		<result column="last_user" property="lastUser" />
+		<result column="last_update" property="lastUpdate" />
+	</resultMap>
+	
+	<select id="getAllIssuedSupplies" resultMap="allIsssuedSupplyMap">
+		SELECT * FROM issued_supply_2
+	</select>
+	
+	<select id="addIssuedSupplies" resultClass="java.lang.String">
+		BEGIN
+			INSERT INTO issued_supplies 2(issued_id,supply_id,issue_date,requestor,quantity,dept_id,last_user,last_update)
+			VALUES (seq_issued_id_2.NEXTVAL,#supplyId#,#issueDate#,#requestor#,#quantity#,#deptId#,#lastUser#,#lastUpdate#)
+		END;
+	</select>
+</sqlMap>

@@ -27,7 +27,13 @@ public class IssuedSupplyServiceImpl implements IssuedSupplyService{
 		public void getAllItem(HttpServletRequest request) throws SQLException{
 			List<IssuedSupply> list = this.getIssuedSupplyDao().getAllItems();
 			System.out.println(list);
-			request.setAttribute("allItems", list);
+			String addOption = "";
+			for (int i = 0; i < list.size(); i++) {
+				addOption += "<option id='"+list.get(i).getSupplyId()+"' value='"+list.get(i).getSupplyId()+"'>";
+				//addOption += list.get(i).getItemName();
+				addOption += "</option>";
+			}
+			request.setAttribute("allItems", addOption);
 		}
 		
 		public void addIssuedSupply(HttpServletRequest request) throws SQLException{

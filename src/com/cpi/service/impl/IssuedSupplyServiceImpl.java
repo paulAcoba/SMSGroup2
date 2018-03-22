@@ -35,6 +35,7 @@ public class IssuedSupplyServiceImpl implements IssuedSupplyService{
 				addOption += "</option>";
 			}
 			request.setAttribute("allItems", addOption);
+			System.out.println(addOption);
 		}
 		
 		public void addIssuedSupply(HttpServletRequest request) throws SQLException{

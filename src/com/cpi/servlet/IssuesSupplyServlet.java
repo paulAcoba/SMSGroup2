@@ -22,6 +22,7 @@ public class IssuesSupplyServlet extends HttpServlet{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		String action = request.getParameter("action");
 		String view = "";
@@ -29,7 +30,7 @@ public class IssuesSupplyServlet extends HttpServlet{
 		
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("/com/cpi/resource/applicationContext.xml");
-		IssuedSupplyService issuedSupply = (IssuedSupplyService) context.getBean("issuedSupply");
+		IssuedSupplyService issuedSupply = (IssuedSupplyService) context.getBean("issueSupplyService");
 
 		request.setAttribute("lastUser", session.getAttribute("username"));
 		request.setAttribute("lastUpdate", new Date());

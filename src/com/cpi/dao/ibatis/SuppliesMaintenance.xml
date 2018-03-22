@@ -8,7 +8,7 @@
 		<result column="supply_type" property="supplyType" />
 		<result column="item_name" property="itemName" />
 		<result column="item_unit" property="itemUnit" />
-		<result column="obsolete_tag" property="obsoleteTag" />
+		<result column="obsolete_tag" property="obseleteTag" />
 		<result column="location" property="location" />
 		<result column="reorder_level" property="reorderLevel" />
 		<result column="actual_count" property="actualCount" />
@@ -27,7 +27,7 @@
 		INSERT INTO
 		supplies_2(supply_id,supply_type,item_name,item_unit,obselete_tag,location,reorder_level,actual_count,remarks,date_added,last_user,last_update)
 		VALUES
-		(seq_supply_id_2.NEXTVAL,#supplyType#,#itemName#,#itemUnit#,#obsoleteTag#,#location#,#reorderLevel#,#actualCount#,#remarks#,#dateAdded#,#lastUser#,#lastUpdate#)
+		(seq_supply_id_2.NEXTVAL,#supplyType#,#itemName#,#itemUnit#,#obseleteTag#,#location#,#reorderLevel#,#actualCount#,#remarks#,#dateAdded#,#lastUser#,#lastUpdate#)
 		END;
 	</select>
 
@@ -37,7 +37,7 @@
 			SET supply_type = #supplyType#,
 				item_name = #itemName#,
 				item_unit = #itemUnit#,
-				obsolete_tag = #obsoleteTag#,
+				obsolete_tag = #obseleteTag#,
 				location = #location#,
 				reorder_level = #reorderLevel#,
 				actual_count = #actualCount#,

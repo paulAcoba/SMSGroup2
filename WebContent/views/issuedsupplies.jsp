@@ -10,7 +10,9 @@
 				<table id="dataFormTable">
 					<tr>	
 						<td><label>Item Name</label></td>
-						<td><select id="selItems"></select></td>
+						<td><select id="selItems">
+						<c:out value="${allItems}"></c:out>
+						</select></td>
 					</tr>
 					<tr>	
 						<td><label>Quantity</label></td>
@@ -69,7 +71,7 @@ try{
 				action: "refresh"
 			},
 			onComplete : function(response){
-				$('dataTable').update({bottom:response.responseText});
+				$('dataTable').insert({bottom:response.responseText});
 			}
 		});
 	}
@@ -88,6 +90,7 @@ try{
 			onComplete : function(response){
 				//$('dataTable').update(response.responseText);
 				alert("Data Added");
+				alert(response.responseText);
 				refresh();
 			}
 		});

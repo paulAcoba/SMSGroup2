@@ -4,7 +4,7 @@
 	<typeAlias alias="IssuedSupplyClass" type="com.cpi.entity.IssuedSupply" /><!-- this will initiates the xml from the entity -->
 	<typeAlias alias="SupplyClass" type="com.cpi.entity.SuppliesMaintenance" />
 	
-	<resultMap id="allIsssuedSupplyMap" class="IssuedSupplyClass">
+	<resultMap id="allIssuedSupplyMap" class="IssuedSupplyClass">
 		<result column="issue_id" property="issueId" />
 		<result column="supply_id" property="supplyId" />
 		<result column="issue_date" property="issueDate" />
@@ -21,13 +21,13 @@
 		<result column="actual_count" property="actualCount" />
 	</resultMap>
 	
-	<select id="getAllIssuedSupplies" resultMap="allIsssuedSupplyMap">
-		SELECT * FROM issued_supply_2
+	<select id="getAllIssuedSupplies" resultMap="allIssuedSupplyMap">
+		SELECT * FROM issued_supplies_2
 	</select>
 	
 	<select id="getAllItems" resultMap="allItemsMap">
 		BEGIN
-			SELECT supply_id, item_name, actual_count FROM supply_2
+			SELECT supply_id, item_name, actual_count FROM supplies_2
 			WHERE obsolete_tag = 'Y'
 		END;
 	</select>
@@ -35,11 +35,7 @@
 	<select id="addIssuedSupplies" resultClass="java.lang.String">
 		BEGIN
 			INSERT INTO issued_supplies_2(issued_id,supply_id,issue_date,requestor,quantity,dept_id,last_user,last_update)
-			VALUES (seq_issued_id_2.NEXTVAL,#supplyId#,#issueDate#,#requestor#,#quantity#,#deptId#,#lastUser#,#lastUpdate#);
-			
-			UPDATE supply_2
-			SET actual_count = actual_count - #quantity#
-			WHERE supply_id = #supplyId#;
+			VALUES (seq_issued_id_2.NEXTVAL,#supplyId#,#issueDate#,#requestor#,#quantity#,#deptId#,#lastUser#,#lastUpdate#)
 		END;
 	</select>
 	

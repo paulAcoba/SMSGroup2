@@ -48,16 +48,7 @@
 				<label>Search: </label>
 				<input type="text" name="txtSearch" id="txtSearch"><br/>
 				<table id="dataTable">
-					<tr id="dataTableHeader">
-						<th>Issue ID</th>
-						<th>Item Name</th>
-						<th>Qty</th>
-						<th>Requested By</th>
-						<th>Department Name</th>
-						<th>Issue Date</th>
-						<th>Last Updated By</th>
-						<th>Last Update</th>
-					</tr>
+					
 					<c:forEach var="isup" items="${issuedSuppliesList}">
 						<tr id="${isup.issueId}">
 							<td><c:out value="${isup.issueId}"></c:out></td>
@@ -85,7 +76,7 @@ try{
 				action: "refresh"
 			},
 			onComplete : function(response){
-				$('dataTable').insert(response.responseText);
+				$('dataTable').update(response.responseText);
 				sels();
 			}
 		});

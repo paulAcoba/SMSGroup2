@@ -51,14 +51,15 @@ public class IssuesSupplyServlet extends HttpServlet{
 				issuedSupply.updateIssuedSupply(request);
 				view = "views/issuedsupply.jsp";
 				
-			}/*else if("refresh".equals(action)){
+			}else if("refresh".equals(action)){
 				
 				List<IssuedSupply> list = new ArrayList<>();
 				list = issuedSupply.getAllIssuedSupply();
 				
+				request.setAttribute("issuedSuppliesList", list);
 				view = "peripherals/issuedSupplies/issuedSuppliesRows.jsp";
 				
-			}else if("sels".equals(action)){
+			}/*else if("sels".equals(action)){
 				
 				List<SuppliesMaintenance> slist = new ArrayList<>();
 				slist = issuedSupply.getAllItem();
@@ -67,13 +68,13 @@ public class IssuesSupplyServlet extends HttpServlet{
 				
 			}*/
 			
-			List<IssuedSupply> list = new ArrayList<>();
+			/*List<IssuedSupply> list = new ArrayList<>();
 			list = issuedSupply.getAllIssuedSupply();
-			request.setAttribute("issuedSuppliesList", list); 
+			request.setAttribute("issuedSuppliesList", list); */
 			
-			List<SuppliesMaintenance> slist = new ArrayList<>();
+			/*List<SuppliesMaintenance> slist = new ArrayList<>();
 			slist = issuedSupply.getAllItem();
-			request.setAttribute("itemList", slist); 
+			request.setAttribute("itemList", slist); */
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

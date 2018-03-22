@@ -12,9 +12,9 @@
 					<tr>	
 						<td><label>Item Name</label></td>
 						<td><select id="selItems">
-							<c:forEach var="itList" items="${itemList}">
+							<%-- <c:forEach var="itList" items="${itemList}">
 								<option value="${itList.supplyId}"><c:out value="${itList.itemName}"></c:out></option>
-							</c:forEach>
+							</c:forEach> --%>
 						</select></td>
 					</tr>
 					<tr>	
@@ -86,11 +86,12 @@ try{
 			},
 			onComplete : function(response){
 				$('dataTable').insert(response.responseText);
-				
+				sels();
 			}
 		});
 	}
-	
+
+	//refresh();
 	function sels(){
 		new Ajax.Request(contextPath + "/issuedSupply",{
 			method: "POST",
@@ -102,8 +103,11 @@ try{
 			}
 		});
 	}
-	refresh();
-	sels();
+	
+	$('btnIssue').observe("click",function(){
+		refresh();
+	});
+	
 	$('btnAdd').observe("click",function(){
 		new Ajax.Request(contextPath + "/issuedSupply",{
 			method: "POST",

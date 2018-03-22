@@ -1,7 +1,10 @@
 package com.cpi.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.cpi.entity.IssuedSupply;
+import com.cpi.entity.SuppliesMaintenance;
 import com.cpi.service.IssuedSupplyService;
 
 public class IssuesSupplyServlet extends HttpServlet{
@@ -34,7 +39,9 @@ public class IssuesSupplyServlet extends HttpServlet{
 
 		request.setAttribute("lastUser", session.getAttribute("username"));
 		request.setAttribute("lastUpdate", new Date());
+		System.out.println(request.getParameter("action") + " action");
 		try{
+			
 			if("addData".equals(action)){
 				issuedSupply.addIssuedSupply(request);
 				view = "views/issuedsupply.jsp";
@@ -44,13 +51,29 @@ public class IssuesSupplyServlet extends HttpServlet{
 				issuedSupply.updateIssuedSupply(request);
 				view = "views/issuedsupply.jsp";
 				
-			}else if("refresh".equals(action)){
+			}/*else if("refresh".equals(action)){
 				
-				issuedSupply.getAllIssuedSupply(request);
-				view = "views/issuedsupply.jsp";
-				//view =request.getAttribute("allIssuedSupply").toString();
+				List<IssuedSupply> list = new ArrayList<>();
+				list = issuedSupply.getAllIssuedSupply();
 				
-			}
+				view = "peripherals/issuedSupplies/issuedSuppliesRows.jsp";
+				
+			}else if("sels".equals(action)){
+				
+				List<SuppliesMaintenance> slist = new ArrayList<>();
+				slist = issuedSupply.getAllItem();
+				
+				view = "peripherals/issuedSupplies/itemSelectPopulate.jsp";
+				
+			}*/
+			
+			List<IssuedSupply> list = new ArrayList<>();
+			list = issuedSupply.getAllIssuedSupply();
+			request.setAttribute("issuedSuppliesList", list); 
+			
+			List<SuppliesMaintenance> slist = new ArrayList<>();
+			slist = issuedSupply.getAllItem();
+			request.setAttribute("itemList", slist); 
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

@@ -26,12 +26,28 @@ public class IssuedSupplyDAOImpl implements IssuedSupplyDAO{
 		return (List<SuppliesMaintenance>) this.getSqlMapClient().queryForList("getAllItems");
 	}
 	
-	public String addIssuedSupplies(Map<String, Object> items) throws SQLException{
-		return (String) this.getSqlMapClient().queryForObject("addIssuedSupplies", items);
+	public void addIssuedSupplies(Map<String, Object> items) throws SQLException{
+		try{
+			System.out.println("on here");
+			this.sqlMapClient.startTransaction();
+			this.sqlMapClient.getCurrentConnection().setAutoCommit(false);
+			this.sqlMapClient.startBatch();
+			
+			this.getSqlMapClient().update("addIssuedSupplies", items);
+			
+			this.sqlMapClient.executeBatch();
+			this.sqlMapClient.getCurrentConnection().commit();
+			
+		}catch(SQLException e){
+			System.out.println(e.getLocalizedMessage());
+		}
+		
 	}
 	
 	public String updateIssuedSupplies(Map<String, Object> items) throws SQLException{
+		
 		return (String) this.getSqlMapClient().queryForObject("updateIssuedSupplies", items);
+	
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -41,6 +57,7 @@ public class IssuedSupplyDAOImpl implements IssuedSupplyDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<IssuedSupply> getAllIssuedSuppliesById(String userId) throws SQLException{
+		
 		return (List<IssuedSupply>) this.getSqlMapClient().queryForList("getAllIssuedSupplies");
 	}	
 }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <jsp:include page="../peripherals/header.jsp"></jsp:include>
 <title>Issue Supplies</title>
 </head>
@@ -11,7 +12,9 @@
 					<tr>	
 						<td><label>Item Name</label></td>
 						<td><select id="selItems">
-						<c:out value="${allItems}"></c:out>
+							<c:forEach var="itList" items="${itemList}">
+								<option value="${itList.supplyId}"><c:out value="${itList.itemName}"></c:out></option>
+							</c:forEach>
 						</select></td>
 					</tr>
 					<tr>	
@@ -55,7 +58,18 @@
 						<th>Last Updated By</th>
 						<th>Last Update</th>
 					</tr>
-					<c:out value="${allIssuedSupply}"></c:out>
+					<c:forEach var="isup" items="${issuedSuppliesList}">
+						<tr id="${isup.issueId}">
+							<td><c:out value="${isup.issueId}"></c:out></td>
+							<td><c:out value="${isup.supplyId}"></c:out></td>
+							<td><c:out value="${isup.quantity}"></c:out></td>
+							<td><c:out value="${isup.requestor}"></c:out></td>
+							<td><c:out value="${isup.deptId}"></c:out></td>
+							<td><fmt:formatDate type="date" pattern="dd-MMM-yyyy" value="${isup.issueDate}"></fmt:formatDate></td>
+							<td><c:out value="${isup.lastUser}"></c:out></td>
+							<td><fmt:formatDate type="date" pattern="dd-MMM-yyyy" value="${isup.lastUpdate}"></fmt:formatDate></td>
+						</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</fieldset>
@@ -67,19 +81,33 @@ try{
 	function refresh(){
 		new Ajax.Request(contextPath + "/issuedSupply",{
 			method: "POST",
-			parameter:{
+			parameters:{
 				action: "refresh"
 			},
 			onComplete : function(response){
-				$('dataTable').insert({bottom:response.responseText});
+				$('dataTable').insert(response.responseText);
+				
 			}
 		});
 	}
 	
+	function sels(){
+		new Ajax.Request(contextPath + "/issuedSupply",{
+			method: "POST",
+			parameters:{
+				action: "sels"
+			},
+			onComplete : function(response){
+				$('selItems').update(response.responseText);
+			}
+		});
+	}
+	refresh();
+	sels();
 	$('btnAdd').observe("click",function(){
 		new Ajax.Request(contextPath + "/issuedSupply",{
 			method: "POST",
-			parameter:{
+			parameters:{
 				action: "addData",
 				supplyId: $F('selItems'),
 				issueDate: $F('txtIssueDate'),
@@ -99,7 +127,7 @@ try{
 	function updateIssue(){
 		new Ajax.Request(contextPath + "/issuedSupply",{
 			method: "POST",
-			parameter:{
+			parameters:{
 				action: "updateData",
 				supplyId: $F('selItems'),
 				issueDate: $F('txtIssueDate'),
@@ -126,7 +154,7 @@ try{
 		$('selDept').value = '1';
 	}
 	
-	$('btnCancel').observe("click", refresh);
+	/* $('btnCancel').observe("click", refresh); */
 }catch(e){
 	alert("issuedsupply.jsp "+e);
 }

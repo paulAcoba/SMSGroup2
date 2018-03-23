@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cpi.dao.IssuedSupplyDAO;
+import com.cpi.entity.Departments;
 import com.cpi.entity.IssuedSupply;
 import com.cpi.entity.SuppliesMaintenance;
 import com.ibatis.sqlmap.client.SqlMapClient;
@@ -60,4 +61,9 @@ public class IssuedSupplyDAOImpl implements IssuedSupplyDAO{
 		
 		return (List<IssuedSupply>) this.getSqlMapClient().queryForList("getAllIssuedSupplies");
 	}	
+	
+	@SuppressWarnings("unchecked")
+	public List<Departments> getAllDepartments() throws SQLException{
+		return this.getSqlMapClient().queryForList("getAllDepartments");
+	}
 }

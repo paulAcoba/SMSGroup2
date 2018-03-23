@@ -22,9 +22,9 @@
 		<tr>	
 			<td><label>Department Name</label></td>
 			<td><select id="selDept">
-				<option value="1">Sales</option>
-				<option value="2">IT</option>
-				<option value="3">Finance</option>
+				<script>
+					depts();
+				</script>
 			</select></td>
 		</tr>
 		<tr>	

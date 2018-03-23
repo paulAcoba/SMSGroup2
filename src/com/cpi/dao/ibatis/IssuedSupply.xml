@@ -3,6 +3,7 @@
 <sqlMap namespace="IssuedSupply">
 	<typeAlias alias="IssuedSupplyClass" type="com.cpi.entity.IssuedSupply" /><!-- this will initiates the xml from the entity -->
 	<typeAlias alias="SupplyClass" type="com.cpi.entity.SuppliesMaintenance" />
+	<typeAlias alias="DepartmentClass" type="com.cpi.entity.Departments" />
 	
 	<resultMap id="allIssuedSupplyMap" class="IssuedSupplyClass">
 		<result column="issue_id" property="issueId" />
@@ -21,6 +22,11 @@
 		<result column="actual_count" property="actualCount" />
 	</resultMap>
 	
+	<resultMap id="allDepartmentsMap" class="DepartmentClass">
+		<result column="department_id" property="deptId" />
+		<result column="department_name" property="deptName" />
+	</resultMap>
+	
 	<select id="getAllIssuedSupplies" resultMap="allIssuedSupplyMap">
 		SELECT issue_id,supply_id,issue_date,requestor,quantity,dept_id,last_user,last_update FROM issued_supplies_2
 		<!-- AND s.obsolete_tag = 'Y' -->
@@ -28,6 +34,10 @@
 	
 	<select id="getAllItems" resultMap="allItemsMap">
 		SELECT supply_id, item_name, actual_count FROM supplies_2
+	</select>
+	
+	<select id="getAllDepartments" resultMap="allDepartmentsMap">
+		SELECT department_id, department_name FROM departments
 	</select>
 	
 	<procedure id="addIssuedSupplies" parameterClass="java.util.Map">

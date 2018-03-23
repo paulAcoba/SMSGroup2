@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.cpi.dao.IssuedSupplyDAO;
+import com.cpi.entity.Departments;
 import com.cpi.entity.IssuedSupply;
 import com.cpi.entity.SuppliesMaintenance;
 import com.cpi.service.IssuedSupplyService;
@@ -70,4 +71,7 @@ public class IssuedSupplyServiceImpl implements IssuedSupplyService{
 			return this.getIssuedSupplyDao().getAllIssuedSupplies();
 		}
 		
+		public List<Departments> getAllDepartment() throws SQLException{
+			return this.getIssuedSupplyDao().getAllDepartments();
+		}
 }

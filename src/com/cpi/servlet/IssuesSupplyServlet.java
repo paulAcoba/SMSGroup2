@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.cpi.entity.Departments;
 import com.cpi.entity.IssuedSupply;
 import com.cpi.entity.SuppliesMaintenance;
 import com.cpi.service.IssuedSupplyService;
@@ -86,6 +87,15 @@ public class IssuesSupplyServlet extends HttpServlet{
 				request.setAttribute("itemList", slist);
 				
 				view = "peripherals/issuedSupplies/itemSelectPopulate.jsp";
+				
+			}else if("depts".equals(action)){
+			
+				
+				List<Departments> dlist = new ArrayList<>();
+				dlist = issuedSupply.getAllDepartment();
+				request.setAttribute("deptList", dlist);
+				
+				view = "peripherals/issuedSupplies/deptSelectPopulate.jsp";
 				
 			}
 			

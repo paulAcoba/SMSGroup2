@@ -13,7 +13,14 @@
 <c:forEach var="isup" items="${issuedSuppliesList}">
 	<tr id="${isup.issueId}">
 		<td><c:out value="${isup.issueId}"></c:out></td>
-		<td><c:out value="${isup.supplyId}"></c:out></td>
+		<td>
+		<c:forEach var="itList" items="${itemList}">
+			<c:if test="${itList.supplyId == isup.supplyId}">
+				<c:out value="${itList.itemName}"></c:out>
+			</c:if>
+		</c:forEach>
+		
+		</td>
 		<td><c:out value="${isup.quantity}"></c:out></td>
 		<td><c:out value="${isup.requestor}"></c:out></td>
 		<td><c:out value="${isup.deptId}"></c:out></td>

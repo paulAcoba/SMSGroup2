@@ -79,6 +79,7 @@ try{
 			onComplete : function(response){
 				$('dataTable').update(response.responseText);
 				sels();
+				depts();
 			}
 		});
 	}
@@ -93,6 +94,18 @@ try{
 			},
 			onComplete : function(response){
 				$('selItems').update(response.responseText);
+			}
+		});
+	}
+	
+	function depts(){
+		new Ajax.Request(contextPath + "/issuedSupply",{
+			method: "POST",
+			parameters:{
+				action: "depts"
+			},
+			onComplete : function(response){
+				$('selDept').update(response.responseText);
 			}
 		});
 	}

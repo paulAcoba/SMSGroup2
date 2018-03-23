@@ -29,6 +29,7 @@
 	
 	<select id="getAllIssuedSupplies" resultMap="allIssuedSupplyMap">
 		SELECT issue_id,supply_id,issue_date,requestor,quantity,dept_id,last_user,last_update FROM issued_supplies_2
+		ORDER BY issue_id ASC
 		<!-- AND s.obsolete_tag = 'Y' -->
 	</select>
 	
@@ -46,15 +47,9 @@
 		END;
 	</procedure>
 	
-	<select id="updateIssuedSupplies" resultClass="java.lang.String">
+	<procedure id="updateIssuedSupplies" parameterClass="java.util.Map">
 		BEGIN
-			UPDATE issued_supplies_2
-			SET issue_date = #issueDate#,
-				requestor = #quantity#,
-				dept_id = #deptId#,
-				last_user = #lastUser#,
-				last_update = #lastUpdate#
-			WHERE issue_id = #issueId#
+			 prod_updateIssuedSupplies (#issueId#,#supplyId#,#issueDate#,#requestor#,#quantity#,#deptId#,#lastUser#);
 		END;
-	</select>
+	</procedure>
 </sqlMap>

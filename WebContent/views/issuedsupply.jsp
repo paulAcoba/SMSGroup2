@@ -10,6 +10,10 @@
 			<div id="dataForm">
 				<table id="dataFormTable">
 					<tr>	
+						<td><label id="issueId"></label></td>
+						<td><label id="txtIssueId"></label></td>
+					</tr>
+					<tr>	
 						<td><label>Item Name</label></td>
 						<td><select id="selItems">
 							<%-- <c:forEach var="itList" items="${itemList}">
@@ -19,7 +23,7 @@
 					</tr>
 					<tr>	
 						<td><label>Quantity</label></td>
-						<td><input type="text" name="txtQuantity" id="txtQuantity"></td>
+						<td><input type="text" name="txtQuantity" id="txtQuantity" ></td>
 					</tr>
 					<tr>	
 						<td><label>Requested By</label></td>
@@ -28,9 +32,6 @@
 					<tr>	
 						<td><label>Department Name</label></td>
 						<td><select id="selDept">
-							<option value="1">Sales</option>
-							<option value="2">IT</option>
-							<option value="3">Finance</option>
 						</select></td>
 					</tr>
 					<tr>	
@@ -46,9 +47,8 @@
 			</div>
 			<div id="issuedSupplyTable" class="tableDiv">
 				<label>Search: </label>
-				<input type="text" name="txtSearch" id="txtSearch"><br/>
+				<input type="text" name="txtSearch" id="txtSearch" placeholder="Item Name"><br/>
 				<table id="dataTable" border="1">
-					
 					<c:forEach var="isup" items="${issuedSuppliesList}">
 						<tr id="${isup.issueId}">
 							<td><c:out value="${isup.issueId}"></c:out></td>
@@ -80,6 +80,25 @@ try{
 				$('dataTable').update(response.responseText);
 				sels();
 				depts();
+				
+				alert(8);
+				var table = $('dataTable');
+				
+				for(var i = 1; i<table.rows.length;i++){
+					table.rows[i].onclick = function(){
+						//alert(this.cells[1].innerHTML);
+						var selID = this.cells[1].children[0].value;
+						var deptID = this.cells[4].children[0].value;
+						
+						$('issueId').update("Issue ID");
+						$('txtIssueId').update(this.cells[0].innerText);
+						$('selItems').value = selID;
+						$('txtQuantity').value = this.cells[2].innerText;
+						$('txtRequestedBy').value = this.cells[3].innerText;
+						$('selDept').value = deptID;
+						$('txtIssueDate').value = this.cells[5].children[0].value;
+					}
+				}
 			}
 		});
 	}
@@ -94,6 +113,7 @@ try{
 			},
 			onComplete : function(response){
 				$('selItems').update(response.responseText);
+				
 			}
 		});
 	}
@@ -106,6 +126,7 @@ try{
 			},
 			onComplete : function(response){
 				$('selDept').update(response.responseText);
+				
 			}
 		});
 	}
@@ -129,12 +150,13 @@ try{
 		});
 	});
 
-	//alert(5);
-	function updateIssue(){
+	alert(5);
+	$('btnSave').observe("click",function(){
 		new Ajax.Request(contextPath + "/issuedSupply",{
 			method: "POST",
 			parameters:{
 				action: "updateData",
+				issueId: $('txtIssueId').innerHTML,
 				supplyId: $F('selItems'),
 				issueDate: $F('txtIssueDate'),
 				requestor: $F('txtRequestedBy'),
@@ -143,33 +165,21 @@ try{
 			},
 			onComplete : function(response){
 				//$('dataTable').update(response.responseText);
-				alert("Data Added");
+				alert("Data Updated");
 				refresh();
 				//clear();
 			}
 		});
-	}
-
-	//alert(6);
-	$('btnSave').observe("click", updateIssue);
+	});
 
 	//alert(7);
 	function clear(){
-		$('selItems').value = '1';
 		$('txtIssueDate').value = '';
 		$('txtRequestedBy').value = '';
 		$('txtQuantity').value = '';
-		$('selDept').value = '1';
 	}
 
-	//alert(8);
-	var table = $('dataTable');
 	
-	for(var i = 1; i<table.rows.length;i++){
-		table.rows[i].onclick = function(){
-			alert(this.cells[3].innerHTML);
-		}
-	}
 	
 	
 }catch(e){

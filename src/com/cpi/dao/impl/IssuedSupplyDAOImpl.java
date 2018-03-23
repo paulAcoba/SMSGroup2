@@ -45,10 +45,20 @@ public class IssuedSupplyDAOImpl implements IssuedSupplyDAO{
 		
 	}
 	
-	public String updateIssuedSupplies(Map<String, Object> items) throws SQLException{
-		
-		return (String) this.getSqlMapClient().queryForObject("updateIssuedSupplies", items);
-	
+	public void updateIssuedSupplies(Map<String, Object> items) throws SQLException{
+		try{
+			System.out.println("in try");
+			this.sqlMapClient.startTransaction();
+			this.sqlMapClient.getCurrentConnection().setAutoCommit(false);
+			this.sqlMapClient.startBatch();
+			
+			this.getSqlMapClient().update("updateIssuedSupplies", items);
+			
+			this.sqlMapClient.executeBatch();
+			this.sqlMapClient.getCurrentConnection().commit();
+		}catch(SQLException e){
+			System.out.println(e.getLocalizedMessage());
+		}
 	}
 	
 	@SuppressWarnings("unchecked")

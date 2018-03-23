@@ -41,7 +41,6 @@ public class IssuedSupplyServiceImpl implements IssuedSupplyService{
 			params.put("requestor", request.getParameter("requestor"));
 			params.put("quantity", Integer.parseInt(request.getParameter("quantity")));
 			params.put("deptId", request.getParameter("deptId"));
-			params.put("lastUser", request.getAttribute("lastUser"));
 			params.put("lastUser", "paul");
 			//params.put("lastUser", request.getAttribute("lastUser"));
 			System.out.println(request.getParameter("issueDate"));
@@ -49,17 +48,18 @@ public class IssuedSupplyServiceImpl implements IssuedSupplyService{
 		}
 		
 		public void updateIssuedSupply(HttpServletRequest request) throws SQLException{
+			System.out.println("service update");
 			Map<String, Object> params = new HashMap<>();
-			params.put("issueId", request.getParameter("issueId"));
-			params.put("supplyId", request.getParameter("supplyId"));
+			params.put("issueId", Integer.parseInt(request.getParameter("issueId")));
+			params.put("supplyId", Integer.parseInt(request.getParameter("supplyId")));
 			params.put("issueDate", request.getParameter("issueDate"));
 			params.put("requestor", request.getParameter("requestor"));
-			params.put("quantity", request.getParameter("quantity"));
+			params.put("quantity", Integer.parseInt(request.getParameter("quantity")));
 			params.put("deptId", request.getParameter("deptId"));
 			params.put("lastUser", "paul");
 			//params.put("lastUser", request.getAttribute("lastUser"));
-			params.put("lastUpdate", request.getAttribute("lastUpdate"));
-			
+			System.out.println(params.get("requestor"));
+			System.out.println(params.get("quantity"));
 			this.getIssuedSupplyDao().updateIssuedSupplies(params);
 		}
 		

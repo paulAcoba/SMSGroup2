@@ -6,7 +6,7 @@
 <body>
 	<div id="wrapper">
 		<jsp:include page="../peripherals/nav.jsp"></jsp:include>
-		<fieldset title="Issue Supplies">
+		<fieldset title="Issue Supplies" id="issueSupplies">
 			<div id="dataForm">
 				<table id="dataFormTable">
 					<tr>	
@@ -38,7 +38,7 @@
 						<td><input type="date" name="txtIssueDate" id="txtIssueDate"></td>
 					</tr>
 					<tr>	
-						<td colspan="2"><input type="button" name="btnAdd" id="btnAdd" value="Add New">
+						<td colspan="2"><input type="button" name="btnIssueRequest" id="btnIssueRequest" value="Issue Request">
 						<input type="button" name="btnSave" id="btnSave" value="Save">
 						<input type="button" name="btnCancel" id="btnCancel" value="Cancel"></td>
 					</tr>
@@ -47,7 +47,7 @@
 			<div id="issuedSupplyTable" class="tableDiv">
 				<label>Search: </label>
 				<input type="text" name="txtSearch" id="txtSearch"><br/>
-				<table id="dataTable">
+				<table id="dataTable" border="1">
 					
 					<c:forEach var="isup" items="${issuedSuppliesList}">
 						<tr id="${isup.issueId}">
@@ -69,6 +69,7 @@
 </html>
 <script>
 try{
+	//alert(1);
 	function refresh(){
 		new Ajax.Request(contextPath + "/issuedSupply",{
 			method: "POST",
@@ -83,6 +84,7 @@ try{
 	}
 
 	//refresh();
+	//alert(2);
 	function sels(){
 		new Ajax.Request(contextPath + "/issuedSupply",{
 			method: "POST",
@@ -94,31 +96,27 @@ try{
 			}
 		});
 	}
-	
+
+	//alert(3);
 	$('btnIssue').observe("click",function(){
 		refresh();
 	});
-	
-	$('btnAdd').observe("click",function(){
+
+	//alert(4);
+	$('btnIssueRequest').observe("click",function(){
 		new Ajax.Request(contextPath + "/issuedSupply",{
 			method: "POST",
 			parameters:{
-				action: "addData",
-				supplyId: $F('selItems'),
-				issueDate: $F('txtIssueDate'),
-				requestor: $F('txtRequestedBy'),
-				quantity: $F('txtQuantity'),
-				deptId: $F('selDept')
+				action: "issue"
 			},
 			onComplete : function(response){
-				//$('dataTable').update(response.responseText);
-				alert("Data Added");
-				alert(response.responseText);
-				refresh();
+				$('issueSupplies').update(response.responseText);
+				//sels();
 			}
 		});
 	});
-	
+
+	//alert(5);
 	function updateIssue(){
 		new Ajax.Request(contextPath + "/issuedSupply",{
 			method: "POST",
@@ -138,9 +136,11 @@ try{
 			}
 		});
 	}
-	
+
+	//alert(6);
 	$('btnSave').observe("click", updateIssue);
-	
+
+	//alert(7);
 	function clear(){
 		$('selItems').value = '1';
 		$('txtIssueDate').value = '';
@@ -148,10 +148,20 @@ try{
 		$('txtQuantity').value = '';
 		$('selDept').value = '1';
 	}
+
+	//alert(8);
+	var table = $('dataTable');
 	
-	/* $('btnCancel').observe("click", refresh); */
+	for(var i = 1; i<table.rows.length;i++){
+		table.rows[i].onclick = function(){
+			alert(this.cells[3].innerHTML);
+		}
+	}
+	
+	
 }catch(e){
 	alert("issuedsupply.jsp "+e);
+	console.log(e);
 }
 	
 	

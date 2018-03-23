@@ -35,7 +35,7 @@ public class IssuedSupplyServiceImpl implements IssuedSupplyService{
 		public void addIssuedSupply(HttpServletRequest request) throws SQLException{
 			System.out.println("service impl");
 			Map<String, Object> params = new HashMap<>();
-			params.put("supplyId", 1);
+			params.put("supplyId", request.getParameter("supplyId"));
 			params.put("issueDate", request.getParameter("issueDate"));
 			params.put("requestor", request.getParameter("requestor"));
 			params.put("quantity", Integer.parseInt(request.getParameter("quantity")));

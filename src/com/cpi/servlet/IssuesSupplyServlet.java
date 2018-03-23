@@ -39,10 +39,25 @@ public class IssuesSupplyServlet extends HttpServlet{
 
 		request.setAttribute("lastUser", session.getAttribute("username"));
 		request.setAttribute("lastUpdate", new Date());
+		
+		/*if(session.isNew()){
+			int counter = 0;
+			session.setAttribute("counter", counter);
+		}else{
+			if(username!= password){
+				counter = session.getAttribute("counter");
+				counter++;
+				session.setAttribute("counter", counter);
+			}
+		}*/
+		
+		
+		
 		System.out.println(request.getParameter("action") + " action");
 		try{
 			
 			if("addData".equals(action)){
+				System.out.println(request.getParameter("supplyId"));
 				issuedSupply.addIssuedSupply(request);
 				view = "views/issuedsupply.jsp";
 				
@@ -59,14 +74,20 @@ public class IssuesSupplyServlet extends HttpServlet{
 				request.setAttribute("issuedSuppliesList", list);
 				view = "peripherals/issuedSupplies/issuedSuppliesRows.jsp";
 				
-			}/*else if("sels".equals(action)){
+			}else if("issue".equals(action)){
+				view = "peripherals/issuedSupplies/addIssueSupply.jsp";
+			}else if("cancel".equals(action)){
+				view = "views/issuedsupply.jsp";
+			}else if("sels".equals(action)){
+			
 				
 				List<SuppliesMaintenance> slist = new ArrayList<>();
 				slist = issuedSupply.getAllItem();
+				request.setAttribute("itemList", slist);
 				
 				view = "peripherals/issuedSupplies/itemSelectPopulate.jsp";
 				
-			}*/
+			}
 			
 			/*List<IssuedSupply> list = new ArrayList<>();
 			list = issuedSupply.getAllIssuedSupply();

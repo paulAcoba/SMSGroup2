@@ -14,6 +14,6 @@ public interface IssuedSupplyService {
 	public List<Departments> getAllDepartment() throws SQLException;
 	public void addIssuedSupply(HttpServletRequest request) throws SQLException;
 	public void updateIssuedSupply(HttpServletRequest request) throws SQLException;
-	public void getAllIssuedSupplyById(HttpServletRequest request) throws SQLException;
+	public List<IssuedSupply> getAllIssuedSupplyById(HttpServletRequest request) throws SQLException;
 	public List<IssuedSupply> getAllIssuedSupply() throws SQLException;
 }

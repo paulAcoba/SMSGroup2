@@ -36,12 +36,18 @@ public class IssuedSupplyServiceImpl implements IssuedSupplyService{
 		public void addIssuedSupply(HttpServletRequest request) throws SQLException{
 			System.out.println("service impl");
 			Map<String, Object> params = new HashMap<>();
+			int newActualCount = 0;
+			int quantity = Integer.parseInt(request.getParameter("quantity"));
+			int actualCounts = Integer.parseInt(request.getAttribute("actualCounts").toString());
+			
+			newActualCount = actualCounts - quantity;
 			params.put("supplyId", request.getParameter("supplyId"));
 			params.put("issueDate", request.getParameter("issueDate"));
 			params.put("requestor", request.getParameter("requestor"));
 			params.put("quantity", Integer.parseInt(request.getParameter("quantity")));
 			params.put("deptId", request.getParameter("deptId"));
 			params.put("lastUser", "paul");
+			params.put("newActualCount", newActualCount);
 			//params.put("lastUser", request.getAttribute("lastUser"));
 			System.out.println(request.getParameter("issueDate"));
 			this.getIssuedSupplyDao().addIssuedSupplies(params);
@@ -63,8 +69,9 @@ public class IssuedSupplyServiceImpl implements IssuedSupplyService{
 			this.getIssuedSupplyDao().updateIssuedSupplies(params);
 		}
 		
-		public void getAllIssuedSupplyById(HttpServletRequest request) throws SQLException{
-			
+		public List<IssuedSupply> getAllIssuedSupplyById(HttpServletRequest request) throws SQLException{
+			String searchText = "%" + request.getParameter("searching") + "%";
+			return this.getIssuedSupplyDao().getAllIssuedSuppliesById(searchText);
 		}
 		
 		public List<IssuedSupply> getAllIssuedSupply() throws SQLException{

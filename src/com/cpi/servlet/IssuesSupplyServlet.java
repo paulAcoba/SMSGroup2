@@ -33,7 +33,8 @@ public class IssuesSupplyServlet extends HttpServlet{
 		String action = request.getParameter("action");
 		String view = "";
 		HttpSession session = request.getSession();
-
+		int quantity =0 ;
+		
 		List<IssuedSupply> list = new ArrayList<>();
 		List<Departments> dlist = new ArrayList<>();
 		List<SuppliesMaintenance> slist = new ArrayList<>();
@@ -46,11 +47,17 @@ public class IssuesSupplyServlet extends HttpServlet{
 		request.setAttribute("lastUpdate", new Date());
 		
 		System.out.println(request.getParameter("action") + " action");
+		
 		try{
+			list = issuedSupply.getAllIssuedSupply();
+			slist = issuedSupply.getAllItem();
+			dlist = issuedSupply.getAllDepartment();
+
+			String searchText = "";
+			searchText = request.getParameter("searching");
 			
 			if("sels".equals(action)){
 			
-
 				view = "peripherals/issuedSupplies/itemSelectPopulate.jsp";
 				
 			}else if("depts".equals(action)){
@@ -66,16 +73,65 @@ public class IssuesSupplyServlet extends HttpServlet{
 				view = "peripherals/issuedSupplies/addIssueSupply.jsp";
 			}else if("cancel".equals(action)){
 				view = "views/issuedsupply.jsp";
+			}else if("toIssuePage".equals(action)){
+				view = "views/issuedsupply.jsp";
 			}else if("addData".equals(action)){
 				System.out.println(request.getParameter("supplyId"));
-				issuedSupply.addIssuedSupply(request);
-				view = "views/issuedsupply.jsp";
+
+				quantity = Integer.parseInt(request.getParameter("quantity"));
+				System.out.println(slist);
+				for(int i = 0; i<slist.size();i++){
+					if(slist.get(i).getSupplyId().toString().equals(request.getParameter("supplyId"))){
+						System.out.println(slist.get(i).getItemName());
+						request.setAttribute("itemNames", slist.get(i).getItemName());
+						request.setAttribute("actualCounts", slist.get(i).getActualCount());
+						request.setAttribute("reorderLevels", slist.get(i).getReorderLevel());
+					}else{
+						System.out.println(slist.get(i).getSupplyId());
+					}
+				}
+				
+				int actualCounts = Integer.parseInt(request.getAttribute("actualCounts").toString());
+				int reorderLevels = Integer.parseInt(request.getAttribute("reorderLevels").toString());
+				String alertMsg = "";
+				if(actualCounts > reorderLevels){
+					System.out.println("AC > RL");
+					if(actualCounts >= quantity){
+						System.out.println("AC > Q");
+						issuedSupply.addIssuedSupply(request);
+						alertMsg ="Request Issued.";
+					}else{
+						alertMsg = request.getAttribute("itemNames")+ " only has " + actualCounts + ", which is below the requested number of items.";
+					}
+				}else{
+					String msg = "";
+					if(actualCounts < reorderLevels) msg = "below"; 
+					else msg="equal";
+					
+					alertMsg = "The actual count of the item "+request.getAttribute("itemNames")+ " is " + msg + " the reorder level";
+					
+				}
+				request.setAttribute("message", alertMsg);
+				System.out.println(request.getAttribute("message"));
+				view = "peripherals/issuedSupplies/addIssueSupply.jsp";
+				
 				
 			}else if("updateData".equals(action)){
 				System.out.println("in update");
 				issuedSupply.updateIssuedSupply(request);
 				view = "views/issuedsupply.jsp";
 				
+			}else if("search".equals(action)){
+				if(searchText.length() <=0 || searchText.equals(null)){
+					list = issuedSupply.getAllIssuedSupply();
+				}else{
+					System.out.println(searchText);
+					list = issuedSupply.getAllIssuedSupplyById(request);
+				}
+				for(int i = 0; i < list.size();i++){
+					System.out.println(list.get(i).getIssueId());
+				}
+				view = "peripherals/issuedSupplies/issuedSuppliesRows.jsp";
 			}
 			
 			/*List<IssuedSupply> list = new ArrayList<>();
@@ -85,11 +141,6 @@ public class IssuesSupplyServlet extends HttpServlet{
 			/*List<SuppliesMaintenance> slist = new ArrayList<>();
 			slist = issuedSupply.getAllItem();
 			request.setAttribute("itemList", slist); */
-
-
-			list = issuedSupply.getAllIssuedSupply();
-			slist = issuedSupply.getAllItem();
-			dlist = issuedSupply.getAllDepartment();
 			
 			request.setAttribute("itemLists", slist);
 			request.setAttribute("deptList", dlist);

@@ -1,6 +1,7 @@
 package com.cpi.dao.impl;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,10 +36,9 @@ public class IssuedSupplyDAOImpl implements IssuedSupplyDAO{
 			this.sqlMapClient.startBatch();
 			
 			this.getSqlMapClient().update("addIssuedSupplies", items);
-			
 			this.sqlMapClient.executeBatch();
 			this.sqlMapClient.getCurrentConnection().commit();
-			
+
 		}catch(SQLException e){
 			System.out.println(e.getLocalizedMessage());
 		}
@@ -68,8 +68,11 @@ public class IssuedSupplyDAOImpl implements IssuedSupplyDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<IssuedSupply> getAllIssuedSuppliesById(String userId) throws SQLException{
+		System.out.println(userId);
+		Map<String, Object> param = new HashMap<>();
 		
-		return (List<IssuedSupply>) this.getSqlMapClient().queryForList("getAllIssuedSupplies");
+		param.put("userId", userId);
+		return (List<IssuedSupply>) this.getSqlMapClient().queryForList("getAllIssuedSuppliesById",param);
 	}	
 	
 	@SuppressWarnings("unchecked")

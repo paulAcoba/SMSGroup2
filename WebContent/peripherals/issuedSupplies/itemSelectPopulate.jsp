@@ -2,5 +2,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:forEach var="itList" items="${itemLists}">
-	<option value="${itList.supplyId}"><c:out value="${itList.itemName}"></c:out></option>
+	<c:choose>
+		<c:when test="${itList.obseleteTag == 'N'}">
+			<option value="${itList.supplyId}"><c:out value="${itList.itemName}"></c:out></option>
+		</c:when>
+	</c:choose>
 </c:forEach>

@@ -20,6 +20,8 @@
 		<result column="supply_id" property="supplyId" />
 		<result column="item_name" property="itemName" />
 		<result column="actual_count" property="actualCount" />
+		<result column="reorder_level" property="reorderLevel" />
+		<result column="obsolete_tag" property="obseleteTag" />
 	</resultMap>
 	
 	<resultMap id="allDepartmentsMap" class="DepartmentClass">
@@ -33,8 +35,19 @@
 		<!-- AND s.obsolete_tag = 'Y' -->
 	</select>
 	
+	<select id="getAllIssuedSuppliesById" parameterClass="java.util.Map" resultMap="allIssuedSupplyMap">
+		SELECT issue_id,supply_id,issue_date,requestor,quantity,dept_id,last_user,last_update 
+		FROM issued_supplies_2
+		WHERE issue_id LIKE #userId#
+		ORDER BY issue_id ASC
+		<!-- BEGIN
+			 prod_search (#userId#);
+		END; -->
+		<!-- AND s.obsolete_tag = 'Y' -->
+	</select>
+	
 	<select id="getAllItems" resultMap="allItemsMap">
-		SELECT supply_id, item_name, actual_count FROM supplies_2
+		SELECT supply_id, item_name, actual_count,reorder_level,obsolete_tag FROM supplies_2
 	</select>
 	
 	<select id="getAllDepartments" resultMap="allDepartmentsMap">

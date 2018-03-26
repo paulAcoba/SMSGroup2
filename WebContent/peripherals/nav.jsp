@@ -29,10 +29,11 @@ function refresh() {
 					var deptID = this.cells[4].children[0].value;
 
 					$('issueId').update("Issue ID");
-					$('txtIssueId').update(
-							this.cells[0].innerText);
+					$('txtIssueId').update(this.cells[0].innerText);
 					$('selItems').value = selID;
+					$('txtOldItem').value = selID;
 					$('txtQuantity').value = this.cells[2].innerText;
+					$('txtOldQuantity').value = this.cells[2].innerText;
 					$('txtRequestedBy').value = this.cells[3].innerText;
 					$('selDept').value = deptID;
 					$('txtIssueDate').value = this.cells[5].children[0].value;

@@ -1,0 +1,15 @@
+@CHARSET "ISO-8859-1";
+
+#nav{
+}
+
+#nav ul li{
+	list-style-type:none;
+	display:block;
+	float:left;
+}
+
+fieldset{
+	clear:both;
+}
+

@@ -27,4 +27,16 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 		<property name="sqlMapClient" ref="sqlMapClient"></property>
 	</bean>
 	
+	<bean id="suppliesMaintenanceDao" class="com.cpi.dao.impl.SuppliesMaintenanceDAOImpl"  depends-on="sqlMapClient">
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+
+	<bean id="issueSupplyService" class="com.cpi.service.impl.IssuedSupplyServiceImpl" depends-on="issuedSupplyDao">
+		<property name="issuedSupplyDao" ref="issuedSupplyDao"></property>
+	</bean>
+	
+	<bean id="suppliesMaintenanceService" class="com.cpi.service.impl.SuppliesMaintenanceServiceImpl"  depends-on="sqlMapClient">
+		<property name="suppliesMaintenanceDao" ref="suppliesMaintenanceDao"></property>
+	</bean>
+
 </beans>

@@ -2,16 +2,86 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>SMS_2</display-name>
   <welcome-file-list>
-    <welcome-file>views/index.jsp</welcome-file>
+    <welcome-file>views/issuedsupply.jsp</welcome-file>
   </welcome-file-list>
   
   <servlet>
-  	<servlet-name>servlet</servlet-name>
-  	<servlet-class>com.cpi.servlet.UserServlet</servlet-class>
+  	<servlet-name>issuedSupply</servlet-name>
+  	<servlet-class>com.cpi.servlet.IssuesSupplyServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
-  	<servlet-name>servlet</servlet-name>
-  	<url-pattern>/serv</url-pattern>
+  	<servlet-name>issuedSupply</servlet-name>
+  	<url-pattern>/issuedSupply</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  	<servlet-name>supplymaintenance</servlet-name>
+  	<servlet-class>com.cpi.servlet.SuppliesMaintenanceServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>supplymaintenance</servlet-name>
+  	<url-pattern>/supplymaintenance</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>add</servlet-name>
+  	<servlet-class>com.cpi.user.AddUserController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>add</servlet-name>
+  	<url-pattern>/adduser</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>gate</servlet-name>
+  	<servlet-class>com.cpi.user.GateController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>gate</servlet-name>
+  	<url-pattern>/gate</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>updatePassword</servlet-name>
+  	<servlet-class>com.cpi.user.UpdatePasswordController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>updatePassword</servlet-name>
+  	<url-pattern>/updatepassword</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>updateProfile</servlet-name>
+  	<servlet-class>com.cpi.user.UpdateProfileController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>updateProfile</servlet-name>
+  	<url-pattern>/updateprofile</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>search</servlet-name>
+  	<servlet-class>com.cpi.user.SearchController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>search</servlet-name>
+  	<url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>enter</servlet-name>
+  	<servlet-class>com.cpi.runner.Enter</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>enter</servlet-name>
+  	<url-pattern>/enter</url-pattern>
   </servlet-mapping>
 </web-app>

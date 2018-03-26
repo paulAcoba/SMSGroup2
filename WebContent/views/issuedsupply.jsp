@@ -12,10 +12,12 @@
 					<tr>
 						<td><label id="issueId"></label></td>
 						<td><label id="txtIssueId"></label></td>
+					</tr><tr>
+						<td><input type="hidden" id="txtOldItem" name="txtOldItem"/></td>
+						<td><input type="hidden" id="txtOldQuantity" name="txtOldQuantity"/></td>
 					</tr>
 					<tr>
 						<td><label>Item Name</label></td>
-						<td><input type="hidden" id="txtOldItem" name="txtOldItem"/></td>
 						<td><select id="selItems">
 								<%-- <c:forEach var="itList" items="${itemList}">
 								<option value="${itList.supplyId}"><c:out value="${itList.itemName}"></c:out></option>
@@ -24,7 +26,6 @@
 					</tr>
 					<tr>
 						<td><label>Quantity</label></td>
-						<td><input type="hidden" id="txtOldQuantity" name="txtOldQuantity"/></td>
 						<td><input type="text" name="txtQuantity" id="txtQuantity"></td>
 					</tr>
 					<tr>
@@ -73,43 +74,9 @@
 	</div>
 </body>
 </html>
+<jsp:include page="../peripherals/footer.jsp"></jsp:include>
 <script>
 	try {
-		//alert(1);
-		
-
-		//refresh();
-		//alert(2);
-		function sels() {
-			new Ajax.Request(contextPath + "/issuedSupply", {
-				method : "POST",
-				parameters : {
-					action : "sels"
-				},
-				onComplete : function(response) {
-					$('selItems').update(response.responseText);
-
-				}
-			});
-		}
-
-		function depts() {
-			new Ajax.Request(contextPath + "/issuedSupply", {
-				method : "POST",
-				parameters : {
-					action : "depts"
-				},
-				onComplete : function(response) {
-					$('selDept').update(response.responseText);
-
-				}
-			});
-		}
-
-		//alert(3);
-		
-		
-		//alert(4);
 		$('btnIssueRequest').observe("click", function() {
 			new Ajax.Request(contextPath + "/issuedSupply", {
 				method : "POST",

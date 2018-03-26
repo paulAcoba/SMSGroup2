@@ -62,7 +62,7 @@
 	
 	<procedure id="updateIssuedSupplies" parameterClass="java.util.Map">
 		BEGIN
-			 prod_updateIssuedSupplies (#issueId#,#supplyId#,#issueDate#,#requestor#,#quantity#,#deptId#,#lastUser#);
+			 prod_updateIssuedSupplies (#issueId#,#supplyId#,#oldItem#,#issueDate#,#requestor#,#quantity#,#oldQuantity#,#deptId#,#lastUser#);
 		END;
 	</procedure>
 </sqlMap>

@@ -58,14 +58,18 @@ public class IssuedSupplyServiceImpl implements IssuedSupplyService{
 			Map<String, Object> params = new HashMap<>();
 			params.put("issueId", Integer.parseInt(request.getParameter("issueId")));
 			params.put("supplyId", Integer.parseInt(request.getParameter("supplyId")));
+			params.put("oldItem", Integer.parseInt(request.getParameter("oldItem")));
 			params.put("issueDate", request.getParameter("issueDate"));
 			params.put("requestor", request.getParameter("requestor"));
 			params.put("quantity", Integer.parseInt(request.getParameter("quantity")));
+			params.put("oldQuantity", Integer.parseInt(request.getParameter("oldQuantity")));
 			params.put("deptId", request.getParameter("deptId"));
 			params.put("lastUser", "paul");
 			//params.put("lastUser", request.getAttribute("lastUser"));
 			System.out.println(params.get("requestor"));
 			System.out.println(params.get("quantity"));
+			System.out.println(params.get("oldItem"));
+			System.out.println(params.get("oldQuantity"));
 			this.getIssuedSupplyDao().updateIssuedSupplies(params);
 		}
 		

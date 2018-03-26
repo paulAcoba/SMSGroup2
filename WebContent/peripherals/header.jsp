@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script type="text/javascript" src="js/prototype.js"></script>
 <link rel="stylesheet" type="text/css" href="css/nav.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
 <script>
 	try{
 		var contextPath = "${pageContext.request.contextPath}";	

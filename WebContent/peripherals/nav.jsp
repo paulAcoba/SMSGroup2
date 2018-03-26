@@ -8,6 +8,35 @@
 </div>
 
 <script>
+
+
+function sels() {
+	new Ajax.Request(contextPath + "/issuedSupply", {
+		method : "POST",
+		parameters : {
+			action : "sels"
+		},
+		onComplete : function(response) {
+			$('selItems').update(response.responseText);
+
+		}
+	});
+}
+
+function depts() {
+	new Ajax.Request(contextPath + "/issuedSupply", {
+		method : "POST",
+		parameters : {
+			action : "depts"
+		},
+		onComplete : function(response) {
+			$('selDept').update(response.responseText);
+
+		}
+	});
+}
+
+
 function refresh() {
 	new Ajax.Request(contextPath + "/issuedSupply",{
 		method : "POST",
@@ -52,8 +81,6 @@ function toIssuePage(){
 		onComplete : function(response) {
 			$('wrapper').update(response.responseText);
 			refresh();
-			sels();
-			depts();
 			clear();
 			//alert(8);
 			

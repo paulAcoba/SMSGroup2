@@ -13,9 +13,7 @@
 <link rel="stylesheet" type="text/css" href="css/nav.css">
 <script>
 	jQuery.noConflict();
-	window.onload = function(){
-		refresh();
-	}
+	
 	try{
 		var contextPath = "${pageContext.request.contextPath}";	
 	}catch(e){

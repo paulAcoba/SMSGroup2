@@ -1,15 +1,6 @@
 @CHARSET "UTF-8";
 
 #nav{
+	text-align: center;
+	padding-top:10px;
 }
-
-#nav ul li{
-	list-style-type:none;
-	display:block;
-	float:left;
-}
-
-fieldset{
-	clear:both;
-}
-

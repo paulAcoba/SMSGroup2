@@ -2,6 +2,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../peripherals/header.jsp"></jsp:include>
 <title>Issue Supplies</title>
+<script>
+	window.onload = function(){
+		refresh();
+	}
+</script>
 </head>
 <body>
 	<div id="wrapper">
@@ -18,7 +23,7 @@
 					</tr>
 					<tr>
 						<td><label>Item Name</label></td>
-						<td><select id="selItems">
+						<td><select id="selItems" class="form-control">
 								<%-- <c:forEach var="itList" items="${itemList}">
 								<option value="${itList.supplyId}"><c:out value="${itList.itemName}"></c:out></option>
 							</c:forEach> --%>
@@ -26,34 +31,34 @@
 					</tr>
 					<tr>
 						<td><label>Quantity</label></td>
-						<td><input type="text" name="txtQuantity" id="txtQuantity"></td>
+						<td><input type="text" name="txtQuantity" id="txtQuantity" class="form-control"></td>
 					</tr>
 					<tr>
 						<td><label>Requested By</label></td>
 						<td><input type="text" name="txtRequestedBy"
-							id="txtRequestedBy"></td>
+							id="txtRequestedBy" class="form-control"></td>
 					</tr>
 					<tr>
 						<td><label>Department Name</label></td>
-						<td><select id="selDept">
+						<td><select id="selDept" class="form-control">
 						</select></td>
 					</tr>
 					<tr>
 						<td><label>Issue Date</label></td>
-						<td><input type="date" name="txtIssueDate" id="txtIssueDate" required></td>
+						<td><input type="date" name="txtIssueDate" id="txtIssueDate" class="form-control" required></td>
 					</tr>
 					<tr>
 						<td colspan="2"><input type="button" name="btnIssueRequest"
-							id="btnIssueRequest" value="Issue Request"> <input
-							type="button" name="btnSave" id="btnSave" value="Save"> <input
-							type="button" name="btnCancel" id="btnCancel" value="Cancel"></td>
+							id="btnIssueRequest" class="btn btn-success" value="Issue Request" data-toggle="modal" ><input
+							type="button" name="btnSave" id="btnSave" class="btn btn-danger" value="Save"> <input
+							type="button" name="btnCancel" id="btnCancel" class="btn btn-primary" value="Cancel"></td>
 					</tr>
 				</table>
 			</div>
 			<div id="issuedSupplyTable" class="tableDiv">
 				<label>Search: </label> <input type="text" name="txtSearch"
-					id="txtSearch" placeholder="Item Name"><br />
-				<table id="dataTable" border="1">
+					id="txtSearch" class="form-control" placeholder="Issue ID"><br />
+				<table id="dataTable" class="table table-hover">
 					<c:forEach var="isup" items="${issuedSuppliesList}">
 						<tr id="${isup.issueId}">
 							<td><c:out value="${isup.issueId}"></c:out></td>
@@ -70,24 +75,38 @@
 					</c:forEach>
 				</table>
 			</div>
+			
 		</fieldset>
+		<div id="dataFormAdd" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-header">
+					 <button type="button" class="close" data-dismiss="modal">&times;</button>
+        			<h4 class="modal-title">Issue Request</h4>
+				</div>
+				<div class="modal-content" id="modal-body">
+					<div class="modal-body">
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
 <jsp:include page="../peripherals/footer.jsp"></jsp:include>
 <script>
 	try {
-		$('btnIssueRequest').observe("click", function() {
-			new Ajax.Request(contextPath + "/issuedSupply", {
+		 $('btnIssueRequest').observe("click", function() {
+			 new Ajax.Request(contextPath + "/issuedSupply", {
 				method : "POST",
 				parameters : {
 					action : "issue"
 				},
 				onComplete : function(response) {
-					$('issueSupplies').update(response.responseText);
+					$('modal-body').update(response.responseText);
 					//sels();
+					$('dataFormAdd').modal({show:true});
 				}
-			});
+			}); 
 		});
 
 		//alert(5);

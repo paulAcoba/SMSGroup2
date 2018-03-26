@@ -1,4 +1,4 @@
-<div id="dataForm">
+<div id="dataFormAdd">
 	<table id="dataFormTable">
 		<tr>	
 			<td><label>Item Name</label></td>
@@ -40,6 +40,8 @@
 
 <script>
 //sels();
+sels();
+depts();
 //alert(9);
 $('btnCancel2').observe("click", function(){
 	 new Ajax.Request(contextPath + "/issuedSupply",{

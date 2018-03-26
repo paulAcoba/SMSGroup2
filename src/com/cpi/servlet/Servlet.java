@@ -29,37 +29,27 @@ public class Servlet extends HttpServlet {
 
 			System.out.println(session.getAttribute("active"));
 
-			/*
-			 * User myUser = new User(); myUser =
-			 * (User)session.getAttribute("activeUser");
-			 * System.out.println(myUser.getEmail());
-			 */
+			User myUser = new User();
+			myUser = (User) session.getAttribute("activeUser");
+			System.out.println(myUser.getFirstName() + " " + myUser.getLastName());
 			
 			RequestDispatcher rd = request.getRequestDispatcher("pages/homeAdmin.jsp");
 			rd.forward(request, response);
 
 		} else if (message.equals("accessUser")) {
 
-			System.out.println(session.getAttribute("active"));
-			
-			/*
-			 * User myUser = new User(); myUser =
-			 * (User)session.getAttribute("activeUser");
-			 * System.out.println(myUser.getEmail());
-			 */
+			User myUser = new User();
+			myUser = (User) session.getAttribute("activeUser");
+			System.out.println(myUser.getFirstName() + " " + myUser.getLastName());
 
 			RequestDispatcher rd = request.getRequestDispatcher("pages/homeUser.jsp");
 			rd.forward(request, response);
 
 		} else if (message.equals("newAccount")) {
 
-			System.out.println(session.getAttribute("active"));
-			
-			/*
-			 * User myUser = new User(); myUser =
-			 * (User)session.getAttribute("activeUser");
-			 * System.out.println(myUser.getEmail());
-			 */
+			User myUser = new User();
+			myUser = (User) session.getAttribute("activeUser");
+			System.out.println(myUser.getFirstName() + " " + myUser.getLastName());
 
 			RequestDispatcher rd = request.getRequestDispatcher("pages/changePasswordPage.jsp");
 			rd.forward(request, response);

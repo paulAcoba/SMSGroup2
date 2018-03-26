@@ -198,8 +198,6 @@ public class UserServiceImpl implements UserService{
 
 		List<User> l = new ArrayList<>();
 
-		String test = log_user;
-		// System.out.println(log_user);
 		try {
 			l = userService.getUser();
 			HttpSession session = request.getSession();
@@ -210,44 +208,23 @@ public class UserServiceImpl implements UserService{
 						&& !(e.getUserId().equals(e.getPassword()))) {
 					if ("Y".equals(e.getActiveTag())) {
 						if ("A".equals(e.getAccessLevel())) {
-							List detailsList = new ArrayList();
-
-							detailsList.add(e.getUserId());
-							detailsList.add(e.getPassword());
-							detailsList.add(e.getFirstName());
-							detailsList.add(e.getLastName());
-							detailsList.add(e.getMiddleInitial());
-							detailsList.add(e.getEmail());
-							detailsList.add(e.getActiveTag());
-							detailsList.add(e.getAccessLevel());
-							detailsList.add(e.getEntryDate());
-							detailsList.add(e.getLastLogin());
-							detailsList.add(e.getLastUser());
-
-							session.setAttribute("active", detailsList);
-
-							/*
-							 * User myList = new User(); myList = e;
-							 * session.setAttribute("activeUser", myList);
-							 */
+							counter = 0;
+							session.setAttribute("sesCounter", counter);
+							request.setAttribute("callSesCounter", counter);
+													
+							  User myList = new User(); 
+							  myList = e;
+							  session.setAttribute("activeUser", myList);
 
 							message = "accessAdmin";
 						} else {
-							List detailsList = new ArrayList();
-
-							detailsList.add(e.getUserId());
-							detailsList.add(e.getPassword());
-							detailsList.add(e.getFirstName());
-							detailsList.add(e.getLastName());
-							detailsList.add(e.getMiddleInitial());
-							detailsList.add(e.getEmail());
-							detailsList.add(e.getActiveTag());
-							detailsList.add(e.getAccessLevel());
-							detailsList.add(e.getEntryDate());
-							detailsList.add(e.getLastLogin());
-							detailsList.add(e.getLastUser());
-
-							session.setAttribute("active", detailsList);
+							counter = 0;
+							session.setAttribute("sesCounter", counter);
+							request.setAttribute("callSesCounter", counter);
+							
+							User myList = new User(); 
+							  myList = e;
+							  session.setAttribute("activeUser", myList);
 
 							message = "accessUser";
 						}
@@ -278,21 +255,14 @@ public class UserServiceImpl implements UserService{
 				} else if ((e.getUserId().equals(log_user)) && (e.getPassword().equals(log_pass))
 						&& (e.getUserId().equals(e.getPassword()))) {
 					if((e.getActiveTag().equals("Y"))){
-						List detailsList = new ArrayList();
-
-						detailsList.add(e.getUserId());
-						detailsList.add(e.getPassword());
-						detailsList.add(e.getFirstName());
-						detailsList.add(e.getLastName());
-						detailsList.add(e.getMiddleInitial());
-						detailsList.add(e.getEmail());
-						detailsList.add(e.getActiveTag());
-						detailsList.add(e.getAccessLevel());
-						detailsList.add(e.getEntryDate());
-						detailsList.add(e.getLastLogin());
-						detailsList.add(e.getLastUser());
-
-						session.setAttribute("active", detailsList);
+						counter = 0;
+						session.setAttribute("sesCounter", counter);
+						request.setAttribute("callSesCounter", counter);
+						
+						User myList = new User(); 
+						  myList = e;
+						  session.setAttribute("activeUser", myList);
+						  
 						message = "newAccount";
 						
 					}
@@ -320,11 +290,6 @@ public class UserServiceImpl implements UserService{
 						message = "incorrectPw";
 					}
 				}
-				/*else if (!(e.getUserId().equals(log_user)) && !(e.getPassword().equals(log_pass)) && !(e.getUserId().equals(e.getPassword()))) || (!(e.getUserId().equals(log_user)) && (e.getPassword().equals(log_pass)) && !(e.getUserId().equals(e.getPassword()))) || (!(e.getUserId().equals(log_user)) && !(e.getPassword().equals(log_pass)) && !(e.getUserId().equals(e.getPassword()))) || (!(e.getUserId().equals(log_user)) && (e.getPassword().equals(log_pass)) && (e.getUserId().equals(e.getPassword())))){
-					counter = 0;
-					session.setAttribute("sesCounter", counter);
-					request.setAttribute("callSesCounter", counter);
-				}*/
 			}
 			return message;
 		} catch (SQLException e) {

@@ -2,13 +2,14 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sqlmap-2.dtd">
 <sqlMap namespace="SuppliesMaintenance">
 	<typeAlias alias="SuppliesMaintenanceClass" type="com.cpi.entity.SuppliesMaintenance" />
+	<typeAlias alias="SupplyTestClass" type="com.cpi.entity.SupplyTest" />
 
 	<resultMap id="allSuppliesMap" class="SuppliesMaintenanceClass">
 		<result column="supply_id" property="supplyId" />
-		<result column="supply_type" property="supplyType" />
+		<result column="supply_type_id" property="supplyType" />
 		<result column="item_name" property="itemName" />
 		<result column="item_unit" property="itemUnit" />
-		<result column="obsolete_tag" property="obseleteTag" />
+		<result column="obsolete_tag" property="obsoleteTag" />
 		<result column="location" property="location" />
 		<result column="reorder_level" property="reorderLevel" />
 		<result column="actual_count" property="actualCount" />
@@ -20,32 +21,57 @@
 
 	<select id="getAllSupplies" resultMap="allSuppliesMap">
 		SELECT * FROM supplies_2
+		WHERE obsolete_tag = 'N'
+		ORDER BY supply_id ASC
+		<!-- AND obsolete_tag = 'Y' -->
 	</select>
 
-	<select id="addSupplies" resultClass="java.lang.String">
+	<resultMap id="getSupplyId" class="SupplyTestClass">
+		<result column="supply_type_id" property="supplyTypeId" />
+		<result column="type_name" property="typeName" />
+	</resultMap>
+
+	<select id="getSuppliesId" resultMap="getSupplyId">
+
+		SELECT supply_type_id, type_name FROM supply_types_2
+
+	</select>
+
+
+	<procedure id="addSupplies" parameterClass="java.util.Map">
 		BEGIN
 		INSERT INTO
-		supplies_2(supply_id,supply_type,item_name,item_unit,obselete_tag,location,reorder_level,actual_count,remarks,date_added,last_user,last_update)
+		supplies_2(supply_id,supply_type_id,item_name,item_unit,obsolete_tag,location,reorder_level,actual_count,remarks,date_added,last_user,last_update)
 		VALUES
-		(seq_supply_id_2.NEXTVAL,#supplyType#,#itemName#,#itemUnit#,#obseleteTag#,#location#,#reorderLevel#,#actualCount#,#remarks#,#dateAdded#,#lastUser#,#lastUpdate#)
+		(seq_supply_id_2.NEXTVAL,#supplyType#,#itemName#,#itemUnit#,#obsoleteTag#,#location#,#reorderLevel#,#actualCount#,#remarks#,to_date(#dateAdded#,'yyyy/MM/dd'),#lastUser#,sysdate);
 		END;
-	</select>
+	</procedure>
 
-	<select id="updateSupplies" resultClass="java.lang.String">
-		BEGIN
-			UPDATE supplies_2
-			SET supply_type = #supplyType#,
-				item_name = #itemName#,
-				item_unit = #itemUnit#,
-				obsolete_tag = #obseleteTag#,
-				location = #location#,
-				reorder_level = #reorderLevel#,
-				actual_count = #actualCount#,
-				remarks = #remarks#
+	<procedure id="updateSupplies" resultClass="java.lang.String">
+	
+		UPDATE supplies_2
+		SET item_name = #itemName#,
+		item_unit = #itemUnit#,
+		obsolete_tag = #obsoleteTag#,
+		location = #location#,
+		reorder_level = #reorderLevel#,
+		actual_count = #actualCount#,
+		remarks = #remarks#
 		WHERE supply_id = #supplyId#
-		END;
-	</select>
+		
+</procedure>
 
+<select id="getAllSuppId" parameterClass="java.util.Map" resultMap="allSuppliesMap">
+	SELECT * FROM supplies_2
+	WHERE supply_id LIKE #supplyId#
+	AND obsolete_tag = 'N'
+	ORDER BY supply_id ASC
+	
+	<!-- 	SELECT * FROM supplies_2
+		WHERE item_name LIKE #itemName#
+		ORDER BY supply_id ASC -->
+		
+	</select>
 </sqlMap>
 
 

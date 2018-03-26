@@ -27,17 +27,13 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 		<property name="sqlMapClient" ref="sqlMapClient"></property>
 	</bean>
 	
-	<bean id="suppliesMaintenanceDao" class="com.cpi.dao.impl.SuppliesMaintenanceDAOImpl"  depends-on="sqlMapClient">
-		<property name="sqlMapClient" ref="sqlMapClient"></property>
-	</bean>
+
 
 	<bean id="issueSupplyService" class="com.cpi.service.impl.IssuedSupplyServiceImpl" depends-on="issuedSupplyDao">
 		<property name="issuedSupplyDao" ref="issuedSupplyDao"></property>
 	</bean>
 	
-	<bean id="suppliesMaintenanceService" class="com.cpi.service.impl.SuppliesMaintenanceServiceImpl"  depends-on="sqlMapClient">
-		<property name="suppliesMaintenanceDao" ref="suppliesMaintenanceDao"></property>
-	</bean>
+
 	
 	<bean class="com.cpi.dao.impl.UserDAOImpl" id="userDAO" depends-on="sqlMapClient">
 		<property name="sqlMapClient" ref="sqlMapClient"></property>
@@ -50,6 +46,17 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 	</bean>
 	<bean class="com.cpi.service.impl.SupplyTypeServiceImpl" id="supplyTypeService" depends-on="supplyTypeDAO">
 		<property name="supplyTypeDAO" ref="supplyTypeDAO"></property>
+	</bean>
+	
+	<bean id="suppliesMaintenanceDao" class="com.cpi.dao.impl.SuppliesMaintenanceDAOImpl"
+		depends-on="sqlMapClient">
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+
+
+	<bean id="suppliesMaintenanceService" class="com.cpi.service.impl.SuppliesMaintenanceServiceImpl"
+		depends-on="suppliesMaintenanceDao">
+		<property name="suppliesMaintenanceDao" ref="suppliesMaintenanceDao"></property>
 	</bean>
 
 </beans>

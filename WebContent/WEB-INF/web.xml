@@ -25,7 +25,7 @@
   	<url-pattern>/issuedSupply</url-pattern>
   </servlet-mapping>
   
-   <servlet>
+ <servlet>
   	<servlet-name>supplymaintenance</servlet-name>
   	<servlet-class>com.cpi.servlet.SuppliesMaintenanceServlet</servlet-class>
   </servlet>

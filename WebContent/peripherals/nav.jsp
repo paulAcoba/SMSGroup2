@@ -5,6 +5,7 @@
 			<li><input type="button" name="btnMaintenance" id="btnMaintenance" value="Maintenance"></li>
 			<li><input type="button" name="btnIssue" id="btnIssue" value="Supply Issuance"></li>
 			<li><input type="button" name="btnStocksAdd" id="btnStocksAdd" value="Add Stocks"></li>
+			<li><input type="button" name="btnUpdateProfile" id="btnUpdateProfile" value="Profile"></li>
 		</ul>
 	</div>
 	
@@ -12,6 +13,30 @@
 
 <script>
 
+$("btnUpdateProfile").observe("click", function(){
+	new Ajax.Request(contextPath + "/gate", {
+		method: "POST",
+		parameters: {
+			gateKey: "userUpdateProfile"
+		},
+		onComplete: function(response) {
+			$("wrapper").update(response.responseText);
+		}
+	});
+});
+
+function toUpdateProfile() {
+	new Ajax.Request(contextPath + "/enter", {
+		method: "POST",
+		parameters: {
+			userId: $F("userId"),
+			password: $F("password")
+		},
+		onComplete: function(response) {
+			$("wrapper").update(response.responseText);
+		}
+	});
+}
 
 function sels() {
 	new Ajax.Request(contextPath + "/issuedSupply", {

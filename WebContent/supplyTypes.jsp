@@ -9,7 +9,7 @@
 
 
 <style>
-input[type="button"] {
+/* input[type="button"] {
 	background-color: #4798f2;
 	width: 150px;
 	color: white;
@@ -51,7 +51,7 @@ div {
 #table1 {
 	text-align: right;
 }
-
+ */
 /* 
 d */
 .modal {

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.cpi.dao.SupplyTypeDAO;
 import com.cpi.entity.SupplyType;
+import com.cpi.entity.User;
 import com.cpi.exceptions.NoSupplyTypeIdFound;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
@@ -50,6 +51,7 @@ public class SupplyTypeDAOImpl implements SupplyTypeDAO {
 		return list;
 	}
 
+	
 	@Override
 	public void insertSupplyType(HttpServletRequest req) throws SQLException {
 		this.sqlMapClient.startTransaction();
@@ -59,16 +61,19 @@ public class SupplyTypeDAOImpl implements SupplyTypeDAO {
 		String dateFormatted = new SimpleDateFormat("MM/dd/yyyy").format(date);
 		String supplyTypeId = req.getParameter("supplyTypeId");
 		String supplyTypeName= req.getParameter("supplyTypeName");
+		
 		HttpSession session = req.getSession();
-		String lastUser= (String)session.getAttribute("activeUser");
+		User activeUser = new User();
+		activeUser = (User) session.getAttribute("activeUser");
+		String lastUser= activeUser.getUserId();
 		
 		SupplyType sup = new SupplyType();
-		System.out.println(lastUser);
+		
 		sup.setLastUser(lastUser);
-		  sup.setSupplyTypeId(Integer.parseInt(supplyTypeId));
-		  sup.setTypeName(supplyTypeName);
-		  sup.setEntryDate(dateFormatted); 
-		  sup.setLastUpdate(dateFormatted);
+		sup.setSupplyTypeId(Integer.parseInt(supplyTypeId));
+		sup.setTypeName(supplyTypeName);
+		sup.setEntryDate(dateFormatted); 
+		sup.setLastUpdate(dateFormatted);
 		 
 
 		this.getSqlMapClient().insert("insertSupplyType", sup);
@@ -97,7 +102,15 @@ public class SupplyTypeDAOImpl implements SupplyTypeDAO {
 		this.sqlMapClient.startTransaction();
 		this.sqlMapClient.getCurrentConnection().setAutoCommit(false);
 		this.sqlMapClient.startBatch();
-
+		
+		HttpSession session = req.getSession();
+		User activeUser = new User();
+		activeUser = (User) session.getAttribute("activeUser");
+		String lastUser= activeUser.getUserId();
+		
+		
+		
+		
 
 		String supplyTypeId= req.getParameter("supplyTypeId");
 		String supplyTypeName= req.getParameter("supplyTypeName");
@@ -105,7 +118,7 @@ public class SupplyTypeDAOImpl implements SupplyTypeDAO {
 		
 		params.put("typeId", supplyTypeId);
 		params.put("typeName", supplyTypeName);
-		params.put("lastUser", "UserA");
+		params.put("lastUser", lastUser);
 
 		this.getSqlMapClient().update("updateSupplyType", params);
 

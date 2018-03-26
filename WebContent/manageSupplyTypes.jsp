@@ -12,7 +12,7 @@
 
 
 <style>
-#sId {
+/* #sId {
 	text-decoration: underline;
 	color: #4798f2;
 }
@@ -85,7 +85,7 @@ input[type="button"] {
 text-align: right;
 }
 
-
+ */
 
 /* for modal */
 
@@ -184,17 +184,6 @@ background-color: #ffcccc;
 			
 			
 			
-			<table id="topLeft">
-				<tr>
-					<td>Users</td>
-				</tr>
-				<tr>
-					<td>Supply Types</td>
-				</tr>
-				<tr>
-					<td>Supplies</td>
-				</tr>
-			</table>
 
 
 

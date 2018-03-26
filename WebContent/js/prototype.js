@@ -5,7 +5,7 @@
  *  For details, see the Prototype web site: http://www.prototypejs.org/
  *
  *--------------------------------------------------------------------------*/
-alert("dfgdfg");
+
 var Prototype = {
   Version: '1.6.1',
 

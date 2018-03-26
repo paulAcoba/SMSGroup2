@@ -45,5 +45,15 @@
 			}
 		});
 	});
+	
+	$("supplyTypes").observe("click", function(){
+		new Ajax.Request(contextPath + "/addSupplyType", {
+			method: "GET",
+		
+			onComplete: function(response) {
+				$("wrapper").update(response.responseText);
+			}
+		});
+	});
 </script>
 </html>

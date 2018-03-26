@@ -15,7 +15,7 @@
 					</tr>
 					<tr>
 						<td><label>Item Name</label></td>
-						<td><input type="hidden" id="txtOldItem" name="txtOldItem"></td>
+						<td><input type="hidden" id="txtOldItem" name="txtOldItem"/></td>
 						<td><select id="selItems">
 								<%-- <c:forEach var="itList" items="${itemList}">
 								<option value="${itList.supplyId}"><c:out value="${itList.itemName}"></c:out></option>
@@ -24,7 +24,7 @@
 					</tr>
 					<tr>
 						<td><label>Quantity</label></td>
-						<td><input type="hidden" id="txtOldQuantity" name="txtOldQuantity"></td>
+						<td><input type="hidden" id="txtOldQuantity" name="txtOldQuantity"/></td>
 						<td><input type="text" name="txtQuantity" id="txtQuantity"></td>
 					</tr>
 					<tr>

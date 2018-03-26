@@ -39,12 +39,12 @@
 </body>
 <script>
 
-	$("userId").value = $(row.id).down(0).innerHTML;
-	$("firstName").value = $(row.id).down(1).innerHTML;
-	$("lastName").value = $(row.id).down(2).innerHTML;
-	$("middleInitial").value = $(row.id).down(3).innerHTML;
-	$("email").value = $(row.id).down(4).innerHTML;
-	$("password").value = $(row.id).down(11).innerHTML;
+	$("userId").value = "${userId}";
+	$("firstName").value = "${firstName}";
+	$("lastName").value = "${lastName}";
+	$("middleInitial").value = "${middleInitial}";
+	$("email").value = "${email}";
+	$("password").value = "${password}";
 
 	if("${serviceResponse}" == "okay") {
 		$("modalP").update("The changes were successfully saved.");

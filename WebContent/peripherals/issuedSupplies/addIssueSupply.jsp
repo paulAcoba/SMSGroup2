@@ -4,6 +4,7 @@
 <div class="panel-heading">Request Supply</div>
 
 <div class="panel-body">
+	<div class="alert alert-danger">"${message}"</div>
 	<table id="dataFormTable">
 		<tr>	
 			<td><label>Item Name</label></td>

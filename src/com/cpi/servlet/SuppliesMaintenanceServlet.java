@@ -16,7 +16,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cpi.entity.SuppliesMaintenance;
-import com.cpi.entity.SupplyTest;
 import com.cpi.entity.SupplyType;
 import com.cpi.service.SuppliesMaintenanceService;
 

@@ -16,6 +16,7 @@
 			<div id="dataForm" class="panel panel-info">
 				<div class="panel-heading">Supply Issuance</div>
 				<div class="panel-body">
+				<div class="alert alert-danger">"${message}"</div>
 				<table id="dataFormTable">
 					<tr>
 						<td><label id="issueId"></label></td>

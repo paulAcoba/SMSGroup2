@@ -10,14 +10,18 @@
 </head>
 <body>
 	<div id="wrapper">
+	<div class="container">
 		<jsp:include page="../peripherals/nav.jsp"></jsp:include>
 		<fieldset title="Issue Supplies" id="issueSupplies">
-			<div id="dataForm">
+			<div id="dataForm" class="panel panel-info">
+				<div class="panel-heading">Supply Issuance</div>
+				<div class="panel-body">
 				<table id="dataFormTable">
 					<tr>
 						<td><label id="issueId"></label></td>
 						<td><label id="txtIssueId"></label></td>
-					</tr><tr>
+					</tr>
+					<tr>
 						<td><input type="hidden" id="txtOldItem" name="txtOldItem"/></td>
 						<td><input type="hidden" id="txtOldQuantity" name="txtOldQuantity"/></td>
 					</tr>
@@ -47,13 +51,14 @@
 						<td><label>Issue Date</label></td>
 						<td><input type="date" name="txtIssueDate" id="txtIssueDate" class="form-control" required></td>
 					</tr>
-					<tr>
+					<tr class="buttons">
 						<td colspan="2"><input type="button" name="btnIssueRequest"
-							id="btnIssueRequest" class="btn btn-success" value="Issue Request" data-toggle="modal" data-target="#dataFormAdd"><input
+							id="btnIssueRequest" class="btn btn-success" value="Issue Request" data-toggle="modal" data-target="#dataFormAdd"> <input
 							type="button" name="btnSave" id="btnSave" class="btn btn-danger" value="Save"> <input
-							type="button" name="btnCancel" id="btnCancel" class="btn btn-primary" value="Cancel"></td>
+							type="button" name="btnCancel" id="btnCancel" class="btn btn-info" value="Cancel"></td>
 					</tr>
 				</table>
+				</div>
 			</div>
 			<div id="issuedSupplyTable" class="tableDiv">
 				<label>Search: </label> <input type="text" name="txtSearch"
@@ -77,6 +82,7 @@
 			</div>
 			
 		</fieldset>
+	</div>
 	</div>
 </body>
 </html>

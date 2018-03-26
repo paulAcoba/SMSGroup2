@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 
 #nav{
+	background:linear-gradient(#007bff 60%,white 60%);
 	text-align: center;
 	padding-top:10px;
 }

@@ -1,13 +1,17 @@
-<div id="nav">
-	<div class="btn-group">
-	<input type="button" name="btnHome" id="btnHome" class="btn btn-primary" value="Home">
-	<input type="button" name="btnMaintenance" id="btnMaintenance" class="btn btn-primary" value="Maintenance">
-	<input type="button" name="btnIssue" id="btnIssue" class="btn btn-primary" value="Supply Issuance">
-	<input type="button" name="btnStocksAdd" id="btnStocksAdd" class="btn btn-primary" value="Add Stocks">
-	<input type="button" name="btnUpdateProfile" id="btnUpdateProfile" class="btn btn-primary" value="Profile">
-	</div>
-</div>
-
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">SMS</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Home</a></li>
+      <li><a href="gate">Profile</a></li>
+      <li><a href="issuedSupply">Maintenance</a></li>
+      <li><a href="#">Supply Issuance</a></li>
+      <li><a href="#">Add Stocks</a></li>
+    </ul>
+  </div>
+</nav>
 
 <script>
 

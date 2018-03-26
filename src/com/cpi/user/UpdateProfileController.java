@@ -20,6 +20,10 @@ public class UpdateProfileController extends HttpServlet{
 
 	private static final long serialVersionUID = 4269975976201580589L;
 	
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		doPost(request, response);
+	}
+	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		String page="";

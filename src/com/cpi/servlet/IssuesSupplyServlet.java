@@ -41,8 +41,8 @@ public class IssuesSupplyServlet extends HttpServlet{
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("/com/cpi/resource/applicationContext.xml");
 		IssuedSupplyService issuedSupply = (IssuedSupplyService) context.getBean("issueSupplyService");
-
-		request.setAttribute("lastUser", session.getAttribute("username"));
+		
+		request.setAttribute("lastUser", session.getAttribute("user"));
 		request.setAttribute("lastUpdate", new Date());
 		
 		System.out.println(request.getParameter("action") + " action");
@@ -153,9 +153,14 @@ public class IssuesSupplyServlet extends HttpServlet{
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(req, resp);
+		String view = "";
+		view = "views/issuedsupply.jsp";
+		
+		RequestDispatcher rd = request.getRequestDispatcher(view);
+		rd.forward(request, response);
+		
 		
 	}
 }

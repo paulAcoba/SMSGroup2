@@ -95,4 +95,14 @@
   	<servlet-name>user</servlet-name>
   	<url-pattern>/login</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>stocks</servlet-name>
+  	<servlet-class>com.cpi.servlet.SuppliesStocksServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>stocks</servlet-name>	
+  	<url-pattern>/stocks</url-pattern>
+  </servlet-mapping>
 </web-app>

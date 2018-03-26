@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sqlmap-2.dtd">
+<sqlMap namespace="Stocks">
+
+	<typeAlias alias="StocksClass" type="com.cpi.entity.SuppliesStocks"/>
+	<typeAlias alias="SuppliesClass" type="com.cpi.entity.SuppliesStocks"/>
+	
+	<resultMap id="getStocksMap" class="StocksClass">
+		<result column="stock_id" 				property="idStock"/>
+		<result column="supply_id" 				property="idSupply"/>
+		<result column="item_name"				property="itemName"/>
+		<result column="date_added" 			property="dateAdded"/>
+		<result column="purchase_date" 			property="datePurchased"/>
+		<result column="reference_no" 			property="numReference"/>
+		<result column="quantity" 				property="qty"/>
+		<result column="last_user" 				property="user"/>
+		<result column="last_update" 			property="dateUpdate"/>
+	</resultMap>
+
+	<select id="getSuppliesStocks" resultMap="getStocksMap">
+		SELECT stocks.stock_id, stocks.supply_id, supplies.item_name,
+		       stocks.date_added, stocks.purchase_date, stocks.reference_no,
+		       stocks.quantity, stocks.last_user, stocks.last_update
+		  FROM supplies_stocks_2 stocks, supplies_2 supplies
+		 WHERE stocks.supply_id = supplies.supply_id
+	  ORDER BY stocks.stock_id
+	</select>
+	
+	<select id="searchSuppliesStocks" resultMap="getStocksMap">
+		SELECT stocks.stock_id, stocks.supply_id, supplies.item_name,
+		       stocks.date_added, stocks.purchase_date, stocks.reference_no,
+		       stocks.quantity, stocks.last_user, stocks.last_update
+		  FROM supplies_stocks_2 stocks, supplies_2 supplies
+		 WHERE stocks.supply_id = supplies.supply_id
+		   AND UPPER(supplies.item_name) LIKE '%'||#itemName#||'%'
+	  ORDER BY stocks.stock_id
+	</select>
+
+	<resultMap id="getSuppliesMap" class="SuppliesClass">
+		<result column="supply_id" property="idSupply" />
+		<result column="item_name" property="itemName" />
+		<result column="obsolete_tag" property="obsoleteTag" />
+	</resultMap>
+	
+	<select id="getSuppliesList" resultMap="getSuppliesMap">
+		SELECT   supply_id, item_name, obsolete_tag
+		    FROM supplies_2
+		   WHERE obsolete_tag = 'N'
+		ORDER BY supply_id
+	</select>
+	
+	<insert id="updateSupplies" parameterClass="StocksClass">
+		UPDATE supplies_2
+		SET actual_count = actual_count + #qty#
+		WHERE supply_id = #idSupply#
+	</insert>
+	
+	<insert id="updateSupplies2" parameterClass="StocksClass">
+		UPDATE supplies_2
+		SET actual_count = (actual_count - #prevQty#) + #qty#
+		WHERE supply_id = #idSupply#
+	</insert>
+	
+	<insert id="insertStocks" parameterClass="StocksClass">
+		INSERT INTO supplies_stocks_2
+		            (stock_id, supply_id, date_added,
+		             purchase_date, reference_no, quantity, last_user, last_update
+		            )
+		     VALUES (seq_supply_id_2.NEXTVAL, #idSupply#, #dateAdded#,
+		             #datePurchased#, #numReference#, #qty#, #user#, SYSDATE
+		            )
+	</insert>
+
+	<insert id="updateStocks" parameterClass="StocksClass">
+		UPDATE supplies_stocks_2
+		   SET quantity = #qty#,
+		       reference_no = #numReference#,
+		       date_added = #dateAdded#,
+		       purchase_date = #datePurchased#,
+		       last_user = #user#,
+		       last_update = SYSDATE
+		 WHERE stock_id = #idStock#
+	</insert>
+	
+</sqlMap>

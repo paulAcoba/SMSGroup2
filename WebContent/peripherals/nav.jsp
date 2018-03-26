@@ -76,6 +76,27 @@ function depts() {
 	});
 }
 
+function clickRow(){
+	var table = $('dataTable');
+
+	for (var i = 1; i < table.rows.length; i++) {
+		table.rows[i].onclick = function() {
+			//alert(this.cells[1].innerHTML);
+			var selID = this.cells[1].children[0].value;
+			var deptID = this.cells[4].children[0].value;
+
+			$('issueId').update("Issue ID");
+			$('txtIssueId').update(this.cells[0].innerText);
+			$('selItems').value = selID;
+			$('txtOldItem').value = selID;
+			$('txtQuantity').value = this.cells[2].innerText;
+			$('txtOldQuantity').value = this.cells[2].innerText;
+			$('txtRequestedBy').value = this.cells[3].innerText;
+			$('selDept').value = deptID;
+			$('txtIssueDate').value = this.cells[5].children[0].value;
+		}
+	}
+}
 
 function refresh() {
 	new Ajax.Request(contextPath + "/issuedSupply",{
@@ -89,25 +110,7 @@ function refresh() {
 			depts();
 			clear();
 			//alert(8);
-			var table = $('dataTable');
-
-			for (var i = 1; i < table.rows.length; i++) {
-				table.rows[i].onclick = function() {
-					//alert(this.cells[1].innerHTML);
-					var selID = this.cells[1].children[0].value;
-					var deptID = this.cells[4].children[0].value;
-
-					$('issueId').update("Issue ID");
-					$('txtIssueId').update(this.cells[0].innerText);
-					$('selItems').value = selID;
-					$('txtOldItem').value = selID;
-					$('txtQuantity').value = this.cells[2].innerText;
-					$('txtOldQuantity').value = this.cells[2].innerText;
-					$('txtRequestedBy').value = this.cells[3].innerText;
-					$('selDept').value = deptID;
-					$('txtIssueDate').value = this.cells[5].children[0].value;
-				}
-			}
+			clickRow();
 		}
 	});
 }

@@ -4,8 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="js/jquery-slim.min.js" ></script>
+<script src="js/bootstrap/bootstrap.js" ></script>
+<script src="js/bootstrap/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/prototype.js"></script>
-<script src="js/jquery-3.3.1.js" ></script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" media="all">
 <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css" media="all">
 <link rel="stylesheet" type="text/css" href="css/nav.css">

@@ -8,6 +8,7 @@
 	</div>
 </div>
 
+
 <script>
 
 $("btnUpdateProfile").observe("click", function(){

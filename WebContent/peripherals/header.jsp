@@ -12,7 +12,6 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css" media="all">
 <link rel="stylesheet" type="text/css" href="css/nav.css">
 <script>
-	jQuery.noConflict();
 	
 	try{
 		var contextPath = "${pageContext.request.contextPath}";	

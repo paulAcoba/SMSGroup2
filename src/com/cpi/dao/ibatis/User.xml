@@ -17,10 +17,11 @@
 		<result column="last_login" 	property="lastLogin"/>
 		<result column="last_user" 	property="lastUser"/>
 		<result column="last_update" property="lastUpdate"/>
+		<result column="counter" property="counter"/>
 	</resultMap>
 
 	<select id="getUser" resultMap="getUserMap">
-		SELECT user_id, password, first_name, last_name, middle_initial, email, active_tag, access_level, entry_date, last_login, last_user, last_update
+		SELECT user_id, password, first_name, last_name, middle_initial, email, active_tag, access_level, entry_date, last_login, last_user, last_update, counter
 		FROM SMS_USERS_2
 	</select>
 	
@@ -35,9 +36,15 @@
 		WHERE user_id = #userId#
 	</update>
 	
-	<!-- <procedure id="updateUser" parameterClass="java.util.Map">
+	<procedure id="updateUser2" parameterClass="java.util.Map">
 		UPDATE SMS_USERS_2
 		SET active_tag = #activeTag#
 		WHERE user_id = #userId#
-	</procedure> -->
+	</procedure>
+	
+	<procedure id="updateCounter" parameterClass="java.util.Map">
+		UPDATE SMS_USERS_2
+		SET counter = #counter#
+		WHERE user_id = #userId#
+	</procedure>
 </sqlMap>

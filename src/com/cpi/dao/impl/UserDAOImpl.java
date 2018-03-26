@@ -56,7 +56,7 @@ public class UserDAOImpl implements UserDAO{
 			this.sqlMapClient.getCurrentConnection().setAutoCommit(false);
 			this.sqlMapClient.startBatch();
 
-			this.sqlMapClient.update("updateUser", params);
+			this.sqlMapClient.update("updateUser2", params);
 			this.sqlMapClient.executeBatch();
 			this.sqlMapClient.getCurrentConnection().commit();
 		}
@@ -70,4 +70,26 @@ public class UserDAOImpl implements UserDAO{
 		
 	}
 
+	@Override
+	public void updateCounter(Map<String, Object> params) throws SQLException {
+		try{
+			this.sqlMapClient.startTransaction();
+			this.sqlMapClient.getCurrentConnection().setAutoCommit(false);
+			this.sqlMapClient.startBatch();
+
+			this.sqlMapClient.update("updateCounter", params);
+			this.sqlMapClient.executeBatch();
+			this.sqlMapClient.getCurrentConnection().commit();
+		}
+		catch (SQLException e){
+			this.sqlMapClient.getCurrentConnection().rollback();
+			throw e;
+		}
+		finally{
+			this.sqlMapClient.endTransaction();
+		}
+		
+	}
+
+	
 }

@@ -15,7 +15,18 @@ public class User {
 	private Date lastLogin;
 	private String lastUser;
 	private Date lastUpdate;
+	private String counter;
 	
+	
+	
+	public String getCounter() {
+		return counter;
+	}
+
+	public void setCounter(String counter) {
+		this.counter = counter;
+	}
+
 	public User(){
 	}
 	

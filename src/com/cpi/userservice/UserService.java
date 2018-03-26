@@ -22,4 +22,5 @@ public interface UserService {
 	public String search(String keyword) throws SQLException;
 	public String getLogin(HttpServletRequest request);
 	public void updateUser(HttpServletRequest request) throws SQLException;
+	public void updateCounter(HttpServletRequest request) throws SQLException;
 }

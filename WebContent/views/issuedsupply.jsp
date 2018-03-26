@@ -77,18 +77,6 @@
 			</div>
 			
 		</fieldset>
-		<div id="dataFormAdd" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-header">
-					 <button type="button" class="close" data-dismiss="modal">&times;</button>
-        			<h4 class="modal-title">Issue Request</h4>
-				</div>
-				<div class="modal-content" id="modal-body">
-					<div class="modal-body">
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 </body>
 </html>
@@ -102,9 +90,7 @@
 					action : "issue"
 				},
 				onComplete : function(response) {
-					$('modal-body').update(response.responseText);
-					//sels();
-					$('dataFormAdd').show();
+					$('issueSupplies').update(response.responseText);
 				}
 			}); 
 		});

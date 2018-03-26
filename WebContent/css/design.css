@@ -1,0 +1,19 @@
+@CHARSET "ISO-8859-1";
+
+body{
+   background-image: url("background.jpg");
+}
+
+fieldset.loginMenu {
+	background-color: #c6ffff;
+	margin: 100px 40px 65px 40px;
+	border: 10px solid #88c4ff;
+	box-shadow: 5px 7px #000000;
+	display:inline-block;
+}
+
+#pic{
+	position:relative;
+	text-align: right;
+}
+

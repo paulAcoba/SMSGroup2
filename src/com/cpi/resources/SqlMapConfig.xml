@@ -3,5 +3,4 @@
 
 <sqlMapConfig>
 	<sqlMap resource="com/cpi/dao/ibatis/User.xml"/>
-	<sqlMap resource="com/cpi/dao/ibatis/Stocks.xml"/>
 </sqlMapConfig>

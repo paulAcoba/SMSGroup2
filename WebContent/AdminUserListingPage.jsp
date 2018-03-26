@@ -14,7 +14,6 @@
 </head>
 <body>
 	<div id="wrapper">
-		<jsp:include page="peripherals/nav.jsp"></jsp:include>
 		<div id="myModal" class="modal">
 		  <div class="modal-content">
 		    <span id="modalClose" class="close">&times;</span>

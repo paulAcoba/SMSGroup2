@@ -4,15 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="js/jquery.min.js" ></script>
 <script src="js/bootstrap/bootstrap.js" ></script>
 <script src="js/bootstrap/bootstrap.min.js"></script>
-<script src="js/jquery.min.js" ></script>
 <script type="text/javascript" src="js/prototype.js"></script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" media="all">
 <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css" media="all">
 <link rel="stylesheet" type="text/css" href="css/nav.css">
 <link rel="stylesheet" type="text/css" href="css/issuedSupply.css">
 <script>
+	jQuery.noConflict();
 	try{
 		var contextPath = "${pageContext.request.contextPath}";	
 	}catch(e){

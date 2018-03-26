@@ -5,40 +5,15 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="#">Home</a></li>
-      <li><a href="gate">Profile</a></li>
-      <li><a href="issuedSupply">Maintenance</a></li>
-      <li><a href="#">Supply Issuance</a></li>
+      <li><a href="maintenancetab">Maintenance</a></li>
+      <li><a href="issuedSupply">Supply Issuance</a></li>
       <li><a href="#">Add Stocks</a></li>
+   	  <li style="position:absolute; left: 93%"><a href="gate" style="float: right;">Profile</a></li>
     </ul>
   </div>
 </nav>
 
 <script>
-
-$("btnUpdateProfile").observe("click", function(){
-	new Ajax.Request(contextPath + "/gate", {
-		method: "POST",
-		parameters: {
-			gateKey: "userUpdateProfile"
-		},
-		onComplete: function(response) {
-			$("wrapper").update(response.responseText);
-		}
-	});
-});
-
-function toUpdateProfile() {
-	new Ajax.Request(contextPath + "/enter", {
-		method: "POST",
-		parameters: {
-			userId: $F("userId"),
-			password: $F("password")
-		},
-		onComplete: function(response) {
-			$("wrapper").update(response.responseText);
-		}
-	});
-}
 
 function sels() {
 	new Ajax.Request(contextPath + "/issuedSupply", {
@@ -103,22 +78,4 @@ function refresh() {
 	});
 }
 
-function toIssuePage(){
-	new Ajax.Request(contextPath + "/issuedSupply",{
-		method : "POST",
-		parameters : {
-			action : "toIssuePage"
-		},
-		onComplete : function(response) {
-			$('wrapper').update(response.responseText);
-			refresh();
-			clear();
-			//alert(8);
-			
-		}
-	});
-}
-$('btnIssue').observe("click", function() {
-	toIssuePage();
-});
 </script>

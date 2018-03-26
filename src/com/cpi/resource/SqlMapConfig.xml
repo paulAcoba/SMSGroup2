@@ -6,4 +6,5 @@
 	<sqlMap resource="/com/cpi/dao/ibatis/IssuedSupply.xml" />
 	<sqlMap resource="/com/cpi/dao/ibatis/SuppliesMaintenance.xml" />
 	<sqlMap resource="com/cpi/dao/ibatis/Stocks.xml"/>
+	<sqlMap resource="com/cpi/dao/ibatis/Sup.xml"/>
 </sqlMapConfig>

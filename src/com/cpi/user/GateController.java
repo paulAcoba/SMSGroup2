@@ -31,7 +31,6 @@ public class GateController extends HttpServlet{
 		if("userUpdateProfile".equals(request.getParameter("gateKey"))){
 			User activeUser = new User();
 			activeUser = (User) session.getAttribute("activeUser");
-			
 			request.setAttribute("userId", activeUser.getUserId());
 			request.setAttribute("password", activeUser.getPassword());
 			request.setAttribute("firstName", activeUser.getFirstName());

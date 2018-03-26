@@ -4,18 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
-<!-- <link rel="stylesheet" type="text/css" href="HomeAdminCss.css"> -->
-
 <title>Admin</title>
+<jsp:include page="../peripherals/header.jsp"></jsp:include>
 </head>
 
 <body style="background-color: aqua">
-<form>
-	
-	<h1 style="color:white"> WELCOME TO ADMIN HOMEPAGE </h1>
-	
-</form>
+<div id="wrapper">
+	<jsp:include page="../peripherals/nav.jsp"></jsp:include>
+</div>
 </body>
 
 </html>

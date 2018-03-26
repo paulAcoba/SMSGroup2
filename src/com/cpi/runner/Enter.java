@@ -20,32 +20,8 @@ public class Enter extends HttpServlet {
 	private static final long serialVersionUID = 7133900998157275120L;
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		String page = "";
-		HttpSession session = request.getSession();
-		//session.setAttribute("userId", request.getParameter("userId"));
-		
-		User user = new User();
-		user.setUserId(request.getParameter("userId"));
-		
-		try {
-			ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/com/cpi/resources/applicationContext.xml");
-			UserService userService = (UserService) applicationContext.getBean("userService");
-			user = userService.enter(user);
-			session.setAttribute("activeUser", user);
-			
-			if(user.getAccessLevel().equals("U")) {
-				page = "UserUpdateProfilePage.jsp";
-			} else if(user.getAccessLevel().equals("A")) {
-				page = "AdminUserListingPage.jsp";
-			} else {
-				page = "Runner.jsp";
-			}
-			
-		} catch(Exception e) {
-			
-		} finally {
-			RequestDispatcher rd = request.getRequestDispatcher(page);
-			rd.forward(request, response);
-		}
+		RequestDispatcher rd = request.getRequestDispatcher("UserUpdateProfilePage.jsp");
+		rd.forward(request, response);
+
 	}
 }

@@ -15,5 +15,4 @@
 	}catch(e){
 		alert("supplies.jsp ", e);
 	}
-	
 </script>	

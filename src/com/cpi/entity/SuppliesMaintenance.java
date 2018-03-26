@@ -5,10 +5,10 @@ import java.util.Date;
 public class SuppliesMaintenance {
 
 	private Integer supplyId;
-	private String supplyType;
+	private Integer supplyType;
 	private String itemName;
 	private String itemUnit;
-	private String obseleteTag;
+	private String obsoleteTag;
 	private String location;
 	private Integer reorderLevel;
 	private Integer actualCount;
@@ -25,11 +25,11 @@ public class SuppliesMaintenance {
 		this.supplyId = supplyId;
 	}
 
-	public String getSupplyType() {
+	public Integer getSupplyType() {
 		return supplyType;
 	}
 
-	public void setSupplyType(String supplyType) {
+	public void setSupplyType(Integer supplyType) {
 		this.supplyType = supplyType;
 	}
 
@@ -49,12 +49,12 @@ public class SuppliesMaintenance {
 		this.itemUnit = itemUnit;
 	}
 
-	public String getObseleteTag() {
-		return obseleteTag;
+	public String getObsoleteTag() {
+		return obsoleteTag;
 	}
 
-	public void setObseleteTag(String obseleteTag) {
-		this.obseleteTag = obseleteTag;
+	public void setObsoleteTag(String obsoleteTag) {
+		this.obsoleteTag = obsoleteTag;
 	}
 
 	public String getLocation() {

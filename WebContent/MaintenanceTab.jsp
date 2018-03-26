@@ -33,5 +33,17 @@
 			}
 		});
 	});
+	
+	$("supplies").observe("click", function(){
+		new Ajax.Request(contextPath + "/suppliesmaintenance.jsp", {
+			method: "POST",
+			parameters: {
+				gateKey: "adminUserListing"
+			},
+			onComplete: function(response) {
+				$("wrapper").update(response.responseText);
+			}
+		});
+	});
 </script>
 </html>

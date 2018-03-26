@@ -1,0 +1,23 @@
+@CHARSET "ISO-8859-1";
+
+#dataFormAdd,#dataForm{
+	margin:auto;
+	margin-top:10px;
+	width:40%;
+}
+
+#dataFormAdd table tr{
+	margin-bottom:10px;
+}
+
+#dataFormAdd table tr td{
+	width:50%;
+}
+
+.panel-heading{
+	margin-bottom:10px;
+}
+
+.buttons{
+	text-align:right;
+}

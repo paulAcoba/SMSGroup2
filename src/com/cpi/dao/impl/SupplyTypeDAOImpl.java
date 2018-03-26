@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.cpi.dao.SupplyTypeDAO;
 import com.cpi.entity.SupplyType;
@@ -58,8 +59,12 @@ public class SupplyTypeDAOImpl implements SupplyTypeDAO {
 		String dateFormatted = new SimpleDateFormat("MM/dd/yyyy").format(date);
 		String supplyTypeId = req.getParameter("supplyTypeId");
 		String supplyTypeName= req.getParameter("supplyTypeName");
+		HttpSession session = req.getSession();
+		String lastUser= (String)session.getAttribute("activeUser");
 		
 		SupplyType sup = new SupplyType();
+		System.out.println(lastUser);
+		sup.setLastUser(lastUser);
 		  sup.setSupplyTypeId(Integer.parseInt(supplyTypeId));
 		  sup.setTypeName(supplyTypeName);
 		  sup.setEntryDate(dateFormatted); 

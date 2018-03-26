@@ -6,11 +6,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<script src="PrototypeFiles/prototype.js"></script>
 
-<link href="CssFiles/manageSupplyTypesStyle.css" rel="stylesheet"
-	type="text/css">
+<script src="js/prototype.js"></script>
+<title>Supply Type Maintenance</title>
+
 
 <style>
 #sId {
@@ -142,8 +141,9 @@ background-color: #ffcccc;
 </style>
 </head>
 <body>
-	<center>
+	
 		<div id="wrapper">
+		<%-- <jsp:include page="peripherals/nav.jsp"></jsp:include> --%>
 			<b>Supply Type Maintenance</b>
 			<table id="table1">
 				<tr>
@@ -222,7 +222,7 @@ background-color: #ffcccc;
 
 			</table>
 		</div>
-	</center>
+	
  <div id="successfullyUpdatedModal" class="modal">
 		<div class="modal-content">
 			<span class="close">&times;</span>
@@ -336,9 +336,7 @@ background-color: #ffcccc;
 				})
 			});
 
-	$("btnSave").observe(
-			"click",
-			function() {
+	$("btnSave").observe("click", function() {
 				
 				if($F("txtSupplyTypeName")=="" ||  $F("txtSupplyTypeId") == ""){
 					showEmptyFieldsModal();

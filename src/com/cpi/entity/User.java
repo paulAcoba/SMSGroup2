@@ -14,6 +14,7 @@ public class User {
 	private Date entryDate;
 	private Date lastLogin;
 	private String lastUser;
+	private Date lastUpdate;
 	
 	public User(){
 	}
@@ -83,5 +84,13 @@ public class User {
 	}
 	public void setLastUser(String lastUser) {
 		this.lastUser = lastUser;
+	}
+
+	public Date getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
 	}
 }

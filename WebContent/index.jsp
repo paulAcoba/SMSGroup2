@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="css/design.css">
-<jsp:include page="peripherals/header.jsp"></jsp:include>
+<%-- <jsp:include page="peripherals/header.jsp"></jsp:include> --%>
 <title>Login</title>
 
 <script src="js/prototype.js"></script>

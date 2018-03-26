@@ -17,6 +17,10 @@ public class SearchController extends HttpServlet {
 
 	private static final long serialVersionUID = 1652980547383307620L;
 	
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		doGet(request, response);
+	}
+	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String content = "";
 		String keyword = request.getParameter("keyword");

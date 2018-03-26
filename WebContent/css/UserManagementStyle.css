@@ -17,7 +17,28 @@ body {
 }
 
 #searchTable {
-	border-collapse: collapse;	
+	border-collapse: collapse;
+	table-layout:fixed;
+	width: 800px;
+	overflow:hidden;	
+}
+
+#maintenanceTab {
+	display: inline-block;
+}
+
+#searchTable>td {
+	display: inline-table;
+}
+
+
+
+#maintenanceTab>div {
+	padding: 1em;
+}
+
+#maintenanceTab>div:hover {
+	background: white;
 }
 
 /* modal */

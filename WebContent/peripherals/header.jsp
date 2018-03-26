@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="js/jquery-3.3.1.js" ></script>
 <script type="text/javascript" src="js/prototype.js"></script>
 <link rel="stylesheet" type="text/css" href="css/nav.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css">

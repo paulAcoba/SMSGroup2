@@ -105,4 +105,18 @@
   	<servlet-name>stocks</servlet-name>	
   	<url-pattern>/stocks</url-pattern>
   </servlet-mapping>
+   <servlet>
+  	<servlet-name>supply</servlet-name>
+  	<servlet-class>com.cpi.servlet.SupplyTypeServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>supply</servlet-name>
+  	<url-pattern>/addSupplyType</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>supply</servlet-name>
+  	<url-pattern></url-pattern>
+  </servlet-mapping>
 </web-app>

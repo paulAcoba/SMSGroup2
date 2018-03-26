@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sqlmap-2.dtd">
+<sqlMap namespace="Sup">
+
+	<typeAlias alias="SupplyTypeClass" type="com.cpi.entity.SupplyType"/>
+	
+	<resultMap id="getSupplyTypeMap" class="SupplyTypeClass">
+		<result column="supply_type_id" 	property="supplyTypeId"/>
+		<result column="type_name" 			property="typeName"/>
+		<result column="entry_date" 		property="entryDate"/>
+		<result column="last_user" 			property="lastUser"/>
+		<result column="last_update" 		property="lastUpdate"/>
+	</resultMap>
+	
+	<resultMap id="searchSupplyTypeMap" class="SupplyTypeClass">
+		<result column="supply_type_id" 	property="supplyTypeId"/>
+		<result column="type_name" 			property="typeName"/>
+		<result column="entry_date" 		property="entryDate"/>
+		<result column="last_user" 			property="lastUser"/>
+		<result column="last_update" 		property="lastUpdate"/>
+	</resultMap>
+	
+	<resultMap id="getMaxSupplyTypeMap" class="SupplyTypeClass">
+		<result column="max_supply_type_id" 	property="supplyTypeId"/>
+	</resultMap>
+
+	<select id="getSupplyType" resultMap="getSupplyTypeMap">
+		SELECT supply_type_id, type_name, TO_CHAR(entry_date,'MM/dd/yyyy') AS entry_date, last_user, TO_CHAR(last_update,'MM/dd/yyyy') AS last_update
+		FROM SUPPLY_TYPES_2 ORDER BY supply_type_id
+	</select>
+	
+	<select id="searchSupplyType" resultMap="searchSupplyTypeMap">
+		SELECT supply_type_id, type_name, TO_CHAR(entry_date,'MM/dd/yyyy') AS entry_date, last_user, TO_CHAR(last_update,'MM/dd/yyyy') AS last_update
+		FROM SUPPLY_TYPES_2
+		WHERE supply_type_id=#typeId#
+	</select>
+	
+	<select id="getMaxSupplyType" resultMap="getMaxSupplyTypeMap">
+		SELECT max(supply_type_id)as max_supply_type_id
+		FROM SUPPLY_TYPES_2 
+	</select>
+	
+	<insert id="insertSupplyType" parameterClass="SupplyTypeClass">
+		INSERT into SUPPLY_TYPES_2 (supply_type_id, type_name, entry_date, last_user, last_update)
+		VALUES(#supplyTypeId#, #typeName#, SYSDATE, SYSDATE, SYSDATE)
+	</insert>
+		
+	<procedure id="updateSupplyType" parameterClass="java.util.Map">
+		BEGIN
+			UPDATE SUPPLY_TYPES_2
+			SET type_name = #typeName#, last_user=#lastUser#, last_update=SYSDATE
+			WHERE supply_type_id=#typeId#;
+		END;
+	</procedure>
+	
+</sqlMap>

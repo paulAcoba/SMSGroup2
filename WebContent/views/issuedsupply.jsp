@@ -141,6 +141,7 @@
 					//alert("search");
 					//refresh("search");
 					//clear();
+					clickRow();
 				}
 			});
 		});

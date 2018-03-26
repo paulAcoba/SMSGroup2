@@ -102,16 +102,36 @@
 	function validateReqFields() {
 		
 		var validateFields = true;
-		
-		if ($("optionSupplies").value == "" || $("txtQty").value == "" || $("txtDateAdded").value == "") {
-			alert("Please fill up all required fields");
-			validateFields = false;
+		var displayMsg = false;
+	 
+			if ($("txtQty").value == "") {
+				$("lblQty").addClassName("required");
+				displayMsg = true;
+				validateFields = false;
+			}else {
+				$("lblQty").removeClassName("required");
+			}
 			
-			$("lblItemName").addClassName("required");
-			$("lblQty").addClassName("required");
-			$("lblDateAdded").addClassName("required");
-		}
-		
+			if ($("txtDateAdded").value == "") {
+				$("lblDateAdded").addClassName("required");
+				displayMsg = true;
+				validateFields = false;
+			}else {
+				$("lblDateAdded").removeClassName("required");
+			}
+			
+			if ($("optionSupplies").value == "") {
+				$("lblItemName").addClassName("required");
+				displayMsg = true;
+				validateFields = false;
+			}else {
+				$("lblItemName").removeClassName("required");
+			}
+			
+			if (displayMsg) {
+				alert("Please fill up all required fields");
+			}
+			
 		return validateFields;
 	}
 	

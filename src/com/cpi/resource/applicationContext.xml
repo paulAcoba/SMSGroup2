@@ -26,8 +26,6 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 	<bean id="issuedSupplyDao" class="com.cpi.dao.impl.IssuedSupplyDAOImpl"  depends-on="sqlMapClient">
 		<property name="sqlMapClient" ref="sqlMapClient"></property>
 	</bean>
-	
-
 
 	<bean id="issueSupplyService" class="com.cpi.service.impl.IssuedSupplyServiceImpl" depends-on="issuedSupplyDao">
 		<property name="issuedSupplyDao" ref="issuedSupplyDao"></property>
@@ -40,6 +38,13 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 	</bean>
 	<bean class="com.cpi.userservice.impl.UserServiceImpl" id="userService" depends-on="userDAO">
 		<property name="userDAO" ref="userDAO"></property>
+	</bean>
+	
+	<bean class="com.cpi.dao.impl.SuppliesStocksDAOImpl" id="suppliesStocksDAO" depends-on="sqlMapClient">
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+	<bean class="com.cpi.service.impl.SuppliesStocksServiceImpl" id="suppliesStocksService" depends-on="suppliesStocksDAO">
+		<property name="suppliesStocksDAO" ref="suppliesStocksDAO"></property>
 	</bean>
 	<bean class="com.cpi.dao.impl.SupplyTypeDAOImpl" id="supplyTypeDAO" depends-on="sqlMapClient">
 		<property name="sqlMapClient" ref="sqlMapClient"></property>

@@ -49,7 +49,7 @@
 					</tr>
 					<tr>
 						<td colspan="2"><input type="button" name="btnIssueRequest"
-							id="btnIssueRequest" class="btn btn-success" value="Issue Request" data-toggle="modal" ><input
+							id="btnIssueRequest" class="btn btn-success" value="Issue Request" data-toggle="modal" data-target="#dataFormAdd"><input
 							type="button" name="btnSave" id="btnSave" class="btn btn-danger" value="Save"> <input
 							type="button" name="btnCancel" id="btnCancel" class="btn btn-primary" value="Cancel"></td>
 					</tr>
@@ -104,7 +104,7 @@
 				onComplete : function(response) {
 					$('modal-body').update(response.responseText);
 					//sels();
-					$('dataFormAdd').modal({show:true});
+					$('dataFormAdd').show();
 				}
 			}); 
 		});
@@ -140,6 +140,19 @@
 			
 		});
 
+		$('btnCancel').observe("click", function(){
+			 new Ajax.Request(contextPath + "/issuedSupply",{
+				method: "POST",
+				parameters:{
+					action: "cancel"
+				},
+				onComplete : function(response){
+					$('wrapper').update(response.responseText);
+					refresh();
+				}
+			});
+		}); 
+		
 		//alert(7);
 		function clear() {
 			$('txtIssueDate').value = '';

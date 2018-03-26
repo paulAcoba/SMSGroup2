@@ -208,13 +208,16 @@ public class UserServiceImpl implements UserService{
 						&& !(e.getUserId().equals(e.getPassword()))) {
 					if ("Y".equals(e.getActiveTag())) {
 						if ("A".equals(e.getAccessLevel())) {
+							
 							counter = 0;
 							session.setAttribute("sesCounter", counter);
 							request.setAttribute("callSesCounter", counter);
-													
-							  User myList = new User(); 
-							  myList = e;
-							  session.setAttribute("activeUser", myList);
+
+							User myList = new User();
+							myList = e;
+							session.setAttribute("activeUser", myList);
+
+							userService.updateCounter(request);
 
 							message = "accessAdmin";
 						} else {
@@ -222,75 +225,91 @@ public class UserServiceImpl implements UserService{
 							session.setAttribute("sesCounter", counter);
 							request.setAttribute("callSesCounter", counter);
 							
-							User myList = new User(); 
-							  myList = e;
-							  session.setAttribute("activeUser", myList);
+							User myList = new User();
+							myList = e;
+							session.setAttribute("activeUser", myList);
+							
+							userService.updateCounter(request);
 
 							message = "accessUser";
 						}
 
 					} else {
+						counter = 0;
+						session.setAttribute("sesCounter", counter);
+						request.setAttribute("callSesCounter", counter);
+						userService.updateCounter(request);
 						message = "blocked";
 					}
 					break;
-				}else if (((e.getUserId().equals(log_user)) && !(e.getPassword().equals(log_pass))
+				} else if (((e.getUserId().equals(log_user)) && !(e.getPassword().equals(log_pass))
 						&& !(e.getUserId().equals(e.getPassword())))) {
-					System.out.println("test for not same");
+
+					counter = Integer.parseInt(e.getCounter());
 					counter = counter + 1;
 					session.setAttribute("sesCounter", counter);
 					System.out.println("counter: " + counter);
 					request.setAttribute("callSesCounter", counter);
+					userService.updateCounter(request);
 
 					if (counter >= 3) {
-
+						
 						counter = 0;
 						session.setAttribute("sesCounter", counter);
 						request.setAttribute("callSesCounter", counter);
-						message = "blocked";
 						userService.updateUser(request);
+						message = "blocked";
 					} else {
+						counter = 0;
+						session.setAttribute("sesCounter", counter);
+						request.setAttribute("callSesCounter", counter);
 						message = "incorrectPw";
 					}
 
 				} else if ((e.getUserId().equals(log_user)) && (e.getPassword().equals(log_pass))
 						&& (e.getUserId().equals(e.getPassword()))) {
-					if((e.getActiveTag().equals("Y"))){
+					if ((e.getActiveTag().equals("Y"))) {
 						counter = 0;
 						session.setAttribute("sesCounter", counter);
 						request.setAttribute("callSesCounter", counter);
-						
-						User myList = new User(); 
-						  myList = e;
-						  session.setAttribute("activeUser", myList);
-						  
+
+						User myList = new User();
+						myList = e;
+						session.setAttribute("activeUser", myList);
+
 						message = "newAccount";
-						
-					}
-					else{
+
+					} else {
+						counter = 0;
+						session.setAttribute("sesCounter", counter);
+						request.setAttribute("callSesCounter", counter);
 						message = "blocked";
 					}
-					
-				} else if((e.getUserId().equals(log_user)) && !(e.getPassword().equals(log_pass))
-						&& (e.getUserId().equals(e.getPassword()))){
-					
-					System.out.println("test for same");
+
+				} else if ((e.getUserId().equals(log_user)) && !(e.getPassword().equals(log_pass))
+						&& (e.getUserId().equals(e.getPassword()))) {
+
+					counter = Integer.parseInt(e.getCounter());
 					counter = counter + 1;
 					session.setAttribute("sesCounter", counter);
 					System.out.println("counter: " + counter);
 					request.setAttribute("callSesCounter", counter);
-
 					if (counter >= 3) {
-
+						
 						counter = 0;
 						session.setAttribute("sesCounter", counter);
 						request.setAttribute("callSesCounter", counter);
-						message = "blocked";
 						userService.updateUser(request);
+						message = "blocked";
 					} else {
+						counter = 0;
+						session.setAttribute("sesCounter", counter);
+						request.setAttribute("callSesCounter", counter);
 						message = "incorrectPw";
 					}
 				}
 			}
+
 			return message;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -305,4 +324,15 @@ public class UserServiceImpl implements UserService{
 		params.put("activeTag", "N");
 		this.getUserDAO().updateUser(params);
 	}
+
+	@Override
+	public void updateCounter(HttpServletRequest request) throws SQLException {
+		HttpSession session = request.getSession();
+		Map<String, Object> params = new HashMap<>();
+		params.put("userId", request.getParameter("username"));
+		params.put("counter", session.getAttribute("sesCounter"));
+		this.getUserDAO().updateCounter(params);
+	}
+
 }
+

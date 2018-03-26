@@ -11,4 +11,5 @@ public interface UserDAO {
 	void insertUser(User user) throws SQLException;
 	void updateUser(User user) throws SQLException;
 	public void updateUser(Map<String, Object> params) throws SQLException;
+	public void updateCounter(Map<String, Object> params) throws SQLException;
 }

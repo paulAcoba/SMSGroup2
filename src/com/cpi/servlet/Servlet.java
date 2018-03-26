@@ -16,11 +16,7 @@ import com.cpi.userservice.impl.UserServiceImpl;
 public class Servlet extends HttpServlet {
 
 	private static final long serialVersionUID = -3254083445269926470L;
-	
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		doPost(request, response);
-	}
-	
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 
@@ -31,12 +27,10 @@ public class Servlet extends HttpServlet {
 
 		if (message.equals("accessAdmin")) {
 
-			System.out.println(session.getAttribute("active"));
-
 			User myUser = new User();
 			myUser = (User) session.getAttribute("activeUser");
 			System.out.println(myUser.getFirstName() + " " + myUser.getLastName());
-			
+
 			RequestDispatcher rd = request.getRequestDispatcher("pages/homeAdmin.jsp");
 			rd.forward(request, response);
 
@@ -58,17 +52,16 @@ public class Servlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("pages/changePasswordPage.jsp");
 			rd.forward(request, response);
 
-		}else if (message.equals("blocked")) {
+		} else if (message.equals("blocked")) {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			RequestDispatcher rd = request.getRequestDispatcher("pages/accountBlocked.jsp");
 			rd.forward(request, response);
 
-		}
-		else {
+		} else {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			RequestDispatcher rd = request.getRequestDispatcher("pages/incorrectPw.jsp");
 			rd.forward(request, response);
-			
+
 		}
 	}
 }

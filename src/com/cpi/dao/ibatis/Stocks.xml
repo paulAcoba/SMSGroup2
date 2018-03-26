@@ -49,13 +49,13 @@
 		ORDER BY supply_id
 	</select>
 	
-	<insert id="updateSupplies" parameterClass="StocksClass">
+	<insert id="updateStockSupplies" parameterClass="StocksClass">
 		UPDATE supplies_2
 		SET actual_count = actual_count + #qty#
 		WHERE supply_id = #idSupply#
 	</insert>
 	
-	<insert id="updateSupplies2" parameterClass="StocksClass">
+	<insert id="updateStockSupplies2" parameterClass="StocksClass">
 		UPDATE supplies_2
 		SET actual_count = (actual_count - #prevQty#) + #qty#
 		WHERE supply_id = #idSupply#

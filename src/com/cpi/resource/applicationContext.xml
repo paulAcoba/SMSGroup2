@@ -45,11 +45,17 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 	<bean class="com.cpi.userservice.impl.UserServiceImpl" id="userService" depends-on="userDAO">
 		<property name="userDAO" ref="userDAO"></property>
 	</bean>
+	
+	<bean class="com.cpi.dao.impl.SuppliesStocksDAOImpl" id="suppliesStocksDAO" depends-on="sqlMapClient">
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+	<bean class="com.cpi.service.impl.SuppliesStocksServiceImpl" id="suppliesStocksService" depends-on="suppliesStocksDAO">
+		<property name="suppliesStocksDAO" ref="suppliesStocksDAO"></property>
+	</bean>
 	<bean class="com.cpi.dao.impl.SupplyTypeDAOImpl" id="supplyTypeDAO" depends-on="sqlMapClient">
 		<property name="sqlMapClient" ref="sqlMapClient"></property>
 	</bean>
 	<bean class="com.cpi.service.impl.SupplyTypeServiceImpl" id="supplyTypeService" depends-on="supplyTypeDAO">
 		<property name="supplyTypeDAO" ref="supplyTypeDAO"></property>
 	</bean>
-
 </beans>

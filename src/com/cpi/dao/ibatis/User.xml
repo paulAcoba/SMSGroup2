@@ -16,20 +16,22 @@
 		<result column="entry_date" 	property="entryDate"/>
 		<result column="last_login" 	property="lastLogin"/>
 		<result column="last_user" 	property="lastUser"/>
+		<result column="last_update" property="lastUpdate"/>
 	</resultMap>
 
 	<select id="getUser" resultMap="getUserMap">
-		SELECT user_id, password, first_name, last_name, middle_initial, email, active_tag, access_level, entry_date, last_login, last_user
+		SELECT user_id, password, first_name, last_name, middle_initial, email, active_tag, access_level, entry_date, last_login, last_user, last_update
 		FROM SMS_USERS_2
 	</select>
 	
 	<insert id="insertUser" parameterClass="UserClass">
-		INSERT into SMS_USERS_2 (user_id, password, first_name, last_name, middle_initial, email, active_tag, access_level, last_user, last_login)
-		VALUES(#userId#, #password#, #firstName#, #lastName#, #middleInitial#, #email#, #activeTag#, #accessLevel#, #lastUser#, SYSDATE)
+		INSERT into SMS_USERS_2 (user_id, password, first_name, last_name, middle_initial, email, active_tag, access_level, last_user, last_login, last_update)
+		VALUES(#userId#, #password#, #firstName#, #lastName#, #middleInitial#, #email#, #activeTag#, #accessLevel#, #lastUser#, SYSDATE, SYSDATE)
 	</insert>
 	
 	<update id="updateUser" parameterClass="UserClass">
 		UPDATE SMS_USERS_2
-		SET user_id = #userId#, password = #password#, first_name = #firstName#, last_name = #lastName#, middle_initial = #middleInitial#, email = #email#, active_tag = #activeTag#, access_level = #accessLevel#, last_login = SYSDATE, last_user = #lastUser#
+		SET user_id = #userId#, password = #password#, first_name = #firstName#, last_name = #lastName#, middle_initial = #middleInitial#, email = #email#, active_tag = #activeTag#, access_level = #accessLevel#, last_user = #lastUser#, last_update= SYSDATE
+		WHERE user_id = #userId#
 	</update>
 </sqlMap>

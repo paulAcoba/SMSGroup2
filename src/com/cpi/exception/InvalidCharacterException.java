@@ -10,7 +10,7 @@ public class InvalidCharacterException extends Exception{
 		this.field = field;
 	}
 	
-	public String errorMessage() {
+	public String getErrorField() {
 		return field;
 	}
 }

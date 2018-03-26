@@ -34,4 +34,10 @@
 		SET user_id = #userId#, password = #password#, first_name = #firstName#, last_name = #lastName#, middle_initial = #middleInitial#, email = #email#, active_tag = #activeTag#, access_level = #accessLevel#, last_user = #lastUser#, last_update= SYSDATE
 		WHERE user_id = #userId#
 	</update>
+	
+	<!-- <procedure id="updateUser" parameterClass="java.util.Map">
+		UPDATE SMS_USERS_2
+		SET active_tag = #activeTag#
+		WHERE user_id = #userId#
+	</procedure> -->
 </sqlMap>

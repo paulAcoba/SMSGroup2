@@ -2,6 +2,7 @@ package com.cpi.dao.impl;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.cpi.dao.UserDAO;
 import com.cpi.entity.User;
@@ -46,6 +47,27 @@ public class UserDAOImpl implements UserDAO{
 		
 		this.sqlMapClient.executeBatch();
 		this.sqlMapClient.getCurrentConnection().commit();
+	}
+	
+	@Override
+	public void updateUser(Map<String, Object> params) throws SQLException {
+		try{
+			this.sqlMapClient.startTransaction();
+			this.sqlMapClient.getCurrentConnection().setAutoCommit(false);
+			this.sqlMapClient.startBatch();
+
+			this.sqlMapClient.update("updateUser", params);
+			this.sqlMapClient.executeBatch();
+			this.sqlMapClient.getCurrentConnection().commit();
+		}
+		catch (SQLException e){
+			this.sqlMapClient.getCurrentConnection().rollback();
+			throw e;
+		}
+		finally{
+			this.sqlMapClient.endTransaction();
+		}
+		
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.cpi.servlet.login;
+package com.cpi.servlet;
 
 import java.io.IOException;
 
@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.cpi.entity.login.User;
-import com.cpi.service.impl.login.UserServiceImpl;
-import com.cpi.service.login.UserService;
+import com.cpi.entity.User;
+import com.cpi.userservice.UserService;
+import com.cpi.userservice.impl.UserServiceImpl;
 
 public class Servlet extends HttpServlet {
 

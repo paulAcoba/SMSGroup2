@@ -1,8 +1,13 @@
-<div id="dataForm">
+
+
+<div id="dataFormAdd"  class="panel panel-info">
+<div class="panel-heading">Request Supply</div>
+
+<div class="panel-body">
 	<table id="dataFormTable">
 		<tr>	
 			<td><label>Item Name</label></td>
-			<td><select id="selItems">
+			<td><select id="selItems" class="form-control">
 				<%-- <c:forEach var="itList" items="${itemList}">
 					<option value="${itList.supplyId}"><c:out value="${itList.itemName}"></c:out></option>
 				</c:forEach> --%>
@@ -11,17 +16,17 @@
 				</script>
 				</select></td>
 		</tr>
-		<tr>	
+		<tr>
 			<td><label>Quantity</label></td>
-			<td><input type="text" name="txtQuantity" id="txtQuantity"></td>
+			<td><input type="text" name="txtQuantity" id="txtQuantity" class="form-control"></td>
 		</tr>
 		<tr>	
 			<td><label>Requested By</label></td>
-			<td><input type="text" name="txtRequestedBy" id="txtRequestedBy"></td>
+			<td><input type="text" name="txtRequestedBy" id="txtRequestedBy" class="form-control"></td>
 		</tr>
 		<tr>	
 			<td><label>Department Name</label></td>
-			<td><select id="selDept">
+			<td><select id="selDept" class="form-control">
 				<script>
 					depts();
 				</script>
@@ -29,17 +34,20 @@
 		</tr>
 		<tr>	
 			<td><label>Issue Date</label></td>
-			<td><input type="date" name="txtIssueDate" id="txtIssueDate" required></td>
+			<td><input type="date" name="txtIssueDate" id="txtIssueDate" class="form-control" required></td>
 		</tr>
-		<tr>	
-			<td colspan="2"><input type="button" name="btnAdd" id="btnAdd" value="Add New">
-			<input type="button" name="btnCancel2" id="btnCancel2" value="Cancel"></td>
+		<tr class="buttons">	
+			<td colspan="2"><input type="button" name="btnAdd" id="btnAdd" class="btn btn-success" value="Add New">
+			<input type="button" name="btnCancel2" id="btnCancel2" class="btn btn-info" value="Cancel"></td>
 		</tr>
 	</table>
+</div>
 </div>
 
 <script>
 //sels();
+sels();
+depts();
 //alert(9);
 $('btnCancel2').observe("click", function(){
 	 new Ajax.Request(contextPath + "/issuedSupply",{

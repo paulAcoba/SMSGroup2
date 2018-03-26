@@ -1,28 +1,18 @@
-<nav id="nav" class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<ul class="nav navbar-nav" id="navList" >
-			<li><input type="button" name="btnHome" id="btnHome" value="Home"></li>
-			<li><input type="button" name="btnMaintenance" id="btnMaintenance" value="Maintenance"></li>
-			<li><input type="button" name="btnIssue" id="btnIssue" value="Supply Issuance"></li>
-			<li><input type="button" name="btnStocksAdd" id="btnStocksAdd" value="Add Stocks"></li>
-			<li><input type="button" name="btnUpdateProfile" id="btnUpdateProfile" value="Profile"></li>
-		</ul>
-	</div>
-</nav>
-
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
+      <a class="navbar-brand" href="#">SMS</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Page 1</a></li>
-      <li><a href="#">Page 2</a></li>
-      <li><a href="#">Page 3</a></li>
+      <li><a href="#">Home</a></li>
+      <li><a href="gate">Profile</a></li>
+      <li><a href="issuedSupply">Maintenance</a></li>
+      <li><a href="#">Supply Issuance</a></li>
+      <li><a href="#">Add Stocks</a></li>
     </ul>
   </div>
 </nav>
+
 <script>
 
 $("btnUpdateProfile").observe("click", function(){
@@ -58,7 +48,6 @@ function sels() {
 		},
 		onComplete : function(response) {
 			$('selItems').update(response.responseText);
-
 		}
 	});
 }
@@ -71,7 +60,6 @@ function depts() {
 		},
 		onComplete : function(response) {
 			$('selDept').update(response.responseText);
-
 		}
 	});
 }
@@ -109,7 +97,7 @@ function refresh() {
 			sels();
 			depts();
 			clear();
-			//alert(8);
+
 			clickRow();
 		}
 	});

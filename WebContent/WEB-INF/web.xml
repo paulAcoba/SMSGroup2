@@ -74,6 +74,7 @@
   	<servlet-name>search</servlet-name>
   	<url-pattern>/search</url-pattern>
   </servlet-mapping>
+
   
   <servlet>
   	<servlet-name>enter</servlet-name>

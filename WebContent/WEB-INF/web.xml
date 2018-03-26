@@ -115,8 +115,5 @@
   	<url-pattern>/addSupplyType</url-pattern>
   </servlet-mapping>
   
-  <servlet-mapping>
-  	<servlet-name>supply</servlet-name>
-  	<url-pattern></url-pattern>
-  </servlet-mapping>
+  
 </web-app>

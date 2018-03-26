@@ -5,7 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<script src="PrototypeFiles/prototype.js"></script>
+<script src="js/prototype.js"></script>
+
 
 <style>
 input[type="button"] {

@@ -92,10 +92,21 @@
 	});
 	
 	$("btnCancel").observe("click", function() {
-		new Ajax.Request(contextPath, {
-			method: "POST",
-			onComplete: function(response){
+		new Ajax.Request(contextPath + "/login", {
+			method : "POST",
+			parameters : {
+				action: "updateUser",
+				username : $F("userId"),
+				password : $F("password")
+			},
+			onFailure : function(response){
+				$("incorrect/blocked").update(response.responseText);
+			},
+			onSuccess : function(response) {
+
 				$("wrapper").update(response.responseText);
+
+				
 			}
 		});
 	});

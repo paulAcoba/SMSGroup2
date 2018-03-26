@@ -16,7 +16,11 @@ import com.cpi.userservice.impl.UserServiceImpl;
 public class Servlet extends HttpServlet {
 
 	private static final long serialVersionUID = -3254083445269926470L;
-
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		doPost(request, response);
+	}
+	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 

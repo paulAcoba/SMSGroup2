@@ -64,7 +64,7 @@ public class SuppliesStocksDAOImpl implements SuppliesStocksDAO{
 				stocks.setUser(request.getParameter("user"));
 				
 				this.getSqlMapClient().insert("insertStocks", stocks);
-				this.getSqlMapClient().update("updateSupplies", stocks);
+				this.getSqlMapClient().update("updateStockSupplies", stocks);
 				this.sqlMapClient.executeBatch();
 				
 				request.setAttribute("insertResult", "successful");
@@ -100,7 +100,7 @@ public class SuppliesStocksDAOImpl implements SuppliesStocksDAO{
 			}
 				
 			this.getSqlMapClient().update("updateStocks", stocks);
-			this.getSqlMapClient().update("updateSupplies2", stocks);
+			this.getSqlMapClient().update("updateStockSupplies2", stocks);
 			
 			this.sqlMapClient.executeBatch();
 			request.setAttribute("updateResult", "successful");

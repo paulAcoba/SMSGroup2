@@ -24,6 +24,10 @@ public class UpdatePasswordController extends HttpServlet{
 
 	private static final long serialVersionUID = 8688541986644975084L;
 	
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		doPost(request, response);
+	}
+	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		

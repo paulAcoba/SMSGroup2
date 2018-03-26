@@ -4,12 +4,14 @@
 <title>Supplies Stocks Listing</title>
 
 <link rel="stylesheet" href="css/suppliesStocks.css" type="text/css">
+<%-- <jsp:include page="peripherals/header.jsp"></jsp:include> --%>
 </head>
 <body>
 
 	<div id="wrapper">
 		<jsp:include page="peripherals/nav.jsp"></jsp:include>
 		<input type="Button" id="btnTemp" value="Temp" />
+
 		<h3>Stocks</h3>
 		<div id="form">
 		<c:if test="${updateResult == 'failed'}">
@@ -99,7 +101,7 @@
 <script type="text/javascript">
 
 	$("btnAddStocks").observe("click", addStocks);
-	$("btnTemp").observe("click", init);
+// 	$("btnTemp").observe("click", init);
  	$("btnSave").observe("click", updateRec);
  	$("optionStocks").observe("change", updateFields);
  	
@@ -132,14 +134,14 @@
  		})
  	};
  	
-	function init() {
-		new Ajax.Request("${pageContext.request.contextPath}/stocks", {
-			method : "get",
-			onComplete : function(response) {
-				$("wrapper").update(response.responseText);
-			}
-		});
-	}
+// 	function init() {
+// 		new Ajax.Request("${pageContext.request.contextPath}/stocks", {
+// 			method : "get",
+// 			onComplete : function(response) {
+// 				$("wrapper").update(response.responseText);
+// 			}
+// 		});
+// 	}
 	
 	function addStocks() {
 		new Ajax.Request("${pageContext.request.contextPath}/stocks", {
@@ -172,8 +174,7 @@
  	 	 					dateAdded : $F("txtDateAdded"),
  	 	 					datePurchased : $F("txtDatePurchased"),
  	 	 					prevQty : getPrevQty($F("optionStocks")),
- 	 	 					idSupply : getSupplyId($F("optionStocks")),
- 	 	 					user: "TEST"
+ 	 	 					idSupply : getSupplyId($F("optionStocks"))
  	 	 				},
  	 	 				onComplete : function(response) {
  	 	 					$("wrapper").update(response.responseText);
@@ -287,15 +288,28 @@
 	function validateReqFields() {
 		
 		var validateFields = true;
+		var displayMsg = false;
 	 
-		if ($("txtQty").value == "" || $("txtDateAdded").value == "") {
-			alert("Please fill up all required fields");
-			validateFields = false;
+			if ($("txtQty").value == "") {
+				$("lblQty").addClassName("required");
+				displayMsg = true;
+				validateFields = false;
+			}else {
+				$("lblQty").removeClassName("required");
+			}
 			
-			$("lblQty").addClassName("required");
-			$("lblDateAdded").addClassName("required");
-		}
+			if ($("txtDateAdded").value == "") {
+				$("lblDateAdded").addClassName("required");
+				displayMsg = true;
+				validateFields = false;
+			}else {
+				$("lblDateAdded").removeClassName("required");
+			}
 		
+			if (displayMsg) {
+				alert("Please fill up all required fields");
+			}
+			
 		return validateFields;
 	}
 </script>

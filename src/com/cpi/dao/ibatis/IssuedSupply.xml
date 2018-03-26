@@ -21,7 +21,7 @@
 		<result column="item_name" property="itemName" />
 		<result column="actual_count" property="actualCount" />
 		<result column="reorder_level" property="reorderLevel" />
-		<result column="obsolete_tag" property="obseleteTag" />
+		<result column="obsolete_tag" property="obsoleteTag" />
 	</resultMap>
 	
 	<resultMap id="allDepartmentsMap" class="DepartmentClass">

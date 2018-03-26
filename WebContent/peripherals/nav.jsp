@@ -5,10 +5,10 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="#">Home</a></li>
-      <li><a href="gate">Profile</a></li>
       <li><a href="maintenancetab">Maintenance</a></li>
       <li><a href="issuedSupply">Supply Issuance</a></li>
       <li><a href="#">Add Stocks</a></li>
+   	  <li style="position:absolute; left: 93%"><a href="gate" style="float: right;">Profile</a></li>
     </ul>
   </div>
 </nav>

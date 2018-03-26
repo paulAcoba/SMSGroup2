@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sqlmap-2.dtd">
+<sqlMap namespace="User">
+
+	<typeAlias alias="UserClass" type="com.cpi.entity.User"/>
+	
+	<resultMap id="getUserMap" class="UserClass">
+		<result column="user_id" 	property="userId"/>
+		<result column="password" 	property="password"/>
+		<result column="first_name" 	property="firstName"/>
+		<result column="last_name" 	property="lastName"/>
+		<result column="middle_initial" 	property="middleInitial"/>
+		<result column="email" 	property="email"/>
+		<result column="active_tag" 	property="activeTag"/>
+		<result column="access_level" 	property="accessLevel"/>
+		<result column="entry_date" 	property="entryDate"/>
+		<result column="last_login" 	property="lastLogin"/>
+		<result column="last_user" 	property="lastUser"/>
+	</resultMap>
+
+	<select id="getUser" resultMap="getUserMap">
+		SELECT user_id, password, first_name, last_name, middle_initial, email, active_tag, access_level, entry_date, last_login, last_user
+		FROM SMS_USERS_2
+	</select>
+	
+	<procedure id="updateUser" parameterClass="java.util.Map">
+		UPDATE SMS_USERS_2
+		SET active_tag = #activeTag#
+		WHERE user_id = #userId#
+	</procedure>
+
+</sqlMap>

@@ -20,35 +20,44 @@
 		    <p id="modalP"></p>
 		  </div>
 		</div>
-		<h3>User Maintenance</h3>
-		<form>
-			<div id="formDiv">
-				<table>
-					<tr><td><label>User ID</label></td><td><input type="text" id="userId" name="userId" disabled="disabled"></td></tr>
-					<tr><td><label>Password</label></td><td><input type="password" id="password" name="password" disabled="disabled"></td>
-					<tr><td><label>First Name</label></td><td><input type="text" id="firstName" name="firstName"></td></tr>
-					<tr><td><label>Last Name</label></td><td><input type="text" id="lastName" name="lastName"></td></tr>
-					<tr><td><label>Middle Initial</label></td><td><input type="text" id="middleInitial" name="middleInitial"></td></tr>
-					<tr><td><label>Email Address</label></td><td><input type="email" placeholder="default@example.com" id="email" name="email"></td></tr>
-					<tr><td><label>Active Tag</label></td><td><input type="radio" id="activeTagYes" name="activeTag" value="Y" checked="checked">Yes<input type="radio" id="activeTagNo" name="activeTag" value="N">No</td></tr>
-					<tr><td><label>Access Level</label></td><td><select id="accessLevel" name="accessLevel" >
-																	<option value=""></option>
-																	<option value="U">User</option>
-																	<option value="A">Admin</option>
-															  	</select></td></tr>
-				</table>
+		<!-- <h3>User Maintenance</h3> -->
+		<div class="panel panel-info" id="userDataForm">
+			<div class="panel-heading">User Maintenance</div>
+			<div class="panel-body">
+				<form>
+					<div id="formDiv">
+						<table>
+							<tr><td><label>User ID</label></td><td><input type="text" id="userId" name="userId" class="form-control" disabled="disabled"></td></tr>
+							<tr><td><label>Password</label></td><td><input type="password" id="password" name="password"  class="form-control" disabled="disabled"></td>
+							<tr><td><label>First Name</label></td><td><input type="text" id="firstName" name="firstName"  class="form-control"></td></tr>
+							<tr><td><label>Last Name</label></td><td><input type="text" id="lastName" name="lastName"  class="form-control"></td></tr>
+							<tr><td><label>Middle Initial</label></td><td><input type="text" id="middleInitial" name="middleInitial"  class="form-control"></td></tr>
+							<tr><td><label>Email Address</label></td><td><input type="email" placeholder="default@example.com" id="email" name="email"  class="form-control"></td></tr>
+							<tr><td><label >Active Tag</label></td><td><label class="radio-inline"><input type="radio" id="activeTagYes" name="activeTag" value="Y" checked="checked">Yes</label><label class="radio-inline"><input type="radio" id="activeTagNo" name="activeTag" value="N">No</label></td></tr>
+							<tr><td><label>Access Level</label></td><td><select id="accessLevel" class="form-control" name="accessLevel" >
+																			<option value=""></option>
+																			<option value="U">User</option>
+																			<option value="A">Admin</option>
+																	  	</select></td></tr>
+						</table>
+					</div>
+					<div id="buttonsDiv">
+						<button  type="button" id="btnAddNew" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add New</button><br>
+						<button  type="button" id="btnSave" class="btn btn-primary" ><span class="glyphicon glyphicon-ok"></span> Save</button><br>
+						<button  type="button" id="btnCancel" class="btn btn-danger"> Cancel</button><br>
+						<!-- <input type="button" id="btnAddNew" class="btn btn-success"value="Add New"><br> -->
+						<!-- <input type="button" id="btnSave" class="btn btn-primary" value="Save"> <br>-->
+						<!-- <input type="button" id="btnCancel" class="btn btn-danger" value="Cancel"> -->
+					</div>
+				</form>	
 			</div>
-			<div id="buttonsDiv">
-				<input type="button" id="btnAddNew" value="Add New"><br>
-				<input type="button" id="btnSave" value="Save"><br>
-				<input type="button" id="btnCancel" value="Cancel">
-			</div>
-		</form>
+		</div>
+		
 		<div id="searchDiv">
 			<table>
-				<tr><td><label>Search</label></td><td><input type="text" id="search" name="search"></td></tr>
+				<tr><td><label>Search</label></td><td><input type="text" id="search" name="search" class="form-control"></td></tr>
 			</table>
-			<table id="searchTable" border="1">
+			<table id="searchTable" class="table table-hover">
 				<tr>
 					<th>User ID</th>
 					<th>First Name</th>

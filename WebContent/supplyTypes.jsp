@@ -112,40 +112,52 @@ background-color: #adebad;
 
 
 	<center>
-		<div id="wrapper">
-			<b>Supply Type Maintenance</b>
-			<table id="table1">
-				<tr>
-					<td>Supply Type ID</td>
-					<td><input type="text" id="txtSupplyTypeId"
-						value="${maxSupplyTypeId}" disabled></td>
-				</tr>
-				<tr>
-					<td>Supply Type Name</td>
-					<td><input type="text" id="txtSupplyTypeName"></td>
-				</tr>
-			</table>
-
-			<table id="topRight">
-				<tr>
-					<td><input type="button" id="btnSave" value="Save"></td>
-				</tr>
-				<tr>
-					<td><input type="button" id="btnCancel" value="Cancel"></td>
-				</tr>
-			</table>
-
-			<table id="topLeft">
-				<tr>
-					<td>Users</td>
-				</tr>
-				<tr>
-					<td>Supply Types</td>
-				</tr>
-				<tr>
-					<td>Supplies</td>
-				</tr>
-			</table>
+		<div id="wrapper"><!-- 
+			<b>Supply Type Maintenance</b> -->
+			<div class="panel panel-info">
+				<div class="panel-heading">Supply Type Maintenance</div>
+				<div class="panel-body">
+					<table id="table1">
+						<tr>
+							<td>Supply Type ID</td>
+							<td><input type="text" id="txtSupplyTypeId"
+								value="${maxSupplyTypeId}" class="form-control" disabled></td>
+						</tr>
+						<tr>
+							<td>Supply Type Name</td>
+							<td><input type="text" class="form-control" id="txtSupplyTypeName"></td>
+						</tr>
+						<tr>
+							<td colspan="2" id="buttons">
+							<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span> Save</button>
+							<button type="button" class="btn btn-danger" id="btnCancel"> Cancel</button>
+							</td>
+						</tr>
+					</table>
+		
+					<!-- <table id="topRight">
+						<tr>
+							<td><input type="button" id="btnSave" value="Save"></td>
+						</tr>
+						<tr>
+							<td><input type="button" id="btnCancel" value="Cancel"></td>
+						</tr>
+					</table> -->
+		
+					<table id="topLeft">
+						<tr>
+							<td>Users</td>
+						</tr>
+						<tr>
+							<td>Supply Types</td>
+						</tr>
+						<tr>
+							<td>Supplies</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
 
 		</div>
 	</center>

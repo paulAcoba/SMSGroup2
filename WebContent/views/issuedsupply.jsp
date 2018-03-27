@@ -10,8 +10,8 @@
 </head>
 <body>
 	<div id="wrapper">
-	<div class="container">
 		<jsp:include page="../peripherals/nav.jsp"></jsp:include>
+	<div class="container">
 		<fieldset title="Issue Supplies" id="issueSupplies">
 			<div id="dataForm" class="panel panel-info">
 				<div class="panel-heading">Supply Issuance</div>

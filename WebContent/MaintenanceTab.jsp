@@ -12,12 +12,12 @@
 </head>
 <body>
 	<jsp:include page="peripherals/nav.jsp"></jsp:include>
-	<div id="maintenanceTab">
-		<div id="userMaintenance">User Maintenance</div>
-		<div id="supplyTypes">Supply Types</div>
-		<div id="supplies">Supplies</div>
+	<div id="maintenanceTab" class="list-group">
+		<div id="userMaintenance" class="list-group-item">User Maintenance</div>
+		<div id="supplyTypes" class="list-group-item">Supply Types</div>
+		<div id="supplies" class="list-group-item">Supplies</div>
 	</div>
-	<div id = "wrapper" style="display:inline-block;position:absolute;">
+	<div id = "wrapper" style="display:inline-block;">
 	</div>
 </body>
 <script>
@@ -30,6 +30,9 @@
 			},
 			onComplete: function(response) {
 				$("wrapper").update(response.responseText);
+				$("supplyTypes").className = "list-group-item";
+				$("supplies").className = "list-group-item";
+				$("userMaintenance").className = "list-group-item active";
 			}
 		});
 	});
@@ -42,6 +45,9 @@
 			},
 			onComplete: function(response) {
 				$("wrapper").update(response.responseText);
+				$("supplyTypes").className = "list-group-item";
+				$("userMaintenance").className = "list-group-item";
+				$("supplies").className = "list-group-item active";
 			}
 		});
 	});
@@ -52,6 +58,9 @@
 		
 			onComplete: function(response) {
 				$("wrapper").update(response.responseText);
+				$("userMaintenance").className = "list-group-item";
+				$("supplies").className = "list-group-item";
+				$("supplyTypes").className = "list-group-item active";
 			}
 		});
 	});

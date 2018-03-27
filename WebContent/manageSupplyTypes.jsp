@@ -182,10 +182,6 @@ background-color: #ffcccc;
 				</tr>
 			</table>
 			
-			
-			
-
-
 
 			<br>
 

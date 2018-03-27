@@ -3,7 +3,7 @@
 
 
 body {
-	background: skyblue;
+	text-align:center;
 }
 
 #buttonsDiv {
@@ -19,28 +19,50 @@ body {
 #searchTable {
 	border-collapse: collapse;
 	table-layout:fixed;
-	width: 800px;
+	width: 100%;
 	overflow:hidden;	
 }
 
 #maintenanceTab {
 	display: inline-block;
+	float:  left;
+    clear: both;
+    margin-left: 50px;
+    margin-right:  10px;
 }
 
 #searchTable>td {
 	display: inline-table;
 }
 
-
+#buttons{
+	text-align:center;
+}
 
 #maintenanceTab>div {
 	padding: 1em;
 }
 
-#maintenanceTab>div:hover {
-	background: white;
+#maintenanceTab>div:hover{
+	background:gray;
+	color:white;
 }
 
+
+#wrapper{
+	width:80%;
+	float:left;
+}
+
+#userDataForm{
+	width:50%;
+	margin:auto;
+	margin-bottom:10px;
+}
+
+#userDataForm button{
+	width:100%;
+}
 /* modal */
 
 /* The Modal (background) */

@@ -16,7 +16,7 @@
 			<div id="dataForm" class="panel panel-info">
 				<div class="panel-heading">Supply Issuance</div>
 				<div class="panel-body">
-				<div class="alert alert-danger">"${message}"</div>
+				<div class="alert alert-danger" id="alert">${message}</div>
 				<table id="dataFormTable">
 					<tr>
 						<td><label id="issueId"></label></td>
@@ -90,6 +90,70 @@
 <jsp:include page="../peripherals/footer.jsp"></jsp:include>
 <script>
 	try {
+		
+		function sels() {
+			new Ajax.Request(contextPath + "/issuedSupply", {
+				method : "POST",
+				parameters : {
+					action : "sels"
+				},
+				onComplete : function(response) {
+					$('selItems').update(response.responseText);
+				}
+			});
+		}
+
+		function depts() {
+			new Ajax.Request(contextPath + "/issuedSupply", {
+				method : "POST",
+				parameters : {
+					action : "depts"
+				},
+				onComplete : function(response) {
+					$('selDept').update(response.responseText);
+				}
+			});
+		}
+
+		function clickRow(){
+			var table = $('dataTable');
+
+			for (var i = 1; i < table.rows.length; i++) {
+				table.rows[i].onclick = function() {
+					//alert(this.cells[1].innerHTML);
+					var selID = this.cells[1].children[0].value;
+					var deptID = this.cells[4].children[0].value;
+
+					$('issueId').update("Issue ID");
+					$('txtIssueId').update(this.cells[0].innerText);
+					$('selItems').value = selID;
+					$('txtOldItem').value = selID;
+					$('txtQuantity').value = this.cells[2].innerText;
+					$('txtOldQuantity').value = this.cells[2].innerText;
+					$('txtRequestedBy').value = this.cells[3].innerText;
+					$('selDept').value = deptID;
+					$('txtIssueDate').value = this.cells[5].children[0].value;
+				}
+			}
+		}
+
+		function refresh() {
+			new Ajax.Request(contextPath + "/issuedSupply",{
+				method : "POST",
+				parameters : {
+					action : "refresh"
+				},
+				onComplete : function(response) {
+					$('dataTable').update(response.responseText);
+					sels();
+					depts();
+					clear();
+
+					clickRow();
+				}
+			});
+		}
+		
 		 $('btnIssueRequest').observe("click", function() {
 			 new Ajax.Request(contextPath + "/issuedSupply", {
 				method : "POST",
@@ -105,9 +169,9 @@
 		//alert(5);
 		$('btnSave').observe("click", function() {
 			if(isNaN($F('txtQuantity'))){
-				alert("Value of Quantity must be a number");
+				$('alert').update("Value of Quantity must be a number");
 			}else if(!$F('txtQuantity') || $F('txtQuantity').lenght <=0){
-				alert("Quantity must have value.");
+				$('alert').update("Quantity must have value.");
 			}else{
 				new Ajax.Request(contextPath + "/issuedSupply", {
 					method : "POST",
@@ -123,10 +187,8 @@
 						deptId : $F('selDept')
 					},
 					onComplete : function(response) {
-						//$('dataTable').update(response.responseText);
 						alert("Data Updated");
 						refresh();
-						//clear();
 					}
 				});
 			}

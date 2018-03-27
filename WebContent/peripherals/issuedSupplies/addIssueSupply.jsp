@@ -4,7 +4,7 @@
 <div class="panel-heading">Request Supply</div>
 
 <div class="panel-body">
-	<div class="alert alert-danger">"${message}"</div>
+	<div class="alert alert-danger" id="alert">${message}</div>
 	<table id="dataFormTable">
 		<tr>	
 			<td><label>Item Name</label></td>
@@ -66,9 +66,9 @@ $('btnCancel2').observe("click", function(){
 //alert(10);
 $('btnAdd').observe("click",function(){
 	if(isNaN($F('txtQuantity'))){
-		alert("Value of Quantity must be a number");
+		$('alert').update("Value of Quantity must be a number");
 	}else if(!$F('txtQuantity') || $F('txtQuantity').lenght <=0){
-		alert("Quantity must have value.");
+		$('alert').update("Quantity must have value.");
 	}else{
 		new Ajax.Request(contextPath + "/issuedSupply",{
 			method: "POST",
@@ -82,10 +82,6 @@ $('btnAdd').observe("click",function(){
 			},
 			onComplete : function(response){
 				$('issueSupplies').update(response.responseText);
-				
-				//alert(response.responseText);
-				//refresh("");
-				alert('${message}');
 			}
 		});
 	}

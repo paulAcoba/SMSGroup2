@@ -2,7 +2,7 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sqlmap-2.dtd">
 <sqlMap namespace="SuppliesMaintenance">
 	<typeAlias alias="SuppliesMaintenanceClass" type="com.cpi.entity.SuppliesMaintenance" />
-	<typeAlias alias="SupplyTestClass" type="com.cpi.entity.SupplyTest" />
+	<typeAlias alias="SupplyTestClass" type="com.cpi.entity.SupplyType" />
 
 	<resultMap id="allSuppliesMap" class="SuppliesMaintenanceClass">
 		<result column="supply_id" property="supplyId" />

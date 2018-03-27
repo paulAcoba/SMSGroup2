@@ -144,6 +144,7 @@ public class IssuesSupplyServlet extends HttpServlet{
 			request.setAttribute("itemLists", slist);
 			request.setAttribute("deptList", dlist);
 			request.setAttribute("issuedSuppliesList", list);
+			System.out.println(view);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

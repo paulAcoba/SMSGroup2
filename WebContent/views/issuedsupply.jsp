@@ -17,7 +17,7 @@
 				<div class="panel-heading">Supply Issuance</div>
 				<div class="panel-body">
 				<div class="alert alert-danger" id="alert">${message}</div>
-				<table id="dataFormTable">
+				<table id="dataFormTable" style="margin:auto;">
 					<tr>
 						<td><label id="issueId"></label></td>
 						<td><label id="txtIssueId"></label></td>
@@ -27,7 +27,7 @@
 						<td><input type="hidden" id="txtOldQuantity" name="txtOldQuantity"/></td>
 					</tr>
 					<tr>
-						<td><label>Item Name</label></td>
+						<td><label>Item Name </label></td>
 						<td><select id="selItems" class="form-control">
 								<%-- <c:forEach var="itList" items="${itemList}">
 								<option value="${itList.supplyId}"><c:out value="${itList.itemName}"></c:out></option>
@@ -35,21 +35,21 @@
 						</select></td>
 					</tr>
 					<tr>
-						<td><label>Quantity</label></td>
+						<td><label>Quantity </label></td>
 						<td><input type="text" name="txtQuantity" id="txtQuantity" class="form-control"></td>
 					</tr>
 					<tr>
-						<td><label>Requested By</label></td>
+						<td><label>Requested By </label></td>
 						<td><input type="text" name="txtRequestedBy"
 							id="txtRequestedBy" class="form-control"></td>
 					</tr>
 					<tr>
-						<td><label>Department Name</label></td>
+						<td><label>Department Name </label></td>
 						<td><select id="selDept" class="form-control">
 						</select></td>
 					</tr>
 					<tr>
-						<td><label>Issue Date</label></td>
+						<td><label>Issue Date </label></td>
 						<td><input type="date" name="txtIssueDate" id="txtIssueDate" class="form-control" required></td>
 					</tr>
 					<tr class="buttons">
@@ -124,7 +124,7 @@
 					var selID = this.cells[1].children[0].value;
 					var deptID = this.cells[4].children[0].value;
 
-					$('issueId').update("Issue ID");
+					$('issueId').update("Issue ID ");
 					$('txtIssueId').update(this.cells[0].innerText);
 					$('selItems').value = selID;
 					$('txtOldItem').value = selID;

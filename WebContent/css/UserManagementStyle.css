@@ -39,6 +39,7 @@ body {
 	text-align:center;
 }
 
+
 #maintenanceTab>div {
 	padding: 1em;
 }
@@ -62,6 +63,15 @@ body {
 
 #userDataForm button{
 	width:100%;
+}
+
+#button01{
+	padding-top:5px;
+	text-align:center;
+}
+
+#button01 button{
+	width:45%;
 }
 /* modal */
 

@@ -16,8 +16,13 @@
 
 .panel-heading{
 	margin-bottom:10px;
+	text-align:center;
 }
 
 .buttons{
 	text-align:right;
+}
+
+.buttons td{
+	padding-top:5px;
 }

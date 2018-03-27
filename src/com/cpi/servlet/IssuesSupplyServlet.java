@@ -18,6 +18,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.cpi.entity.Departments;
 import com.cpi.entity.IssuedSupply;
 import com.cpi.entity.SuppliesMaintenance;
+import com.cpi.entity.User;
 import com.cpi.service.IssuedSupplyService;
 
 public class IssuesSupplyServlet extends HttpServlet{
@@ -41,8 +42,9 @@ public class IssuesSupplyServlet extends HttpServlet{
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("/com/cpi/resource/applicationContext.xml");
 		IssuedSupplyService issuedSupply = (IssuedSupplyService) context.getBean("issueSupplyService");
-		
-		request.setAttribute("lastUser", session.getAttribute("user"));
+		User user = new User();
+		user = (User) session.getAttribute("activeUser");
+		request.setAttribute("lastUser",user.getUserId());
 		request.setAttribute("lastUpdate", new Date());
 		
 		System.out.println(request.getParameter("action") + " action");

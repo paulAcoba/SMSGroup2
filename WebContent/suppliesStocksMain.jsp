@@ -8,59 +8,68 @@
 </head>
 <body>
 
-	<div id="wrapper">
+	<div id="wrapper" >
 		<jsp:include page="peripherals/nav.jsp"></jsp:include>
-		<input type="Button" id="btnTemp" value="Temp" />
+		<!-- <input type="Button" id="btnTemp" value="Temp" /> -->
 
-		<h3>Stocks</h3>
-		<div id="form">
-		<c:if test="${updateResult == 'failed'}">
-		<label><font color="red">Updating of record failed</font></label>
-		</c:if>
-		<c:if test="${updateResult == 'successful'}">
-		<label><font color="red">Stocks Record Updated</font></label>
-		</c:if>
-		<div id="form">
-			<table>
-				<tr>
-					<td><label>Item Name </label></td>
-					<td><select id="optionStocks" class="dropdown">
-								<option value=""></option>
-							<c:forEach var="stocks" items="${suppliesStocks}">
-								<option value="${stocks.idStock }">${stocks.itemName } ${stocks.idStock }</option>
-							</c:forEach>
-						</select>	
-					</td>
-				</tr>
-				<tr>
-					<td><label id="lblQty">Quantity </label></td>
-					<td><input type="text" id="txtQty"></td>
-				</tr>
-				<tr>
-					<td><label>Reference No. </label></td>
-					<td><input type="text" id="txtRefNo"></td>
-				</tr>
-				<tr>
-					<td><label id="lblDateAdded">Date Added </label></td>
-					<td><input type="date" id="txtDateAdded"></td>
-				</tr>
-				<tr>
-					<td><label>Purchase Date </label></td>
-					<td><input type="date" id="txtDatePurchased"></td>
-				</tr>
-
-			</table>
+		<div id="form" style="width:80%; margin:auto;">
+		<!-- <h3>Stocks</h3> -->
+		<div class="panel panel-info" id="dataForm">
+			<div class="panel-heading">Stocks</div>
+			<div class="panel-body">
+				<c:if test="${updateResult == 'failed'}">
+				<label><font color="red">Updating of record failed</font></label>
+				</c:if>
+				<c:if test="${updateResult == 'successful'}">
+				<label><font color="red">Stocks Record Updated</font></label>
+				</c:if>
+				<div id="form">
+					<table id="formTable" style="margin:auto;">
+						<tr>
+							<td><label>Item Name </label></td>
+							<td><select id="optionStocks" class="dropdown form-control">
+										<option value=""></option>
+									<c:forEach var="stocks" items="${suppliesStocks}">
+										<option value="${stocks.idStock }">${stocks.itemName } ${stocks.idStock }</option>
+									</c:forEach>
+								</select>	
+							</td>
+						</tr>
+						<tr>
+							<td><label id="lblQty">Quantity </label></td>
+							<td><input type="text" id="txtQty" class="form-control"></td>
+						</tr>
+						<tr>
+							<td><label>Reference No. </label></td>
+							<td><input type="text" id="txtRefNo" class="form-control"></td>
+						</tr>
+						<tr>
+							<td><label id="lblDateAdded">Date Added </label></td>
+							<td><input type="date" id="txtDateAdded" class="form-control"></td>
+						</tr>
+						<tr>
+							<td><label>Purchase Date </label></td>
+							<td><input type="date" id="txtDatePurchased" class="form-control"></td>
+						</tr>
+		
+					</table>
+				</div>
+				<br />
+				<div id="buttons" style="text-align:center;">
+					<button type="Button" id="btnAddStocks" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add Stocks</button>
+					<button type="Button" id="btnSave" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Insert</button>
+					<button type="Button" id="btnCancel" class="btn btn-danger"> Cancel</button>
+					<!-- <input type="Button" id="btnAddStocks" value="Add Stocks"><br />
+					<input type="Button" id="btnSave" value="Save" /><br />
+					<input type="Button" id="btnCancel" value="Cancel" /> -->
+				</div>	
+			</div>
 		</div>
-		<br />
-		<div id="buttons">
-			<input type="Button" id="btnAddStocks" value="Add Stocks"><br />
-			<input type="Button" id="btnSave" value="Save" /><br />
-			<input type="Button" id="btnCancel" value="Cancel" />
-		</div>
+		
 		<hr />
 		<br />
 		<div id="search">
-			<label>Search </label><input type="text" id="txtSearch" placeholder="Item Name" onkeypress="search(event)">
+			<label>Search </label><input type="text" id="txtSearch" class="form-control" placeholder="Item Name" onkeypress="search(event)">
 		</div>
 		<br />
 		<div>

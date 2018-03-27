@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<jsp:include page="peripherals/header.jsp"></jsp:include>
 <title>Add Stocks</title>
 <script src='js/prototype.js'></script>
 <script> var contextPath = "${pageContext.request.contextPath}";</script>
@@ -13,7 +14,9 @@
 </head>
 <body>
 	<div id="wrapper">
+	<jsp:include page="peripherals/nav.jsp"></jsp:include>
 		<h3>Stocks</h3>
+		
 		<div id="form">
 		<c:if test="${insertResult == 'failed'}">
 		<label><font color="red">transaction failed</font></label>
@@ -24,7 +27,7 @@
 			<table>
 				<tr>
 					<td><label id="lblItemName">Item Name </label></td>
-					<td><select id="optionSupplies" class="dropdown">
+					<td><select id="optionSupplies" class="dropdown ">
 								<option value=""></option>
 							<c:forEach var="supplies" items="${supplies}">
 								<option value="${supplies.idSupply}">${supplies.itemName } ${supplies.idSupply}</option>

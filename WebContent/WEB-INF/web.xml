@@ -106,6 +106,11 @@
   	<url-pattern>/login</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+  	<servlet-name>user</servlet-name>
+  	<url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
   	<servlet-name>home</servlet-name>
   	<servlet-class>com.cpi.servlet.HomeServlet</servlet-class>
@@ -114,11 +119,6 @@
   <servlet-mapping>
   	<servlet-name>home</servlet-name>
   	<url-pattern>/home</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-  	<servlet-name>user</servlet-name>
-  	<url-pattern>/logout</url-pattern>
   </servlet-mapping>
   
   <servlet>

@@ -17,17 +17,17 @@ public class HomeServlet extends HttpServlet{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 102831973239L;
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
 
 		UserService userService = new UserServiceImpl();
 		String page = "";
 		User myUser = new User();
 		myUser = (User) session.getAttribute("activeUser");
+		System.out.println("home boy");
 		session.setAttribute("status", "login");
 		session.setAttribute("page", "pages/homeUser.jsp");
 		RequestDispatcher rd = request.getRequestDispatcher("pages/homeUser.jsp");

@@ -47,14 +47,14 @@
 </html>
 
 <script>
+try{
+	
 
 var counter = 0;
 window.onload = function(){
 	console.log($F('hidStatus')+"-hidden");
-	var page = $('hidPage')
-	obj = JSON.parse("{'page':page}");
 	if($F('hidStatus')=='login'){
-		$("wrapper").update(obj.page);
+		alert("hidden");
 	}
 } 
 $("btnLogin").observe("click", function() {
@@ -73,10 +73,14 @@ function login(){
 			$("incorrect/blocked").update(response.responseText);
 		},
 		onSuccess : function(response) {
-			
+
 			$("wrapper").update(response.responseText);
 			
 		}
 	});
 }	
+
+}catch(e){
+	console.log(e)
+}
 </script>

@@ -45,8 +45,8 @@ public class Servlet extends HttpServlet {
 			myUser = (User) session.getAttribute("activeUser");
 			System.out.println(myUser.getFirstName() + " " + myUser.getLastName());
 			session.setAttribute("status", "login");
-			session.setAttribute("page", "'pages/homeAdmin.jsp'");
-			RequestDispatcher rd = request.getRequestDispatcher("pages/homeAdmin.jsp");
+			session.setAttribute("page", "pages/homeUser.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("pages/homeUser.jsp");
 			rd.forward(request, response);
 
 		} else if (message.equals("accessUser")) {

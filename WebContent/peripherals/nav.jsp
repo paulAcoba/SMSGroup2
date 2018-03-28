@@ -1,7 +1,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">SMS</a>
+      <a class="navbar-brand" href="home">SMS</a>
     </div>
     <ul class="nav navbar-nav">
       <li><a href="#">Home</a></li>
@@ -20,3 +20,8 @@
     </ul>
   </div>
 </nav>
+<%  if(user.getAccessLevel().equals("U")){ %>
+	<img src="${pageContext.request.contextPath}\\pages\\user.PNG" alt="Banner" class="pic">
+<% }else{ %>
+	<img src="${pageContext.request.contextPath}\\pages\\admin.PNG" alt="Banner" class="pic">
+<% } %>

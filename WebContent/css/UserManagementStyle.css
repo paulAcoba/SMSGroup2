@@ -9,6 +9,7 @@ body {
 #buttonsDiv {
 	display: inline-block;
 	vertical-align: top;
+	width:15%;
 }
 
 #formDiv {

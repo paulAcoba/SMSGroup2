@@ -11,7 +11,7 @@
 <title>Update Profile</title>
 </head>
 <body>
-	<div id="wrapper">
+	<div id="wrappers">
 		<jsp:include page="peripherals/nav.jsp"></jsp:include>
 		<div id="myModal" class="modal">
 		  <div class="modal-content">
@@ -19,22 +19,48 @@
 		    <p id="modalP"></p>
 		  </div>
 		</div>
-		<form method="POST">
-			<div id="formDiv">
-				<table>
-					<tr><td><label>User ID</label></td><td><input type="text" id="userId" name="userId" disabled="disabled"></td></tr>
-					<tr><td><label>Password</label></td><td><input type="password" id="password" name="password" disabled="disabled"></td><td><input type="button" id="btnChangePassword" value="Change Password"></td></tr>
-					<tr><td><label>First Name</label></td><td><input type="text" id="firstName" name="firstName"></td></tr>
-					<tr><td><label>Last Name</label></td><td><input type="text" id="lastName" name="lastName"></td></tr>
-					<tr><td><label>Middle Initial</label></td><td><input type="text" id="middleInitial" name="middleInitial"></td></tr>
-					<tr><td><label>Email Address</label></td><td><input type="email" placeholder="default@example.com" id="email" name="email"></td></tr>
-				</table>
+		<div class="panel panel-info" id="userDataForm">
+			<div class="panel-heading">Profile</div>
+			<div class="panel-body">
+				<form method="POST">
+					<div id="formDiv">
+						<table>
+							<tr>
+								<td><label>User ID</label></td><td><input type="text" id="userId" name="userId" disabled="disabled" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><label>Password</label></td><td><input type="password" id="password" name="password" disabled="disabled" class="form-control"></td>
+								<td><!-- <input type="button" id="btnChangePassword" value="Change Password"> -->
+									<button type="button" id="btnChangePassword" class="btn btn-info"><span class="glyphicon glyphicon-save"></span> Change Password</button>
+								</td>
+							</tr>
+							<tr>
+								<td><label>First Name</label></td><td><input type="text" id="firstName" name="firstName" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><label>Last Name</label></td><td><input type="text" id="lastName" name="lastName" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><label>Middle Initial</label></td>
+								<td><input type="text" id="middleInitial" name="middleInitial" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><label>Email Address</label></td>
+								<td><input type="email" placeholder="default@example.com" id="email" name="email" class="form-control"></td>
+							</tr>
+						</table>
+					</div>
+					<div id="buttonsDiv">
+						<button type="button" id="btnSave" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Save</button>
+						<button type="button" id="btnCancel" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+					<!-- 
+						<input type="button" id="btnSave" value="Save"><br>
+						<input type="button" id="btnCancel" value="Cancel"> -->
+					</div>
+				</form>
 			</div>
-			<div id="buttonsDiv">
-				<input type="button" id="btnSave" value="Save"><br>
-				<input type="button" id="btnCancel" value="Cancel">
-			</div>
-		</form>
+		</div>
+		
 	</div>
 </body>
 <script>

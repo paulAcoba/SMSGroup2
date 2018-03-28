@@ -46,7 +46,7 @@ public class IssuesSupplyServlet extends HttpServlet{
 		user = (User) session.getAttribute("activeUser");
 		request.setAttribute("lastUser",user.getUserId());
 		request.setAttribute("lastUpdate", new Date());
-		
+		session.setAttribute("status","login");
 		System.out.println(request.getParameter("action") + " action");
 		
 		try{

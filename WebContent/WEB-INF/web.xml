@@ -106,6 +106,11 @@
   	<url-pattern>/login</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+  	<servlet-name>user</servlet-name>
+  	<url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
   	<servlet-name>stocks</servlet-name>
   	<servlet-class>com.cpi.servlet.SuppliesStocksServlet</servlet-class>

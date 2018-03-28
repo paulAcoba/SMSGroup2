@@ -7,13 +7,16 @@
       <li><a href="#">Home</a></li>
       <%  com.cpi.entity.User user = new com.cpi.entity.User();
       	user = (com.cpi.entity.User) session.getAttribute("activeUser");
-      	user.setUserId("A");
-      	if(user.getUserId().equals("A")){ %>
-      <li><a href="maintenancetab">Maintenance</a></li>
+      	System.out.println(user.getAccessLevel());
+      	if(user.getAccessLevel().equals("A")){ %>
+    	  <li><a href="maintenancetab">Maintenance</a></li>
       <% } %>
       <li><a href="issuedSupply">Supply Issuance</a></li>
       <li><a href="stocks">Add Stocks</a></li>
-   	  <li style="position:absolute; left: 93%"><a href="gate" style="float: right;">Profile</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+   	  <li ><a href="gate" >Profile</a></li>
+   	  <li ><a href="logout" >Logout</a></li>
     </ul>
   </div>
 </nav>

@@ -17,7 +17,8 @@
 </head>
 <body>
 	<div id="wrapper">
-	
+		<input type="hidden" id="hidStatus" value="${status? '':status }">
+		<input type="hidden" id="hidPage" value="${page? '':page }">
 		<fieldset class = "loginMenu" style="width: 215px;">
 			<legend>
 				<b><i>LOGIN</i></b>
@@ -48,7 +49,14 @@
 <script>
 
 var counter = 0;
-
+window.onload = function(){
+	console.log($F('hidStatus')+"-hidden");
+	var page = $('hidPage')
+	obj = JSON.parse("{'page':page}");
+	if($F('hidStatus')=='login'){
+		$("wrapper").update(obj.page);
+	}
+} 
 $("btnLogin").observe("click", function() {
 	login();
 });
@@ -65,9 +73,8 @@ function login(){
 			$("incorrect/blocked").update(response.responseText);
 		},
 		onSuccess : function(response) {
-
+			
 			$("wrapper").update(response.responseText);
-
 			
 		}
 	});

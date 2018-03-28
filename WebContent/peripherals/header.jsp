@@ -13,7 +13,6 @@
 <link rel="stylesheet" type="text/css" href="css/nav.css">
 <link rel="stylesheet" type="text/css" href="css/issuedSupply.css">
 <script>
-	jQuery.noConflict();
 	try{
 		var contextPath = "${pageContext.request.contextPath}";	
 	}catch(e){

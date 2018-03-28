@@ -16,7 +16,15 @@ import com.cpi.userservice.impl.UserServiceImpl;
 public class Servlet extends HttpServlet {
 
 	private static final long serialVersionUID = -3254083445269926470L;
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		session.invalidate();
 
+		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+		rd.forward(request, response);
+	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 
@@ -24,13 +32,18 @@ public class Servlet extends HttpServlet {
 		String message = userService.getLogin(request);
 		String page = "";
 		System.out.println(message);
-
+		if(session.isNew()){
+			session.setAttribute("status", "");
+			session.setAttribute("page", "");
+		}
+		
 		if (message.equals("accessAdmin")) {
 
 			User myUser = new User();
 			myUser = (User) session.getAttribute("activeUser");
 			System.out.println(myUser.getFirstName() + " " + myUser.getLastName());
-
+			session.setAttribute("status", "login");
+			session.setAttribute("page", "'pages/homeAdmin.jsp'");
 			RequestDispatcher rd = request.getRequestDispatcher("pages/homeAdmin.jsp");
 			rd.forward(request, response);
 
@@ -39,7 +52,8 @@ public class Servlet extends HttpServlet {
 			User myUser = new User();
 			myUser = (User) session.getAttribute("activeUser");
 			System.out.println(myUser.getFirstName() + " " + myUser.getLastName());
-
+			session.setAttribute("status", "login");
+			session.setAttribute("page", "pages/homeUser.jsp");
 			RequestDispatcher rd = request.getRequestDispatcher("pages/homeUser.jsp");
 			rd.forward(request, response);
 
@@ -48,7 +62,8 @@ public class Servlet extends HttpServlet {
 			User myUser = new User();
 			myUser = (User) session.getAttribute("activeUser");
 			System.out.println(myUser.getFirstName() + " " + myUser.getLastName());
-
+			session.setAttribute("status", "login");
+			session.setAttribute("page", "pages/changePasswordPage.jsp");
 			RequestDispatcher rd = request.getRequestDispatcher("pages/changePasswordPage.jsp");
 			rd.forward(request, response);
 
@@ -64,4 +79,5 @@ public class Servlet extends HttpServlet {
 
 		}
 	}
+	
 }

@@ -11,6 +11,9 @@
 <body style="background-color: aqua">
 <div id="wrapper">
 	<jsp:include page="../peripherals/nav.jsp"></jsp:include>
+	<img src="${pageContext.request.contextPath}\\pages\\admin.PNG" alt="Banner" class="pic">
+	<img src="${pageContext.request.contextPath}\\pages\\HomeBanner.PNG" alt="Banner" class="pic">
+	
 </div>
 </body>
 

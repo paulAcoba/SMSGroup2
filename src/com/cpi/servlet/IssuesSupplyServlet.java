@@ -95,25 +95,25 @@ public class IssuesSupplyServlet extends HttpServlet{
 				int actualCounts = Integer.parseInt(request.getAttribute("actualCounts").toString());
 				int reorderLevels = Integer.parseInt(request.getAttribute("reorderLevels").toString());
 				String alertMsg = "";
-				if(actualCounts > reorderLevels){
-					System.out.println("AC > RL");
 					if(actualCounts >= quantity){
 						System.out.println("AC > Q");
+
 						issuedSupply.addIssuedSupply(request);
+
 						alertMsg ="Request Issued.";
+						if(actualCounts <= reorderLevels){
+							String msg = "";
+							if(actualCounts < reorderLevels) msg = "below"; 
+							else msg="equal";
+							
+							alertMsg += "\nThe actual count of the item "+request.getAttribute("itemNames")+ " is " + msg + " the reorder level";
+						}
 					}else{
 						alertMsg = request.getAttribute("itemNames")+ " only has " + actualCounts + ", which is below the requested number of items.";
 					}
-				}else{
-					String msg = "";
-					if(actualCounts < reorderLevels) msg = "below"; 
-					else msg="equal";
-					
-					alertMsg = "The actual count of the item "+request.getAttribute("itemNames")+ " is " + msg + " the reorder level";
-					
-				}
+				
 				request.setAttribute("message", alertMsg);
-				System.out.println(request.getAttribute("message"));
+				System.out.println(request.getAttribute("message") + "-message");
 				view = "peripherals/issuedSupplies/addIssueSupply.jsp";
 				
 				
@@ -160,7 +160,7 @@ public class IssuesSupplyServlet extends HttpServlet{
 		// TODO Auto-generated method stub
 		String view = "";
 		view = "views/issuedsupply.jsp";
-		
+		request.setAttribute("message", "");
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 		

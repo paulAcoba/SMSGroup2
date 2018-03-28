@@ -26,3 +26,11 @@
 .buttons td{
 	padding-top:5px;
 }
+
+.hidden{
+	visibility:hidden;
+}
+
+.show{
+	visibility:visible;
+}

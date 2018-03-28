@@ -2,9 +2,8 @@
 
 <div id="dataFormAdd"  class="panel panel-info">
 <div class="panel-heading">Request Supply</div>
-
 <div class="panel-body">
-	<div class="alert alert-danger" id="alert">${message}</div>
+	<div class="alert alert-danger" id="alerts" hidden>${message}</div>
 	<table id="dataFormTable">
 		<tr>	
 			<td><label>Item Name</label></td>
@@ -38,8 +37,12 @@
 			<td><input type="date" name="txtIssueDate" id="txtIssueDate" class="form-control" required></td>
 		</tr>
 		<tr class="buttons">	
-			<td colspan="2"><input type="button" name="btnAdd" id="btnAdd" class="btn btn-success" value="Add New">
-			<input type="button" name="btnCancel2" id="btnCancel2" class="btn btn-info" value="Cancel"></td>
+			<td colspan="2">
+			
+							<button type="button" name="btnAdd" id="btnAdd" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Add</button>
+							<button type="button" name="btnCancel2" id="btnCancel2" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+			<!-- <input type="button" name="btnAdd" id="btnAdd" class="btn btn-success" value="Add New">
+			<input type="button" name="btnCancel2" id="btnCancel2" class="btn btn-danger" value="Cancel"> --></td>
 		</tr>
 	</table>
 </div>
@@ -47,6 +50,7 @@
 
 <script>
 //sels();
+
 sels();
 depts();
 //alert(9);
@@ -65,11 +69,14 @@ $('btnCancel2').observe("click", function(){
 
 //alert(10);
 $('btnAdd').observe("click",function(){
-	if(isNaN($F('txtQuantity'))){
-		$('alert').update("Value of Quantity must be a number");
-	}else if(!$F('txtQuantity') || $F('txtQuantity').lenght <=0){
-		$('alert').update("Quantity must have value.");
+	if(isNaN($F('txtQuantity')) ){
+		$('alerts').className += ' show';
+		$('alerts').update("<strong>Warning!</strong> Value of Quantity must be a number");
+	}else if(!$F('txtQuantity') || $F('txtQuantity').lenght <=0 || $F('txtRequestedBy') == ''){
+		$('alerts').className += ' show';
+		$('alerts').update("<strong>Warning!</strong> Please fill all the fields");
 	}else{
+		$('alerts').className = 'alert alert-danger';
 		new Ajax.Request(contextPath + "/issuedSupply",{
 			method: "POST",
 			parameters:{
@@ -82,6 +89,7 @@ $('btnAdd').observe("click",function(){
 			},
 			onComplete : function(response){
 				$('issueSupplies').update(response.responseText);
+				
 			}
 		});
 	}

@@ -16,7 +16,7 @@
 			<div id="dataForm" class="panel panel-info">
 				<div class="panel-heading">Supply Issuance</div>
 				<div class="panel-body">
-				<div class="alert alert-danger" id="alert">${message}</div>
+				<div class="alert alert-danger" id="alert" hidden>${message}</div>
 				<table id="dataFormTable" style="margin:auto;">
 					<tr>
 						<td><label id="issueId"></label></td>
@@ -53,10 +53,15 @@
 						<td><input type="date" name="txtIssueDate" id="txtIssueDate" class="form-control" required></td>
 					</tr>
 					<tr class="buttons">
-						<td colspan="2"><input type="button" name="btnIssueRequest"
-							id="btnIssueRequest" class="btn btn-success" value="Issue Request" data-toggle="modal" data-target="#dataFormAdd"> <input
-							type="button" name="btnSave" id="btnSave" class="btn btn-danger" value="Save"> <input
-							type="button" name="btnCancel" id="btnCancel" class="btn btn-info" value="Cancel"></td>
+						<td colspan="2">
+							<button type="button" name="btnIssueRequest"
+							id="btnIssueRequest" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Issue Request</button>
+							<button type="button" name="btnSave" id="btnSave" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Save</button>
+							<button type="button" name="btnCancel" id="btnCancel" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+						<!-- <input type="button" name="btnIssueRequest"
+							id="btnIssueRequest" class="btn btn-success" value="Issue Request"> <input
+							type="button" name="btnSave" id="btnSave" class="btn btn-primary" value="Save"> <input
+							type="button" name="btnCancel" id="btnCancel" class="btn btn-danger" value="Cancel"></td> -->
 					</tr>
 				</table>
 				</div>
@@ -169,10 +174,13 @@
 		//alert(5);
 		$('btnSave').observe("click", function() {
 			if(isNaN($F('txtQuantity'))){
-				$('alert').update("Value of Quantity must be a number");
-			}else if(!$F('txtQuantity') || $F('txtQuantity').lenght <=0){
-				$('alert').update("Quantity must have value.");
+				$('alert').className += ' show';
+				$('alert').update("<strong>Warning!</strong> Value of Quantity must be a number");
+			}else if(!$F('txtQuantity') || $F('txtQuantity').lenght <=0 || $F('txtRequestedBy') == ''){
+				$('alert').className += ' show';
+				$('alert').update("<strong>Warning!</strong> Quantity must have value.");
 			}else{
+				$('alert').className = 'alert alert-danger';
 				new Ajax.Request(contextPath + "/issuedSupply", {
 					method : "POST",
 					parameters : {

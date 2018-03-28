@@ -3,7 +3,7 @@
 
 <c:forEach var="itList" items="${itemLists}">
 	<c:choose>
-		<c:when test="${itList.obseleteTag == 'N'}">
+		<c:when test="${itList.obsoleteTag == 'N'}">
 			<option value="${itList.supplyId}"><c:out value="${itList.itemName}"></c:out></option>
 		</c:when>
 	</c:choose>

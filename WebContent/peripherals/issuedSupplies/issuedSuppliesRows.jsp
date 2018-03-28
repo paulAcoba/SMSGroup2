@@ -12,7 +12,7 @@
 </tr>
 <c:forEach var="isup" items="${issuedSuppliesList}">
 	<c:forEach var="itList" items="${itemLists}">
-		<c:if test="${itList.supplyId==isup.supplyId && itList.obseleteTag == 'N'}">
+		<c:if test="${itList.supplyId==isup.supplyId && itList.obsoleteTag == 'N'}">
 			<tr id="${isup.issueId}">
 				<td><c:out value="${isup.issueId}"></c:out></td>
 				<td>

@@ -5,7 +5,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="#">Home</a></li>
-      <% com.cpi.entity.User user = new com.cpi.entity.User();
+      <%  com.cpi.entity.User user = new com.cpi.entity.User();
       	user = (com.cpi.entity.User) session.getAttribute("activeUser");
       	user.setUserId("A");
       	if(user.getUserId().equals("A")){ %>

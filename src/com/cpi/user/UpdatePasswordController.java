@@ -49,11 +49,11 @@ public class UpdatePasswordController extends HttpServlet{
 		if(activeUser.getAccessLevel().equals("U")) {
 			page = "UserUpdateProfilePage.jsp";
 			request.setAttribute("userType", "user");
-			request.setAttribute("accessLevel", "U");
+			session.setAttribute("accessLevel", "U");
 		} else if(activeUser.getAccessLevel().equals("A")) {
 			page = "AdminUserListingPage.jsp";
 			request.setAttribute("userType", "admin");
-			request.setAttribute("accessLevel", "A");
+			session.setAttribute("accessLevel", "A");
 		}
 		
 		
@@ -103,7 +103,7 @@ public class UpdatePasswordController extends HttpServlet{
 		} finally {
 			
 			newUser.setAccessLevel(activeUser.getAccessLevel());
-			newUser.setActiveTag(activeUser.getAccessLevel());
+			newUser.setActiveTag(activeUser.getActiveTag());
 			newUser.setEmail(activeUser.getEmail());
 			newUser.setFirstName(activeUser.getFirstName());
 			newUser.setLastName(activeUser.getLastName());

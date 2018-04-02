@@ -309,12 +309,12 @@ public class UserServiceImpl implements UserService{
 
 							message = "accessUser";
 						}
+						session.setAttribute("accessLevel", e.getAccessLevel());
 
 					} else {
 						counter = 0;
 						session.setAttribute("sesCounter", counter);
 						request.setAttribute("callSesCounter", counter);
-						session.setAttribute("accessLevel", e.getAccessLevel());
 						userService.updateCounter(request);
 						message = "blocked";
 					}

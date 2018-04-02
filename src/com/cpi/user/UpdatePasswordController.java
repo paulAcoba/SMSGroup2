@@ -37,7 +37,7 @@ public class UpdatePasswordController extends HttpServlet{
 		activeUser = (User)session.getAttribute("activeUser");
 		currentUser.setPassword(request.getParameter("currentPassword"));
 		newUser.setAccessLevel(activeUser.getAccessLevel());
-		newUser.setActiveTag(activeUser.getAccessLevel());
+		newUser.setActiveTag(activeUser.getActiveTag());
 		newUser.setEmail(activeUser.getEmail());
 		newUser.setFirstName(activeUser.getFirstName());
 		newUser.setLastName(activeUser.getLastName());

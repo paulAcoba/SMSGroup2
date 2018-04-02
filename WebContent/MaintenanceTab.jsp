@@ -17,7 +17,7 @@
 		<div id="supplyTypes" class="list-group-item">Supply Types</div>
 		<div id="supplies" class="list-group-item">Supplies</div>
 	</div>
-	<div id = "wrapper" style="display:inline-block;">
+	<div id = "wrapper" style="display:inline-block;width:80%;float:left;">
 	</div>
 </body>
 <script>
@@ -38,7 +38,7 @@
 	});
 	
 	$("supplies").observe("click", function(){
-		new Ajax.Request(contextPath + "/suppliesmaintenance.jsp", {
+		new Ajax.Request(contextPath + "/supplymaintenance", {
 			method: "POST",
 			parameters: {
 				gateKey: "adminUserListing"

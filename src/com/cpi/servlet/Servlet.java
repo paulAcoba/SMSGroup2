@@ -46,6 +46,7 @@ public class Servlet extends HttpServlet {
 			System.out.println(myUser.getFirstName() + " " + myUser.getLastName());
 			session.setAttribute("status", "login");
 			session.setAttribute("page", "pages/homeUser.jsp");
+			session.setAttribute("accessLevel", "A");
 			RequestDispatcher rd = request.getRequestDispatcher("pages/homeUser.jsp");
 			rd.forward(request, response);
 
@@ -56,6 +57,7 @@ public class Servlet extends HttpServlet {
 			System.out.println(myUser.getFirstName() + " " + myUser.getLastName());
 			session.setAttribute("status", "login");
 			session.setAttribute("page", "pages/homeUser.jsp");
+			session.setAttribute("accessLevel", "U");
 			RequestDispatcher rd = request.getRequestDispatcher("pages/homeUser.jsp");
 			rd.forward(request, response);
 
@@ -65,8 +67,8 @@ public class Servlet extends HttpServlet {
 			myUser = (User) session.getAttribute("activeUser");
 			System.out.println(myUser.getFirstName() + " " + myUser.getLastName());
 			session.setAttribute("status", "login");
-			session.setAttribute("page", "pages/changePasswordPage.jsp");
-			RequestDispatcher rd = request.getRequestDispatcher("pages/changePasswordPage.jsp");
+			session.setAttribute("page", "UserChangePasswordProfilePage.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("UserChangePasswordProfilePage.jsp");
 			rd.forward(request, response);
 
 		} else if (message.equals("blocked")) {

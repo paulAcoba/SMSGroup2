@@ -20,7 +20,6 @@
 		    <p id="modalP"></p>
 		  </div>
 		</div>
-		<!-- <h3>User Maintenance</h3> -->
 		<div class="panel panel-info" id="userDataForm">
 			<div class="panel-heading">User Maintenance</div>
 			<div class="panel-body">
@@ -45,9 +44,6 @@
 						<button  type="button" id="btnAddNew" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add New</button><br>
 						<button  type="button" id="btnSave" class="btn btn-primary" ><span class="glyphicon glyphicon-ok"></span> Save</button><br>
 						<button  type="button" id="btnCancel" class="btn btn-danger"> Cancel</button><br>
-						<!-- <input type="button" id="btnAddNew" class="btn btn-success"value="Add New"><br> -->
-						<!-- <input type="button" id="btnSave" class="btn btn-primary" value="Save"> <br>-->
-						<!-- <input type="button" id="btnCancel" class="btn btn-danger" value="Cancel"> -->
 					</div>
 				</form>	
 			</div>
@@ -76,7 +72,12 @@
 	</div>
 </body>
 <script>
-
+	
+	if("${serviceResponse}" == "invalidCharacter") {
+		$("modalP").update("You've entered an invalid. Please check and retry");
+		$("myModal").writeAttribute("style", "display:block");
+	}
+	
 	if("${serviceResponse}" == "emptyField") {
 		$("modalP").update("One or more fields are empty. Please complete all fields.");
 		$("myModal").writeAttribute("style", "display:block");
@@ -84,6 +85,16 @@
 
 	if("${serviceResponse}" == "okay") {
 		$("modalP").update("The changes were successfully saved.");
+		$("myModal").writeAttribute("style", "display:block");
+	}
+	
+	if("${serviceResponse}" == "SQLException") {
+		$("modalP").update("Cannot connect properly to databse. Please contact administrator.");
+		$("myModal").writeAttribute("style", "display:block");
+	}
+	
+	if("${serviceResponse}" == "aboveMaximumCharacters") {
+		$("modalP").update("Middle Name should not exceed 3 characters. Please check and retry.");
 		$("myModal").writeAttribute("style", "display:block");
 	}
 	
@@ -162,7 +173,7 @@
 	});
 	
 	$("btnCancel").observe("click", function() {
-		new Ajax.Request(contextPath, {
+		new Ajax.Request(contextPath + "/AdminUserListingPage.jsp", {
 			method: "POST",
 			onComplete: function(response){
 				$("wrapper").update(response.responseText);

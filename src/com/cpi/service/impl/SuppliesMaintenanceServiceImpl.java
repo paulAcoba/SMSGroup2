@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.cpi.dao.SuppliesMaintenanceDAO;
 
 import com.cpi.entity.SuppliesMaintenance;
 
 import com.cpi.entity.SupplyType;
+import com.cpi.entity.User;
 import com.cpi.service.SuppliesMaintenanceService;;
 
 public class SuppliesMaintenanceServiceImpl implements SuppliesMaintenanceService {
@@ -52,6 +54,15 @@ public class SuppliesMaintenanceServiceImpl implements SuppliesMaintenanceServic
 	}
 
 	public void addSupplies(HttpServletRequest request) throws SQLException {
+		HttpSession session = request.getSession();
+
+		User activeUser = new User();
+		activeUser = (User) session.getAttribute("activeUser");
+		
+		
+		request.setAttribute("lastUser", activeUser.getUserId());
+		System.out.println(activeUser.getUserId());
+		
 		Map<String, Object> params = new HashMap<>();
 		params.put("supplyId", request.getParameter("supplyId"));
 		params.put("supplyType", request.getParameter("supplyType"));
@@ -71,6 +82,19 @@ public class SuppliesMaintenanceServiceImpl implements SuppliesMaintenanceServic
 	}
 
 	public void updateSupplies(HttpServletRequest request) throws SQLException {
+		
+		HttpSession session = request.getSession();
+
+		User activeUser = new User();
+		activeUser = (User) session.getAttribute("activeUser");
+		
+		
+		request.setAttribute("lastUser", activeUser.getUserId());
+		System.out.println(activeUser.getUserId());
+	
+		
+		
+		
 		Map<String, Object> params = new HashMap<>();
 		params.put("supplyId", request.getParameter("supplyId"));
 		//params.put("supplyType", request.getParameter("supplyType"));
@@ -81,8 +105,10 @@ public class SuppliesMaintenanceServiceImpl implements SuppliesMaintenanceServic
 		params.put("reorderLevel", request.getParameter("reorderLevel"));
 		params.put("remarks", request.getParameter("remarks"));
 		params.put("actualCount", request.getParameter("actualCount"));
+		params.put("lastUser", request.getAttribute("lastUser"));
 		//params.put("dateAdded", request.getParameter("dateAdded"));
-		//params.put("lastUser", request.getParameter("lastUser"));
+		/*params.put("lastUser", (activeUser.getUserId()).toString());
+		System.out.println(activeUser.getUserId());*/
 		//params.put("lastUpdate", request.getParameter("lastUpdate"));
 
 		this.getSuppliesMaintenanceDao().updateSupplies(params);

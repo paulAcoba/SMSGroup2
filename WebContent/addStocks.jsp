@@ -6,58 +6,63 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<jsp:include page="peripherals/header.jsp"></jsp:include>
 <title>Add Stocks</title>
+<jsp:include page="peripherals/header.jsp"></jsp:include>
 <script src='js/prototype.js'></script>
 <script> var contextPath = "${pageContext.request.contextPath}";</script>
 <link rel="stylesheet" href="css/suppliesStocks.css" type="text/css">
 </head>
 <body>
 	<div id="wrapper">
-	<jsp:include page="peripherals/nav.jsp"></jsp:include>
-		<h3>Stocks</h3>
-		
-		<div id="form">
-		<c:if test="${insertResult == 'failed'}">
-		<label><font color="red">transaction failed</font></label>
-		</c:if>
-		<c:if test="${insertResult == 'successful'}">
-		<label><font color="red">Reordering of supply is successful</font></label>
-		</c:if>
-			<table>
-				<tr>
-					<td><label id="lblItemName">Item Name </label></td>
-					<td><select id="optionSupplies" class="dropdown ">
-								<option value=""></option>
-							<c:forEach var="supplies" items="${supplies}">
-								<option value="${supplies.idSupply}">${supplies.itemName } ${supplies.idSupply}</option>
-							</c:forEach>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td><label id="lblQty">Quantity </label></td>
-					<td><input type="text" id="txtQty"></td>
-				</tr>
-				<tr>
-					<td><label>Reference No. </label></td>
-					<td><input type="text" id="txtRefNo"></td>
-				</tr>
-				<tr>
-					<td><label id="lblDateAdded">Date Added </label></td>
-					<td><input type="date" id="txtDateAdded"></td>
-				</tr>
-				<tr>
-					<td><label>Purchase Date </label></td>
-					<td><input type="date" id="txtDatePurchased"></td>
-				</tr>
-
-			</table>
+		<jsp:include page="peripherals/nav.jsp"></jsp:include>
+		<div id="myModal" class="modal">
+			<div class="modal-content" id="modal-content">
+				<span id="modalClose" class="close">&times;</span>
+				<p id="modalP"></p>
+			</div>
 		</div>
-		<br />
-		<div id="buttons">
-			<input type="Button" id="btnSave" value="Save">
-			<input type="Button" id="btnCancel" value="Cancel">
+		<div class="panel panel-info" id="userDataForm">
+			<div class="panel-heading">Stocks</div>
+			<div class="panel-body">
+				<div id="form">
+					<table>
+						<tr>
+							<td><label id="lblItemName">Item Name </label></td>
+							<td><select id="optionSupplies" class="form-control" style="width: 210px;">
+									<option value=""></option>
+									<c:forEach var="supplies" items="${supplies}">
+										<option value="${supplies.idSupply}">${supplies.itemName }</option>
+									</c:forEach>
+							</select></td>
+						</tr>
+						<tr>
+							<td><label id="lblQty">Quantity </label></td>
+							<td><input type="text" id="txtQty" class="form-control"></td>
+						</tr>
+						<tr>
+							<td><label>Reference No. </label></td>
+							<td><input type="text" id="txtRefNo" class="form-control"></td>
+						</tr>
+						<tr>
+							<td><label id="lblDateAdded">Date Added </label></td>
+							<td><input type="date" id="txtDateAdded" class="form-control"></td>
+						</tr>
+						<tr>
+							<td><label>Purchase Date </label></td>
+							<td><input type="date" id="txtDatePurchased" class="form-control"></td>
+						</tr>
+
+					</table>
+				</div>
+				<br />
+				<br />
+				<div id="buttons">
+					<button type="Button" id="btnSave" class="btn btn-primary" style="width: 100px">
+						<span class="glyphicon glyphicon-ok"></span> Save 
+					</button>
+					<button type="button" id="btnCancel" class="btn btn-danger" style="width: 100px">Cancel</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
@@ -65,6 +70,18 @@
 
 	$("btnSave").observe("click", addStocks);
 	$("btnCancel").observe("click", returnHome);
+	
+	if("${insertResult}" == "successful") {
+		$("modalP").update("Stock successfully Added.");
+		$("modal-content").writeAttribute("style", "background-color:#ccffcc");
+		$("myModal").writeAttribute("style", "display:block");
+	}
+	
+	if("${insertResult}" == "failed") {
+		$("modalP").update("Transaction Failed");
+		$("modal-content").writeAttribute("style", "background-color:#ffcccc");
+		$("myModal").writeAttribute("style", "display:block");
+	}
 	
 	function addStocks() {
 		
@@ -132,27 +149,45 @@
 			}
 			
 			if (displayMsg) {
-				alert("Please fill up all required fields");
+				$("modalP").update("Please fill up all required fields");
+				$("modal-content").writeAttribute("style", "background-color:#ffcccc");
+				$("myModal").writeAttribute("style", "display:block");
 			}
 			
 		return validateFields;
 	}
 	
 	function validateQty() {
-		
+
 		var validateQty = true;
-		
+
 		if (!isNaN(parseInt($("txtQty").value))) {
-			if (parseInt($("txtQty").value) < 1) {
-				alert("Quantity should be greater than 0");
+			if ($("txtQty").value.indexOf('.') != 1) {
+				if (parseInt($("txtQty").value) < 1) {
+					$("modalP").update("Quantity should be greater than 0");
+					$("modal-content").writeAttribute("style", "background-color:#ffcccc");
+					$("myModal").writeAttribute("style", "display:block");
+					validateQty = false;
+				}
+			} else {
+				$("modalP").update("Invalid Quantity Value");
+				$("modal-content").writeAttribute("style", "background-color:#ffcccc");
+				$("myModal").writeAttribute("style", "display:block");
 				validateQty = false;
 			}
 		} else {
-			alert("Only Numerical Values are valid for this field");
+			$("modalP").update("Invalid Quantity Value");
+			$("modal-content").writeAttribute("style", "background-color:#ffcccc");
+			$("myModal").writeAttribute("style", "display:block");
 			validateQty = false;
-		};
-		
+		}
+		;
+
 		return validateQty;
 	}
+	
+	$("modalClose").observe("click", function(){
+		myModal.writeAttribute("style", "display:none");
+	});
 </script>
 </html>

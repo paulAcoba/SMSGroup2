@@ -12,19 +12,31 @@
   color: red;
 }
 
-#formTable{
-	margin:auto;
-}
-
-
-#buttons{
+body {
 	text-align:center;
 }
 
+#buttons{
+	display: inline-block;
+	vertical-align: top;
+	text-align:center;
+}
+
+#form{
+	display: inline-block;
+	vertical-align: top;
+}
+
+#userDataForm{
+	width:30%;
+	margin:auto;
+	margin-bottom:10px;
+}
+
+/* table css */
 table.blueTable {
   border: 1px solid #1C6EA4;
-  width: 100%;
-  text-align: left;
+  width: 70%;
   border-collapse: collapse;
 }
 table.blueTable td, table.blueTable th {
@@ -53,4 +65,45 @@ table.blueTable thead th {
 
 table.blueTable thead th:first-child {
   border-left: none;
+}
+
+/* modal */
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
 }

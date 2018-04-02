@@ -51,12 +51,12 @@ try{
 	
 
 var counter = 0;
-window.onload = function(){
+/* window.onload = function(){
 	console.log($F('hidStatus')+"-hidden");
 	if($F('hidStatus')=='login'){
 		alert("hidden");
 	}
-} 
+}  */
 $("btnLogin").observe("click", function() {
 	login();
 });

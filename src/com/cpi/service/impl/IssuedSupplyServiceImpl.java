@@ -46,9 +46,9 @@ public class IssuedSupplyServiceImpl implements IssuedSupplyService{
 			params.put("requestor", request.getParameter("requestor"));
 			params.put("quantity", Integer.parseInt(request.getParameter("quantity")));
 			params.put("deptId", request.getParameter("deptId"));
-			params.put("lastUser", "paul");
+			/*params.put("lastUser", "paul");*/
 			params.put("newActualCount", newActualCount);
-			//params.put("lastUser", request.getAttribute("lastUser"));
+			params.put("lastUser", request.getAttribute("lastUser"));
 			System.out.println(request.getParameter("issueDate"));
 			this.getIssuedSupplyDao().addIssuedSupplies(params);
 		}
@@ -64,8 +64,8 @@ public class IssuedSupplyServiceImpl implements IssuedSupplyService{
 			params.put("quantity", Integer.parseInt(request.getParameter("quantity")));
 			params.put("oldQuantity", Integer.parseInt(request.getParameter("oldQuantity")));
 			params.put("deptId", request.getParameter("deptId"));
-			params.put("lastUser", "paul");
-			//params.put("lastUser", request.getAttribute("lastUser"));
+			//params.put("lastUser", "paul");
+			params.put("lastUser", request.getAttribute("lastUser"));
 			System.out.println(params.get("requestor"));
 			System.out.println(params.get("quantity"));
 			System.out.println(params.get("oldItem"));

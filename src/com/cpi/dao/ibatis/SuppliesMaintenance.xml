@@ -56,7 +56,8 @@
 		location = #location#,
 		reorder_level = #reorderLevel#,
 		actual_count = #actualCount#,
-		remarks = #remarks#
+		remarks = #remarks#,
+		last_user = #lastUser#
 		WHERE supply_id = #supplyId#
 		
 </procedure>

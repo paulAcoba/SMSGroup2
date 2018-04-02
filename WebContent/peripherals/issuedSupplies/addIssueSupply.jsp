@@ -89,6 +89,7 @@ $('btnAdd').observe("click",function(){
 			},
 			onComplete : function(response){
 				$('issueSupplies').update(response.responseText);
+				$('alerts').className += ' show';
 				
 			}
 		});

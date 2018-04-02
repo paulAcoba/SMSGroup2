@@ -15,10 +15,11 @@ import com.cpi.exception.WrongPasswordException;
 
 public interface UserService {
 	List<User> getUser() throws SQLException;
-	void addUser(User user) throws SQLException, DuplicateEntryException, InvalidCharacterException, EmptyFieldException;
-	public void updatePassword(User activeUser, User currentUser, User newUser) throws SQLException, WrongPasswordException, AboveMaximumCharactersException, BelowMinimumCharactersException,EmptyFieldException;
-	public void updateProfile(User newUser) throws SQLException, InvalidCharacterException,EmptyFieldException;
-	public void updateProfileAdmin(User newUser) throws SQLException, InvalidCharacterException,EmptyFieldException;
+	public boolean checkCharacters(String string, String allowed);
+	void addUser(User user) throws AboveMaximumCharactersException, SQLException, DuplicateEntryException, InvalidCharacterException, EmptyFieldException;
+	public void updatePassword(User activeUser, User currentUser, User newUser) throws InvalidCharacterException, SQLException, WrongPasswordException, AboveMaximumCharactersException, BelowMinimumCharactersException,EmptyFieldException;
+	public void updateProfile(User newUser) throws AboveMaximumCharactersException, SQLException, InvalidCharacterException,EmptyFieldException;
+	public void updateProfileAdmin(User newUser) throws AboveMaximumCharactersException, SQLException, InvalidCharacterException,EmptyFieldException;
 	public String search(String keyword) throws SQLException;
 	public String getLogin(HttpServletRequest request);
 	public void updateUser(HttpServletRequest request) throws SQLException;

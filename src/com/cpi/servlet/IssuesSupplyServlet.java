@@ -92,8 +92,10 @@ public class IssuesSupplyServlet extends HttpServlet{
 					}
 				}
 				
-				int actualCounts = Integer.parseInt(request.getAttribute("actualCounts").toString());
-				int reorderLevels = Integer.parseInt(request.getAttribute("reorderLevels").toString());
+				int actualCounts = 0;
+				actualCounts = Integer.parseInt(request.getAttribute("actualCounts").toString());
+				int reorderLevels = 0;
+				reorderLevels = Integer.parseInt(request.getAttribute("reorderLevels").toString());
 				String alertMsg = "";
 					if(actualCounts >= quantity){
 						System.out.println("AC > Q");

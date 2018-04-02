@@ -3,12 +3,10 @@ package com.cpi.userservice.impl;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -40,17 +38,50 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getUser();
 	}
 	
+	public boolean checkCharacters(String string, String allowed) {
+		boolean result = false;
+		System.out.println(allowed);
+		for(int i = 0; i < string.length(); i++) {
+			if(!(allowed.indexOf(string.toLowerCase().charAt(i)) >= 0)) {
+				result = true;
+				break;
+			}
+		}
+		
+		return result;
+	}
+	
 	@Override
-	public void addUser(User user) throws SQLException, DuplicateEntryException, InvalidCharacterException, EmptyFieldException {
+	public void addUser(User user) throws SQLException, DuplicateEntryException, InvalidCharacterException, EmptyFieldException, AboveMaximumCharactersException {
 		List<User> userList = new ArrayList<>();
 		userList = this.userDAO.getUser();
 		
-		if(user.getUserId().indexOf(" ") >= 0){
+		if(checkCharacters(user.getUserId(), "abcdefghijklmnopqrstuvwxyz_0123456789")) {
 			throw new InvalidCharacterException("userId");
+		}
+		if(checkCharacters(user.getPassword(), "abcdefghijklmnopqrstuvwxyz0123456789")) {
+			throw new InvalidCharacterException("password");
+		}
+		if(checkCharacters(user.getFirstName(), "abcdefghijklmnopqrstuvwxyz ")) {
+			throw new InvalidCharacterException("firstName");
+		}
+		if(checkCharacters(user.getLastName(), "abcdefghijklmnopqrstuvwxyz ")) {
+			throw new InvalidCharacterException("lastName");
+		}
+		if(checkCharacters(user.getMiddleInitial(), "abcdefghijklmnopqrstuvwxyz.")) {
+			throw new InvalidCharacterException("middleInitial");
+		}
+		
+		if(checkCharacters(user.getEmail(), "abcdefghijklmnopqrstuvwxyz.@0123456789")) {
+			throw new InvalidCharacterException("email");
 		}
 		
 		if("".equals(user.getUserId()) || "".equals(user.getPassword()) || "".equals(user.getFirstName()) || "".equals(user.getLastName()) || "".equals(user.getMiddleInitial()) || "".equals(user.getAccessLevel())){
 			throw new EmptyFieldException();
+		}
+		
+		if(user.getMiddleInitial().length() > 3){
+			throw new AboveMaximumCharactersException();
 		}
 		
 		for(int i = 0; i < userList.size(); i++){
@@ -62,10 +93,15 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public void updatePassword(User activeUser, User currentUser, User newUser) throws SQLException, WrongPasswordException, AboveMaximumCharactersException, BelowMinimumCharactersException, EmptyFieldException {
+	public void updatePassword(User activeUser, User currentUser, User newUser) throws InvalidCharacterException, SQLException, WrongPasswordException, AboveMaximumCharactersException, BelowMinimumCharactersException, EmptyFieldException {
 		if("".equals(currentUser.getPassword()) || "".equals(newUser.getPassword())){
 			throw new EmptyFieldException();
 		}
+		
+		if(checkCharacters(newUser.getPassword(), "abcdefghijklmnopqrstuvwxyz0123456789")) {
+			throw new InvalidCharacterException("newPassword");
+		}
+		
 		
 		if(!(activeUser.getPassword().equals(currentUser.getPassword()))) {
 			throw new WrongPasswordException();
@@ -85,12 +121,30 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public void updateProfile(User newUser) throws SQLException, InvalidCharacterException, EmptyFieldException {
+	public void updateProfile(User newUser) throws SQLException, InvalidCharacterException, EmptyFieldException, AboveMaximumCharactersException {
 		List<User> userList = new ArrayList<>();
 		userList = this.userDAO.getUser();
 		
+		if(checkCharacters(newUser.getFirstName(), "abcdefghijklmnopqrstuvwxyz ")) {
+			throw new InvalidCharacterException("firstName");
+		}
+		if(checkCharacters(newUser.getLastName(), "abcdefghijklmnopqrstuvwxyz ")) {
+			throw new InvalidCharacterException("lastName");
+		}
+		if(checkCharacters(newUser.getMiddleInitial(), "abcdefghijklmnopqrstuvwxyz ")) {
+			throw new InvalidCharacterException("middleInitial");
+		}
+		
+		if(checkCharacters(newUser.getEmail() , "abcdefghijklmnopqrstuvwxyz.@0123456789")) {
+			throw new InvalidCharacterException("email");
+		}
+		
 		if("".equals(newUser.getFirstName()) || "".equals(newUser.getLastName()) || "".equals(newUser.getMiddleInitial())){
 			throw new EmptyFieldException();
+		}
+		
+		if(newUser.getMiddleInitial().length() > 3){
+			throw new AboveMaximumCharactersException();
 		}
 		
 		for(int i = 0; i < userList.size(); i++) {
@@ -113,12 +167,34 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public void updateProfileAdmin(User newUser) throws SQLException, InvalidCharacterException, EmptyFieldException {
+	public void updateProfileAdmin(User newUser) throws SQLException, InvalidCharacterException, EmptyFieldException, AboveMaximumCharactersException {
 		List<User> userList = new ArrayList<>();
 		userList = this.userDAO.getUser();
 		
+		if(checkCharacters(newUser.getFirstName(), "abcdefghijklmnopqrstuvwxyz ")) {
+			System.out.println("1");
+			throw new InvalidCharacterException("firstName");
+		}
+		if(checkCharacters(newUser.getLastName(), "abcdefghijklmnopqrstuvwxyz ")) {
+			System.out.println("2");
+			throw new InvalidCharacterException("lastName");
+		}
+		if(checkCharacters(newUser.getMiddleInitial(), "abcdefghijklmnopqrstuvwxyz ")) {
+			System.out.println("3");
+			throw new InvalidCharacterException("middleInitial");
+		}
+		
+		if(checkCharacters(newUser.getEmail() , "abcdefghijklmnopqrstuvwxyz.@0123456789")) {
+			System.out.println("4");
+			throw new InvalidCharacterException("email");
+		}
+		
 		if("".equals(newUser.getFirstName()) || "".equals(newUser.getLastName()) || "".equals(newUser.getMiddleInitial()) || "".equals(newUser.getAccessLevel())){
 			throw new EmptyFieldException();
+		}
+		
+		if(newUser.getMiddleInitial().length() > 3){
+			throw new AboveMaximumCharactersException();
 		}
 		
 		for(int i = 0; i < userList.size(); i++) {

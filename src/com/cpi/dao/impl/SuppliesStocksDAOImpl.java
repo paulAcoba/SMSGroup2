@@ -5,9 +5,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.cpi.dao.SuppliesStocksDAO;
 import com.cpi.entity.SuppliesStocks;
+import com.cpi.entity.User;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 public class SuppliesStocksDAOImpl implements SuppliesStocksDAO{
@@ -53,6 +55,11 @@ public class SuppliesStocksDAOImpl implements SuppliesStocksDAO{
 				
 				SuppliesStocks stocks = new SuppliesStocks();
 				
+				HttpSession session = request.getSession();
+				User activeUser = new User();
+				activeUser = (User) session.getAttribute("activeUser");
+				String lastUser= activeUser.getUserId();
+				
 				stocks.setIdSupply(Integer.parseInt(request.getParameter("idSupply")));
 				stocks.setQty(Integer.parseInt(request.getParameter("qty")));
 				stocks.setNumReference(request.getParameter("refNo"));
@@ -61,7 +68,7 @@ public class SuppliesStocksDAOImpl implements SuppliesStocksDAO{
 				if (request.getParameter("datePurchased") != "") {
 					stocks.setDatePurchased(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("datePurchased")));
 				}
-				stocks.setUser(request.getParameter("user"));
+				stocks.setUser(lastUser);
 				
 				this.getSqlMapClient().insert("insertStocks", stocks);
 				this.getSqlMapClient().update("updateStockSupplies", stocks);
@@ -69,10 +76,9 @@ public class SuppliesStocksDAOImpl implements SuppliesStocksDAO{
 				
 				request.setAttribute("insertResult", "successful");
 			} catch (SQLException e) {
-				
 				this.sqlMapClient.getCurrentConnection().rollback();
 				request.setAttribute("insertResult", "failed");
-				
+				System.out.println(e);
 			} finally {
 				this.sqlMapClient.getCurrentConnection().commit();
 			}
@@ -87,11 +93,16 @@ public class SuppliesStocksDAOImpl implements SuppliesStocksDAO{
 			
 			SuppliesStocks stocks = new SuppliesStocks();
 			
+			HttpSession session = request.getSession();
+			User activeUser = new User();
+			activeUser = (User) session.getAttribute("activeUser");
+			String lastUser= activeUser.getUserId();
+			
+			stocks.setUser(lastUser);
 			stocks.setIdStock(Integer.parseInt(request.getParameter("idStock")));
 			stocks.setIdSupply(Integer.parseInt(request.getParameter("idSupply")));
 			stocks.setQty(Integer.parseInt(request.getParameter("qty")));
 			stocks.setNumReference(request.getParameter("refNo"));
-			stocks.setUser(request.getParameter("user"));
 			stocks.setPrevQty(Integer.parseInt(request.getParameter("prevQty")));
 			stocks.setDateAdded(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dateAdded")));
 			

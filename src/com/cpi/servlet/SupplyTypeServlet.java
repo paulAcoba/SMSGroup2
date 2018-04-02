@@ -27,7 +27,7 @@ public class SupplyTypeServlet extends HttpServlet {
 
 	@SuppressWarnings("resource")
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String page = "supplyTypes.jsp";
+		String page = "manageSupplyTypes.jsp";
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
 				"/com/cpi/resource/applicationContext.xml");
 
@@ -45,18 +45,21 @@ public class SupplyTypeServlet extends HttpServlet {
 			for (SupplyType m : maxSupplyTypeId) {
 				maxId = m.getSupplyTypeId();
 			}
-
-			req.setAttribute("maxSupplyTypeId", maxId + 1);
+			int maxP1=maxId+1;
+			System.out.println("max id: "+maxId);
+			System.out.println("max id +1: "+(maxId+1));
+			req.setAttribute("maxSupplyTypeId", maxP1);
 			req.setAttribute("suppliesType", l);
 
 			if ("save".equals(action)) {
 				supplyTypeService.insertSupplyType(req);
+				page = "supplyTypes.jsp";
 			} else if ("cancel".equals(action)) {
 				page = "manageSupplyTypes.jsp";
-			} else if ("actionAddNewSupply".equals(action)) {
+			} else if ("addNewSupply".equals(action)) {
 				page = "supplyTypes.jsp";
 			} else if ("updateSupplyType".equals(action)) {
-				
+
 				supplyTypeService.updateSupplyType(req);
 				List<SupplyType> n = new ArrayList<>();
 				n = supplyTypeService.getSupplyType();
@@ -74,7 +77,9 @@ public class SupplyTypeServlet extends HttpServlet {
 					req.setAttribute("suppliesTypeSearch", search);
 					page = "pages/searchSupplyTypeTable.jsp";
 				}
-			}  else {
+					
+				
+			} else {
 				req.setAttribute("suppliesType", l);
 			}
 

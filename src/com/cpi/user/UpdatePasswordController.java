@@ -17,6 +17,7 @@ import com.cpi.entity.User;
 import com.cpi.exception.AboveMaximumCharactersException;
 import com.cpi.exception.BelowMinimumCharactersException;
 import com.cpi.exception.EmptyFieldException;
+import com.cpi.exception.InvalidCharacterException;
 import com.cpi.exception.WrongPasswordException;
 import com.cpi.userservice.UserService;
 
@@ -30,7 +31,6 @@ public class UpdatePasswordController extends HttpServlet{
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
-		
 		User activeUser = new User();
 		User currentUser = new User();
 		User newUser = new User();
@@ -46,13 +46,14 @@ public class UpdatePasswordController extends HttpServlet{
 		newUser.setUserId(activeUser.getUserId());
 		newUser.setPassword(request.getParameter("newPassword"));
 		String page = "";
-		
 		if(activeUser.getAccessLevel().equals("U")) {
 			page = "UserUpdateProfilePage.jsp";
 			request.setAttribute("userType", "user");
+			request.setAttribute("accessLevel", "U");
 		} else if(activeUser.getAccessLevel().equals("A")) {
 			page = "AdminUserListingPage.jsp";
 			request.setAttribute("userType", "admin");
+			request.setAttribute("accessLevel", "A");
 		}
 		
 		
@@ -62,6 +63,12 @@ public class UpdatePasswordController extends HttpServlet{
 			userService.updatePassword(activeUser, currentUser, newUser);
 			
 			
+			
+		} catch(InvalidCharacterException e) {
+			request.setAttribute("serviceResponse", "invalidCharacter");
+			request.setAttribute("errorField", e.getErrorField());
+			RequestDispatcher rd = request.getRequestDispatcher("UserChangePasswordProfilePage.jsp");
+			rd.forward(request, response);
 			
 		}  catch(EmptyFieldException e){
 			request.setAttribute("serviceResponse", "emptyField");
@@ -105,9 +112,16 @@ public class UpdatePasswordController extends HttpServlet{
 			newUser.setUserId(activeUser.getUserId());
 			newUser.setPassword(request.getParameter("newPassword"));
 			
+			request.setAttribute("userId", activeUser.getUserId());
+			request.setAttribute("password", activeUser.getPassword());
+			request.setAttribute("firstName", activeUser.getFirstName());
+			request.setAttribute("lastName", activeUser.getLastName());
+			request.setAttribute("middleInitial", activeUser.getMiddleInitial());
+			request.setAttribute("email", activeUser.getEmail());
 			session.setAttribute("activeUser", newUser);
 			request.setAttribute("serviceResponse", "okay");
-			RequestDispatcher rd = request.getRequestDispatcher(page);
+			session.setAttribute("accessLevel", newUser.getAccessLevel());
+			RequestDispatcher rd = request.getRequestDispatcher("pages/homeUser.jsp");
 			rd.forward(request, response);
 		}
 	}

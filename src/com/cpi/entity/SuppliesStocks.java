@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class SuppliesStocks {
 	
-	//Stocks Table Variables
 	private Integer idStock;
 	private Integer idSupply;
 	private Integer	qty;
@@ -14,8 +13,6 @@ public class SuppliesStocks {
 	private	Date	dateUpdate;
 	private	String	numReference;
 	private String	user;
-	
-	//Supplies Table Variables
 	private String	itemName;
 	private String 	obsoleteTag;
 	

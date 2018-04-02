@@ -25,7 +25,12 @@ public class GateController extends HttpServlet{
 		request.setAttribute("lastName", activeUser.getLastName());
 		request.setAttribute("middleInitial", activeUser.getMiddleInitial());
 		request.setAttribute("email", activeUser.getEmail());
-		
+		System.out.println(activeUser.getUserId() + "-userid");
+		System.out.println(activeUser.getPassword() + "-password");
+		System.out.println(activeUser.getFirstName() + "-first name");
+		System.out.println(activeUser.getLastName() + "-last");
+		System.out.println(activeUser.getMiddleInitial() + "-mid");
+		System.out.println(activeUser.getEmail() + "-email");
 		RequestDispatcher rd = request.getRequestDispatcher("UserUpdateProfilePage.jsp");
 		rd.forward(request, response);
 		

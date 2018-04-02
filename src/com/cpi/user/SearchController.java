@@ -1,6 +1,7 @@
 package com.cpi.user;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,8 +30,10 @@ public class SearchController extends HttpServlet {
 			UserService userService = (UserService) applicationContext.getBean("userService");
 			content = userService.search(keyword);
 			request.setAttribute("content", content);
-		} catch(Exception e) {
-			
+		} catch(SQLException e) {
+			request.setAttribute("content", "Cannot connect properly to the database. Please contact administrator.");
+			RequestDispatcher rd = request.getRequestDispatcher("TablePage.jsp");
+			rd.forward(request, response);
 		} finally {
 			RequestDispatcher rd = request.getRequestDispatcher("TablePage.jsp");
 			rd.forward(request, response);

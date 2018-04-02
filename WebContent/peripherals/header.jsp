@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css" media="all">
 <link rel="stylesheet" type="text/css" href="css/nav.css">
 <link rel="stylesheet" type="text/css" href="css/issuedSupply.css">
+<link rel="stylesheet" type="text/css" href="css/suppliesmaintenance.css">
 <script>
 	try{
 		var contextPath = "${pageContext.request.contextPath}";	

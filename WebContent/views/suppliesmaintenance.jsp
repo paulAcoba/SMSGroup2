@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../peripherals/header.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css"
-	href="../css/suppliesmaintenance.css">
+	href="css/suppliesmaintenance.css">
 <title>Supplies Maintenance</title>
 <script>
 	window.onload = function() {
@@ -13,91 +13,105 @@
 
 <body>
 	<div id="wrapper">
-		<jsp:include page="../peripherals/nav.jsp"></jsp:include>
-		<fieldset title="Supplies Maintenance" id="supplyMaintenances">
+		<div class="container">
+			<fieldset title="Supplies Maintenance" id="supplyMaintenances">
 
-			<div id="dataForm">
-				<table id="dataFormTable">
+				<div id="dataForm" class="panel panel-info">
+					<div class="panel-heading">Supply Maintenance</div>
+					<div class="panel-body">
+						<div class="alert alert-danger" id="alert" hidden>${message}</div>
+						<table id="dataFormTable">
 
-					<tr>
-						<td><input type="text" id="txtsuppId" hidden></td>
-					</tr>
-					<tr>
+							<tr>
+								<td><input type="text" id="txtsuppId" hidden></td>
+							</tr>
+							<tr>
 
 
-						<!-- 	<td><label>Supply Type: </label></td>
+								<!-- 	<td><label>Supply Type: </label></td>
 						<td><input type="text" id="txtsuType"></td> -->
 
 
-						<td><label>Supply Type:</label></td>
-						<td><select id="txtsuType" disabled="disabled">
-								<%-- <c:forEach var="itList" items="${supType}">
+								<td><label>Supply Types:</label></td>
+								<td><select id="txtsuType" disabled="disabled"
+									class="form-control">
+										<%-- <c:forEach var="itList" items="${supType}">
 									<option value="${itList.supplyType}"><c:out
 											value="${itList.typeName}"></c:out></option>
 								</c:forEach> --%>
-						</select></td>
+								</select></td>
 
 
-					</tr>
-					<tr>
-						<td><label>Item Name:</label></td>
-						<td><input type="text" id="txtitName" disabled></td>
-					</tr>
-					<tr>
-						<td><label>Item Unit:</label></td>
-						<td><input type="text" id="txtitUnit" disabled="disabled"></td>
-					</tr>
-					<tr>
-						<td><label>Obsolete Tag:</label></td>
-						<td><form>
-								<input type="radio" name="obsolete" value="Y" id="rdYes"
-									disabled>Yes <input type="radio" name="obsolete"
-									value="N" id="rdNo" disabled>No
-							</form></td>
-					</tr>
-					<tr>
-						<td><label>Location:</label></td>
-						<td><input type="text" id="txtlocation" disabled="disabled"></td>
-					</tr>
-					<tr>
-						<td><label>Entered Date:</label></td>
-						<td><input type="date" id="dateEntered" disabled="disabled"></td>
-					</tr>
-
-					<tr>
-						<td><label>Reorder Level:</label></td>
-						<td><input type="text" id="txtreLevel"
-							onkeydown='return (event.which >=48 && event.which <=57) || event.which ===8 || event.which == 46'
-							disabled> <label>Actual Count: </label> <input
-							type="text" class="quantity" id="txtacCount"
-							onkeydown='return (event.which >= 48 && event.which <= 57) 
+							</tr>
+							<tr>
+								<td><label>Item Name:</label></td>
+								<td><input type="text" id="txtitName" disabled
+									class="form-control"></td>
+							</tr>
+							<tr>
+								<td><label>Item Unit:</label></td>
+								<td><input type="text" id="txtitUnit" disabled="disabled"
+									class="form-control"></td>
+							</tr>
+							<tr>
+								<td><label>Obsolete Tag:</label></td>
+								<td><form>
+										<input type="radio" name="obsolete" value="Y" id="rdYes"
+											disabled>Yes <input type="radio" name="obsolete"
+											value="N" id="rdNo" disabled>No
+									</form></td>
+							</tr>
+							<tr>
+								<td><label>Location:</label></td>
+								<td><input type="text" id="txtlocation" disabled="disabled"
+									class="form-control"></td>
+							</tr>
+							<tr>
+								<td><label>Entered Date:</label></td>
+								<td><input type="date" id="dateEntered" disabled="disabled"
+									class="form-control"></td>
+							<tr>
+								<td><label>Reorder Level:</label></td>
+								<td><input type="text" id="txtreLevel"
+									onkeydown='return (event.which >=48 && event.which <=57) || event.which ===8 || event.which == 46'
+									disabled class="form-control"></td>
+							</tr>
+							<tr>
+								<td><label>Actual Count: </label></td>
+								<td><input type="text" id="txtacCount"
+									onkeydown='return (event.which >= 48 && event.which <= 57) 
    || event.which == 8 || event.which == 46'
-							disabled /> <!-- <input type="text" id="txtacCount"
+									disabled class="form-control"></td>
+								<!-- <input type="text" id="txtacCount"
 							disabled="disabled"></td> -->
-					</tr>
+							</tr>
 
-					<tr>
-						<form>
-							<td><label>Remarks :</label></td>
-							<td><textarea rows="5" cols="30" id="remarks" disabled>
+							<tr>
+								<form>
+									<td><label>Remarks :</label></td>
+									<td><textarea rows="5" cols="30" id="remarks" disabled
+											class="form-control">
 							</textarea></td>
-						</form>
+								</form>
 
 
-					</tr>
-					<tr>
-						<td colspan="2"><input type="button" name="btnAddshow"
-							id="btnAddshow" value="Add New"> <input type="button"
-							name="btnSave" id="btnSave" value="Save"> <input
-							type="button" name="btnCancel" id="btnCancel" value="Cancel"></td>
-					</tr>
-				</table>
-			</div>
-			<div id="supplyMaintenanceTable" class="tableDiv">
-				<label>Search: </label> <input type="text" name="txtSearch"
-					id="txtSearch" placeholder="Supply ID"><br />
-				<table id="dataTable" border="1">
-					<%-- <tr id="dataTableHeader">
+							</tr>
+							<tr>
+								<td colspan="2"><input type="button" name="btnAddshow"
+									id="btnAddshow" value="Add New" class="btn btn-success">
+									<input type="button" name="btnSave" id="btnSave" value="Save"
+									class="btn btn-primary"> <input type="button"
+									name="btnCancel" id="btnCancel" value="Cancel"
+									class="btn btn-danger"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div id="supplyMaintenanceTable" class="tableDiv">
+					<label>Search: </label> <input type="text" name="txtSearch"
+						id="txtSearch" placeholder="Supply ID" class="form-control"><br />
+					<table id="dataTable" class="table table-hover">
+						<%-- <tr id="dataTableHeader">
 						<th>Supply ID</th>
 						<th>Supply Type</th>
 						<th>Item Name</th>
@@ -129,9 +143,10 @@
 									value="${items.lastUpdate}"></fmt:formatDate></td>
 						</tr>
 					</c:forEach> --%>
-				</table>
-			</div>
-		</fieldset>
+					</table>
+				</div>
+			</fieldset>
+		</div>
 	</div>
 </body>
 </html>
@@ -153,7 +168,7 @@
 
 			});
 		}
-
+		populate();
 		function sTypeId() {
 			new Ajax.Request(contextPath + "/supplymaintenance", {
 				method : "POST",
@@ -167,7 +182,7 @@
 		}
 
 		$('btnAddshow').observe("click", function() {
-			alert('test');
+		
 			new Ajax.Request(contextPath + "/supplymaintenance", {
 				method : "POST",
 				parameters : {
@@ -184,23 +199,55 @@
 
 				},
 				onComplete : function(response) {
+					//$('wrapper').update(response.responseText);
 					$('supplyMaintenances').update(response.responseText);
 					sTypeId();
-					//$('supplyMaintenances').update(response.responseText);
 
 				}
 			});
 		});
 		$('btnCancel').observe("click", function() {
+			$('btnAddshow').disabled = false;
 			clear();
+			disabled();
 		});
 
 		$('btnSave').observe("click", function() {
+			
+			if ($('txtitUnit').disabled == true) {
+				$('alert').className += ' show';
+				$('alert').update('Please Select an Item'); 
+			
+			}else if (!$F('txtsuType') || !$F('txtitName') || !$F('txtitUnit') || !$F('txtacCount')) {
+				$('alert').className += ' show';
+				$('alert').update("Please fill up all the fields!");
+				
+			
+			}else if ($F('txtitName').length > 100 ) {
+				$('alert').className += ' show';
+				$('alert').update('The letters of the item name entered should not exceed to 100');
 
-			if (!$F('txtitName') || !$F('txtitUnit') || !$F('txtacCount')) {
-				alert("Please fill up all the fields!");
-			} else {
+			}  else if ($F('txtitUnit').length > 10 ) {
+				$('alert').className += ' show';
+				$('alert').update('The letters of the item unit entered should not exceed to 10');
 
+			}  else if ($F('txtlocation').length > 100 ) {
+				$('alert').className += ' show';
+				$('alert').update('The letters of the location entered should not exceed to 100');
+
+			}  else if ($F('remarks').length > 1000 ) {
+				$('alert').className += ' show';
+				$('alert').update('The letters of the remarks entered should not exceed to 1000');
+
+			} else if ($F('txtreLevel').length > 4 || $F('txtacCount').length > 4 ) {
+				$('alert').className += ' show';
+				$('alert').update('The inpputed numbers should only contain 4 digits');
+			}else if (isNaN($F('txtreLevel')) || isNaN($F('txtacCount'))) {
+				$('alert').className += ' show';
+				$('alert').update('Enter proper number'); 
+			
+			}else {
+				$('alert').className = 'alert alert-danger';
 				var obsolete = "";
 				if ($("rdYes").checked) {
 					obsolete = "Y";
@@ -223,9 +270,12 @@
 
 					},
 					onComplete : function(response) {
+						$('alert').className += ' show';
+						$('alert').update('Supplies updated');
+						$('btnAddshow').disabled = false;
 						populate();
-						alert('supplies updated');
 						disabled()
+						clear();
 					}
 				});
 			}
@@ -235,8 +285,8 @@
 			$('txtsuType').value = '';
 			$('txtitName').value = '';
 			$('txtitUnit').value = '';
-			$('rdYes').checked = false;
-			$('rdNo').checked = false;
+			/* $('rdYes').checked = false;
+			$('rdNo').checked = false; */
 			$('txtlocation').value = '';
 			$('txtreLevel').value = '';
 			$('txtacCount').value = '';
@@ -244,33 +294,35 @@
 			$('remarks').value = '';
 			$('txtSearch').value = '';
 			populate();
-			//sTypeId();
+			
 		}
 
 		function enabled() {
-			document.getElementById('txtitName').disabled = false;
-			document.getElementById('txtitUnit').disabled = false;
-			document.getElementById('rdYes').disabled = false;
-			document.getElementById('rdNo').disabled = false;
-			document.getElementById('txtlocation').disabled = false;
-			document.getElementById('txtreLevel').disabled = false;
-			document.getElementById('txtacCount').disabled = false;
-			document.getElementById('remarks').disabled = false;
+			$('txtitName').disabled = false;
+			$('txtitUnit').disabled = false;
+			$('rdYes').disabled = false;
+			$('rdNo').disabled = false;
+			$('txtlocation').disabled = false;
+			$('txtreLevel').disabled = false;
+			$('txtacCount').disabled = false;
+			$('remarks').disabled = false;
+			
 
-			//--------------REPLACE DOLLAR SIGN
+		
 		}
 
 		function disabled() {
-			document.getElementById('txtitName').disabled = true;
-			document.getElementById('txtitUnit').disabled = true;
-			document.getElementById('rdYes').disabled = true;
-			document.getElementById('rdNo').disabled = true;
-			document.getElementById('txtlocation').disabled = true;
-			document.getElementById('txtreLevel').disabled = true;
-			document.getElementById('txtacCount').disabled = true;
-			document.getElementById('remarks').disabled = true;
+			$('txtitName').disabled = true;
+			$('txtitUnit').disabled = true;
+			$('rdYes').disabled = true;
+			$('rdNo').disabled = true;
+			$('txtlocation').disabled = true;
+			$('txtreLevel').disabled = true;
+			$('txtacCount').disabled = true;
+			$('remarks').disabled = true;
+			
 
-			//--------------REPLACE DOLLAR SIGN
+		
 		}
 
 		function select() {
@@ -286,8 +338,8 @@
 
 					$('txtitName').value = this.cells[2].innerHTML;
 					$('txtitUnit').value = this.cells[3].innerHTML;
-
-					//$('rdYesNo').value = this.cells[4].innerHTML;
+					
+					
 					$('txtlocation').value = this.cells[5].innerHTML;
 					$('txtreLevel').value = this.cells[6].innerHTML;
 					$('txtacCount').value = this.cells[7].innerHTML;
@@ -300,6 +352,7 @@
 					}
 
 					enabled()
+					$('btnAddshow').disabled = true;
 
 				}
 			}
@@ -325,4 +378,3 @@
 		alert("home.jsp " + e);
 	}
 </script>
-

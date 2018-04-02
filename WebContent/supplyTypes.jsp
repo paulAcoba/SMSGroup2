@@ -9,6 +9,9 @@
 
 
 <style>
+#wrapper {
+	position: relative;
+}
 /* input[type="button"] {
 	background-color: #4798f2;
 	width: 150px;
@@ -52,6 +55,18 @@ div {
 	text-align: right;
 }
  */
+#topRight {
+	position: absolute;
+	top: 62px;
+	right: 22px;
+	font-size: 18px;
+	font-weight: bold;
+}
+.buttons td button{
+	width: 100%;
+	font:  Arial;
+	font-weight: bold;
+}
 /* 
 d */
 .modal {
@@ -66,7 +81,7 @@ d */
 	overflow: auto; /* Enable scroll if needed */
 	background-color: rgba(0, 0, 0, 0.4); /* Fallback color */
 	background-color: rgba(0, 0, 0, 0.4);
-	height: 30%; /* Black w/ opacity */
+	height: 100%; /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -74,13 +89,14 @@ d */
 	background-color: #ffcccc;
 	margin: auto;
 	padding: 20px;
-	border: 1px solid #ff4d4d;
+	border: 1px solid #33cc33;
 	width: 90%;
 	height: 10%;
 	border-radius: 10px;
 }
-.modal-contentSuccess{
-background-color: #adebad;
+
+.modal-contentSuccess {
+	background-color: #adebad;
 	margin: auto;
 	padding: 20px;
 	border: 1px solid #33cc33;
@@ -103,6 +119,14 @@ background-color: #adebad;
 	cursor: pointer;
 }
 /* #myEmptyFieldsModal{height:50px;background-color:green;} */
+
+.hidden{
+	visibility:hidden;
+}
+
+.show{
+	visibility:visible;
+}
 </style>
 
 </head>
@@ -114,58 +138,48 @@ background-color: #adebad;
 	<center>
 		<div id="wrapper"><!-- 
 			<b>Supply Type Maintenance</b> -->
-			<div class="panel panel-info" id="userDataForm">
+			<div class="panel panel-info">
 				<div class="panel-heading">Supply Type Maintenance</div>
 				<div class="panel-body">
+				 <div class="alert alert-danger " id="alertf" hidden>
+				 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    				<strong>Danger!</strong> Please complete the fields needed.
+				 </div> 
+				 
+				<div class="alert alert-success alert-dismissible" id="alert" hidden>
+				 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    				<strong>Success!</strong> Successfully added.
+				</div>
 					<table id="table1">
-						<tr>
-							<td>Supply Type ID </td>
+						
+						<tr class="buttons">
+							<td>Supply Type ID</td>
 							<td><input type="text" id="txtSupplyTypeId"
 								value="${maxSupplyTypeId}" class="form-control" disabled></td>
+								<td>&nbsp;</td>
+								<td><button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span> Save</button></td>
 						</tr>
-						<tr>
-							<td>Supply Type Name </td>
+						<tr class="buttons">
+							<td>Supply Type Name</td>
 							<td><input type="text" class="form-control" id="txtSupplyTypeName"></td>
+							<td>&nbsp;</td>
+							<td><button type="button" class="btn btn-danger" id="btnCancel"><span class="glyphicon glyphicon-remove"></span> Cancel</button></td>
 						</tr>
-						<tr>
-							<td colspan="2" id="button01">
-							<button type="button" class="btn btn-primary" id="btnSave"><span class="glyphicon glyphicon-ok"></span> Save</button>
-							<button type="button" class="btn btn-danger" id="btnCancel"> Cancel</button>
-							</td>
-						</tr>
+						
 					</table>
+					
+			
 				</div>
 			</div>
-					<!-- <table id="topRight">
-						<tr>
-							<td><input type="button" id="btnSave" value="Save"></td>
-						</tr>
-						<tr>
-							<td><input type="button" id="btnCancel" value="Cancel"></td>
-						</tr>
-					</table> -->
-		
-					<table id="topLeft">
-						<tr>
-							<td>Users</td>
-						</tr>
-						<tr>
-							<td>Supply Types</td>
-						</tr>
-						<tr>
-							<td>Supplies</td>
-						</tr>
-					</table>
-				
 			
 
 		</div>
 	</center>
 
 
-
+<!-- 
 	<div id="myEmptyFieldsModal" class="modal">
-		<!-- Modal content -->
+		Modal content
 		<div class="modal-content">
 			<span class="close">&times;</span>
 			<p>Please complete the fields needed</p>
@@ -173,17 +187,17 @@ background-color: #adebad;
 	</div>
 
 	<div id="successfullyAddedModal" class="modal">
-		<!-- Modal content -->
+		Modal content
 		<div class="modal-contentSuccess">
 			<span class="close">&times;</span>
-			<strong>Success!</strong><p>Successfully added</p>
+			<p>Successfully added</p>
 		</div>
 
-	</div>
+	</div> -->
 </body>
 
 <script>
-	function showModal1() {
+	/* function showModal1() {
 		var modals = document.getElementById('successfullyAddedModal');
 
 		//Get the <span> element that closes the modal
@@ -224,7 +238,7 @@ background-color: #adebad;
 			}
 		}
 	}
-
+ */
 	//
 	$("btnSave").observe(
 			"click",
@@ -233,8 +247,11 @@ background-color: #adebad;
 				if ($F("txtSupplyTypeName") == "") {
 					//$("main").update(response.responseText);
 					//modal.style.display = "block";
-					showModal();
+					//showModal();
 					//alert("hgi");
+					
+					$('alertf').className += ' show';
+					//$('alertf').update("Please");
 				} else {
 					new Ajax.Request("${pageContext.request.contextPath}"
 							+ "/addSupplyType", {
@@ -245,7 +262,12 @@ background-color: #adebad;
 							supplyTypeName : $F("txtSupplyTypeName")
 						},
 						onComplete : function(response) {
-							showModal1();
+							//showModal1();
+							$("wrapper").update(response.responseText);
+							$('alert').className += ' show';
+							//$("txtSupplyTypeId").value = "";
+							$("txtSupplyTypeName").value = "";
+							//$('alert').update("Data Saved");
 						}
 					});
 				}

@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<jsp:include page="peripherals/header.jsp"></jsp:include>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="css/UserManagementStyle.css" type="text/css">
 <script src="js/prototype.js"></script>
@@ -10,28 +11,31 @@
 <title>Change Password</title>
 </head>
 <body>
-	<div id="wrapper">
-		<div id="myModal" class="modal">
+	<div id="myModal" class="modal">
 		  <div class="modal-content">
 		    <span id="modalClose" class="close">&times;</span>
 		    <p id="modalP"></p>
 		  </div>
-		</div>
-		<h3>Change Password</h3>
+	</div>
+	<div id="wrapper2">
+		<div class="panel panel-info" id="userDataForm">
+			<div class="panel-heading">Change Password</div>
+			<div class="panel-body">
 		<form>
 			<div id="formDiv">
 				<table>
-					<tr><td><label>Current Password</label></td><td><input type="password" id="currentPassword" name="currentPassword"></td></tr>
-					<tr><td><label>New Password</label></td><td><input type="password" id="newPassword" name="newPassword"></td></tr>
-					<tr><td><label>Retype Password</label></td><td><input type="password" id="retypePassword" name="retypePassword"></td></tr>
+					<tr><td><label>Current Password</label></td><td><input type="password" id="currentPassword" name="currentPassword" class="form-control"></td></tr>
+					<tr><td><label>New Password</label></td><td><input type="password" id="newPassword" name="newPassword" class="form-control"></td></tr>
+					<tr><td><label>Retype Password</label></td><td><input type="password" id="retypePassword" name="retypePassword" class="form-control"></td></tr>
 				</table>
 			</div>
 			<div id="buttonsDiv">
-					<input type="button" id="btnSave" value="Save"><br>
-					<input type="button" id="btnCancel" value="Cancel">
+					<button type="button" id="btnSave" class="btn btn-primary" ><span class="glyphicon glyphicon-ok"></span> Save</button><br>
+					<button type="button" id="btnCancel" class="btn btn-danger"> Cancel</button>
 			</div>
 		</form>
-		
+		</div>
+	</div>
 	</div>
 </body>
 <script>
@@ -56,6 +60,16 @@
 		$("myModal").writeAttribute("style", "display:block");
 	}
 	
+	if("${serviceResponse}" == "invalidCharacter") {
+		$("modalP").update("You've entered an invalid value on new password. Please check and retry");
+		$("myModal").writeAttribute("style", "display:block");
+	}
+	
+	if("${serviceResponse}" == "SQLException") {
+		$("modalP").update("Cannot connect properly to databse. Please contact administrator.");
+		$("myModal").writeAttribute("style", "display:block");
+	}
+	
 	$("btnSave").observe("click", function(){
 		if($F("newPassword") == $F("retypePassword")) {
 			new Ajax.Request(contextPath + "/updatepassword", {
@@ -66,7 +80,7 @@
 					newPassword: $F("newPassword")
 				},
 				onComplete: function(response){
-					$("wrapper").update(response.responseText);
+					$("wrapper2").update(response.responseText);
 				}
 			});
 			
@@ -85,7 +99,7 @@
 					gateKey: "adminUserListing"
 				},
 				onComplete: function(response){
-					$("wrapper").update(response.responseText);
+					$("wrapper2").update(response.responseText);
 				}
 			});
 		}
@@ -97,7 +111,7 @@
 					gateKey: "userUpdateProfile"
 				},
 				onComplete: function(response){
-					$("wrapper").update(response.responseText);
+					$("wrapper2").update(response.responseText);
 				}
 			});
 		}
@@ -105,7 +119,7 @@
 	});
 	
 	$("modalClose").observe("click", function(){
-		myModal.writeAttribute("style", "display:none");
+		$("myModal").writeAttribute("style", "display:none");
 	});
 </script>
 </html>

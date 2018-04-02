@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:include page="../peripherals/header.jsp"></jsp:include>
 
 <div id="supplyMaintenanceTable" class="tableDiv">
-<!-- 	<label>Search: </label> <input type="text" name="txtSearch"
-		id="txtSearch"><br /> -->
-	<table id="dataTable" border="1">
+
+	<table id="dataTable" class="table table-hover">
 		<tr id="dataTableHeader">
 			<th>Supply ID</th>
 			<th>Supply Type</th>
@@ -24,8 +24,8 @@
 				<td><c:out value="${items.supplyId}"></c:out></td>
 				
 					<td><c:forEach var="items2" items="${supType}">
-						<c:if test="${items2.supplyType==items.supplyType}">
-							<input type="hidden" value="${items2.supplyType}">
+						<c:if test="${items2.supplyTypeId==items.supplyType}">
+							<input type="hidden" value="${items2.supplyTypeId}">
 							<c:out value="${items2.typeName}"></c:out>
 						</c:if>
 					</c:forEach>

@@ -9,7 +9,6 @@ body {
 #buttonsDiv {
 	display: inline-block;
 	vertical-align: top;
-	width:15%;
 }
 
 #formDiv {
@@ -20,8 +19,7 @@ body {
 #searchTable {
 	border-collapse: collapse;
 	table-layout:fixed;
-	width: 100%;
-	overflow:hidden;	
+	width: 100%;	
 }
 
 #maintenanceTab {
@@ -31,15 +29,14 @@ body {
     margin-left: 50px;
     margin-right:  10px;
 }
-
-#searchTable>td {
-	display: inline-table;
+.rows>td {
+	overflow: hidden;
+	font-size:x-small;
 }
 
 #buttons{
 	text-align:center;
 }
-
 
 #maintenanceTab>div {
 	padding: 1em;
@@ -50,10 +47,10 @@ body {
 	color:white;
 }
 
-
 #wrapper{
 	width:80%;
 	float:left;
+	display:inline-block;
 }
 
 #userDataForm{
@@ -64,15 +61,6 @@ body {
 
 #userDataForm button{
 	width:100%;
-}
-
-#button01{
-	padding-top:5px;
-	text-align:center;
-}
-
-#button01 button{
-	width:45%;
 }
 /* modal */
 

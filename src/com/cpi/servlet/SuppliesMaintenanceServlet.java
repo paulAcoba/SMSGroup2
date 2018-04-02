@@ -17,6 +17,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cpi.entity.SuppliesMaintenance;
 import com.cpi.entity.SupplyType;
+import com.cpi.entity.User;
 import com.cpi.service.SuppliesMaintenanceService;
 
 public class SuppliesMaintenanceServlet extends HttpServlet {
@@ -25,10 +26,36 @@ public class SuppliesMaintenanceServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub]
+		try{
+			String action = request.getParameter("action");
+			String a = "";
+
+			@SuppressWarnings("resource")
+			ApplicationContext context = new ClassPathXmlApplicationContext("/com/cpi/resource/applicationContext.xml");
+			SuppliesMaintenanceService supplies = (SuppliesMaintenanceService) context
+					.getBean("suppliesMaintenanceService");
+			
+			List<SupplyType> lists = new ArrayList<>();
+			List<SuppliesMaintenance> list = new ArrayList<>();
+			
+			lists = supplies.getSupplyTypeID();
+			list = supplies.getAllSupplies();
+			
+			RequestDispatcher rd = request.getRequestDispatcher("peripherals/populateAll.jsp");
+			rd.forward(request, response);
+		}catch(Exception e){
+			
+		}
+		
+	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String action = request.getParameter("action");
 		String a = "";
+		HttpSession session = request.getSession();
 
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("/com/cpi/resource/applicationContext.xml");
@@ -38,7 +65,18 @@ public class SuppliesMaintenanceServlet extends HttpServlet {
 		List<SupplyType> lists = new ArrayList<>();
 		List<SuppliesMaintenance> list = new ArrayList<>();
 
-		request.setAttribute("lastUser", "test");
+		
+
+		
+	
+		
+	
+	/*	User activeUser = new User();
+		activeUser = (User) session.getAttribute("activeUser");
+		
+		
+		request.setAttribute("lastUser", activeUser.getUserId());
+		System.out.println(activeUser.getUserId());*/
 		request.setAttribute("lastUpdate", new Date());
 		String searchId = "";
 		searchId = request.getParameter("search");
@@ -48,28 +86,33 @@ public class SuppliesMaintenanceServlet extends HttpServlet {
 			list = supplies.getAllSupplies();
 			if ("showSupply".equals(action)) {
 
+				System.out.println("ichan");
+
 				a = "peripherals/addSupplies.jsp";
+
 			} else if ("id".equals(action)) {
 
-				
 				a = "peripherals/populateSupplyTypeId.jsp";
 
 			} else if ("addSupply".equals(action)) {
 
 				supplies.addSupplies(request);
+				request.setAttribute("message", "Supplies Added!");
 				a = "views/suppliesmaintenance.jsp";
 
 			} else if ("populate".equals(action)) {
 
 				a = "peripherals/populateAll.jsp";
 			} else if ("cancel".equals(action)) {
-				
+
 				a = "views/suppliesmaintenance.jsp";
-			
+
 			} else if ("save".equals(action)) {
 
 				supplies.updateSupplies(request);
+				//request.setAttribute("message", "Supplies Updated!");
 				a = "views/suppliesmaintenance.jsp";
+				
 
 			} else if ("search".equals(action)) {
 				if (searchId.length() <= 0 || searchId.equals(null)) {
@@ -83,12 +126,13 @@ public class SuppliesMaintenanceServlet extends HttpServlet {
 				}
 				a = "peripherals/populateAll.jsp";
 
+			} else {
+				a = "views/suppliesmaintenance.jsp";
 			}
 
-			
 			request.setAttribute("supType", lists);
-		
-			//list = supplies.getAllSupplies();
+
+			// list = supplies.getAllSupplies();
 			request.setAttribute("allItems", list);
 
 		} catch (Exception e) {

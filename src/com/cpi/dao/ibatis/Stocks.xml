@@ -66,7 +66,7 @@
 		            (stock_id, supply_id, date_added,
 		             purchase_date, reference_no, quantity, last_user, last_update
 		            )
-		     VALUES (seq_supply_id_2.NEXTVAL, #idSupply#, #dateAdded#,
+		     VALUES (seq_stock_id_2.NEXTVAL, #idSupply#, #dateAdded#,
 		             #datePurchased#, #numReference#, #qty#, #user#, SYSDATE
 		            )
 	</insert>
@@ -81,5 +81,4 @@
 		       last_update = SYSDATE
 		 WHERE stock_id = #idStock#
 	</insert>
-	
 </sqlMap>

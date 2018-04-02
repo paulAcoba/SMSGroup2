@@ -6,9 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<script src="js/prototype.js"></script>
 <script> var contextPath = "${pageContext.request.contextPath}";</script>
 <jsp:include page="peripherals/header.jsp"></jsp:include>
+<script src="js/prototype.js"></script>
 <link rel="stylesheet" href="css/UserManagementStyle.css" type="text/css">
 <title>Add New User</title>
 </head>
@@ -20,37 +20,33 @@
 		    <p id="modalP"></p>
 		  </div>
 		</div>
-		<!-- <h3>User Maintenance</h3> -->
 		<div class="panel panel-info" id="userDataForm">
 			<div class="panel-heading">User Maintenance</div>
 			<div class="panel-body">
-				<form>
-					<div id="formDiv">
-						<table>
-							<tr><td><label>User ID</label></td><td><input type="text" id="userId" name="userId" class="form-control"></td></tr>
-							<tr><td><label>Password</label></td><td><input type="password" id="password" name="password" readonly="readonly" class="form-control"></td></tr>
-							<tr><td><label>First Name</label></td><td><input type="text" id="firstName" name="firstName" class="form-control"></td></tr>
-							<tr><td><label>Last Name</label></td><td><input type="text" id="lastName" name="lastName" class="form-control"></td></tr>
-							<tr><td><label>Middle Initial</label></td><td><input type="text" id="middleInitial" name="middleInitial" class="form-control"></td></tr>
-							<tr><td><label>Email Address</label></td><td><input type="email" placeholder="default@example.com" id="email" name="email" class="form-control"></td></tr>
-							<tr><td><label>Active Tag</label></td><td><label class="radio-inline"><input type="radio" id="activeTagYes" name="activeTag" checked="checked">Yes</label><label class="radio-inline"><input type="radio" id="activeTagNo" name="activeTag">No</label></td></tr>
-							<tr><td><label>Access Level</label></td><td><select id="accessLevel" name="accessLevel" class="form-control" style="width:147px;">
-																			<option value=""></option>
-																			<option value="U">User</option>
-																			<option value="A">Admin</option>
-																	  	</select></td></tr>
-						</table>
-					</div>
-					<div id="buttonsDiv">
-						<!-- <input type="button" id="btnSave" value="Save"><br>
-						<input type="button" id="btnCancel" value="Cancel"> -->
-						<button  type="button" id="btnSave" class="btn btn-primary" ><span class="glyphicon glyphicon-ok"></span> Save</button><br>
-						<button  type="button" id="btnCancel" class="btn btn-danger"> Cancel</button><br>
-					</div>
-				</form>
+		<form>
+			<div id="formDiv">
+				<table>
+					<tr><td><label>User ID</label></td><td><input type="text" id="userId" name="userId"  class="form-control"></td></tr>
+					<tr><td><label>Password</label></td><td><input type="password" id="password" name="password" readonly="readonly"  class="form-control"></td></tr>
+					<tr><td><label>First Name</label></td><td><input type="text" id="firstName" name="firstName"  class="form-control"></td></tr>
+					<tr><td><label>Last Name</label></td><td><input type="text" id="lastName" name="lastName"  class="form-control"></td></tr>
+					<tr><td><label>Middle Initial</label></td><td><input type="text" id="middleInitial" name="middleInitial"  class="form-control"></td></tr>
+					<tr><td><label>Email Address</label></td><td><input type="email" placeholder="default@example.com" id="email" name="email"  class="form-control"></td></tr>
+					<tr><td><label>Active Tag</label></td><td><input type="radio" id="activeTagYes" name="activeTag" checked="checked">Yes<input type="radio" id="activeTagNo" name="activeTag">No</td></tr>
+					<tr><td><label>Access Level</label></td><td><select id="accessLevel" name="accessLevel" style="width:147px;"  class="form-control">
+																	<option value=""></option>
+																	<option value="U">User</option>
+																	<option value="A">Admin</option>
+															  	</select></td></tr>
+				</table>
 			</div>
+			<div id="buttonsDiv">
+				<button type="button" id="btnSave" class="btn btn-primary" ><span class="glyphicon glyphicon-ok"></span> Save</button><br>
+				<button type="button" id="btnCancel" class="btn btn-danger"> Cancel</button>
+			</div>
+		</form>
 		</div>
-		
+		</div>
 	</div>
 </body>
 <script>
@@ -77,6 +73,16 @@
 	if("${serviceResponse}" == "emptyField") {
 		fillInFields();
 		$("modalP").update("One or more fields are empty. Please complete all fields.");
+		$("myModal").writeAttribute("style", "display:block");
+	}
+	
+	if("${serviceResponse}" == "SQLException") {
+		$("modalP").update("Cannot connect properly to databse. Please contact administrator.");
+		$("myModal").writeAttribute("style", "display:block");
+	}
+	
+	if("${serviceResponse}" == "aboveMaximumCharacters") {
+		$("modalP").update("Middle Name should not exceed 3 characters. Please check and retry.");
 		$("myModal").writeAttribute("style", "display:block");
 	}
 	

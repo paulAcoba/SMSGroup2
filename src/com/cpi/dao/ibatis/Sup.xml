@@ -42,7 +42,10 @@
 	
 	<insert id="insertSupplyType" parameterClass="SupplyTypeClass">
 		INSERT into SUPPLY_TYPES_2 (supply_type_id, type_name, entry_date, last_user, last_update)
-		VALUES(#supplyTypeId#, #typeName#, SYSDATE, SYSDATE, SYSDATE)
+		VALUES(#supplyTypeId#, #typeName#, SYSDATE, #lastUser#, SYSDATE)
+		
+		<!-- INSERT into SUPPLY_TYPES_2 (supply_type_id, type_name, entry_date, last_user, last_update)
+		VALUES(seq_supply_type_id_2.nextval, #typeName#, SYSDATE, #lastUser#, SYSDATE) -->
 	</insert>
 		
 	<procedure id="updateSupplyType" parameterClass="java.util.Map">
